@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fumarogo 100D — Immobilia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.ciaobooking.com/widget/js/app.js" defer></script>
+<style>
+  :root{
+    --forest:#173226; --forest-dark:#0f2119; --cream:#F6F2E9; --cream-soft:#EFE8D8;
+    --gold:#B9974E; --ink:#22261F; --ink-soft:#5B5F52; --line:#E3DCC9; --radius:14px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Inter',sans-serif;color:var(--ink);background:var(--cream);-webkit-font-smoothing:antialiased;}
+  h1,h2,h3,.serif{font-family:'Fraunces',serif;}
+  a{text-decoration:none;color:inherit;}
+  img{display:block;max-width:100%;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 32px;}
+
+  header{position:sticky;top:0;z-index:50;background:var(--cream);border-bottom:1px solid var(--line);}
+  nav{display:flex;align-items:center;justify-content:space-between;padding:16px 32px;max-width:1120px;margin:0 auto;}
+  .logo{display:flex;align-items:center;gap:10px;}
+  .logo-mark{width:34px;height:34px;border-radius:8px;background:var(--forest);display:flex;align-items:center;justify-content:center;color:var(--cream);font-family:'Fraunces',serif;font-weight:600;font-size:18px;}
+  .logo-text .name{font-weight:700;letter-spacing:.06em;font-size:13px;}
+  .logo-text .sub{font-size:10px;letter-spacing:.14em;color:var(--ink-soft);}
+  .back-link{font-size:13px;font-weight:600;color:var(--forest);}
+
+  .title-block{padding:32px 0 20px;}
+  .breadcrumb{font-size:12px;color:var(--ink-soft);margin-bottom:10px;}
+  h1{font-size:34px;font-weight:500;}
+  .stats{display:flex;align-items:center;gap:14px;font-size:13.5px;color:var(--ink-soft);margin-top:8px;}
+  .stats .rating{color:var(--gold);font-weight:700;}
+  .stats .badge{background:var(--cream-soft);color:var(--forest);padding:2px 9px;border-radius:999px;font-weight:700;font-size:11.5px;}
+
+  .gallery{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:repeat(2,180px);gap:8px;border-radius:var(--radius);overflow:hidden;margin:20px 0 40px;}
+  .gallery img{width:100%;height:100%;object-fit:cover;}
+  .gallery .g-main{grid-row:1/3;}
+
+  .content{display:grid;grid-template-columns:1.6fr 1fr;gap:56px;padding-bottom:60px;}
+  .section{padding:28px 0;border-bottom:1px solid var(--line);}
+  .section:first-child{padding-top:0;}
+  .section h2{font-size:20px;font-weight:600;margin-bottom:14px;}
+  .section p{font-size:14.5px;line-height:1.7;color:var(--ink-soft);}
+  .section p + p{margin-top:12px;}
+  .amenities{display:grid;grid-template-columns:1fr 1fr;gap:12px 20px;}
+  .amenity{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--ink);}
+  .amenity .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0;}
+
+  .rooms{display:flex;flex-direction:column;gap:12px;}
+  .room{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;background:#fff;border:1px solid var(--line);border-radius:10px;font-size:14px;}
+  .room span:last-child{color:var(--ink-soft);font-size:12.5px;}
+
+  .sidebar{position:sticky;top:90px;align-self:start;}
+  .book-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:0 12px 30px rgba(15,33,25,.08);}
+  .book-card .stay-meta{font-size:12.5px;color:var(--ink-soft);padding:0 4px 14px;}
+
+  footer{padding:40px 32px;text-align:center;font-size:12px;color:var(--ink-soft);}
+
+  @media(max-width:880px){
+    .content{grid-template-columns:1fr;}
+    .gallery{grid-template-columns:1fr 1fr;grid-template-rows:140px 140px;}
+    .gallery .g-main{grid-column:1/3;grid-row:auto;height:220px;}
+    .sidebar{position:static;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo">
+      <div class="logo-mark">I</div>
+      <div class="logo-text"><div class="name">IMMOBILIA</div><div class="sub">MILANO · BORMIO · LIVIGNO</div></div>
+    </div>
+    <a class="back-link" href="index.html">← Tutti gli annunci</a>
+  </nav>
+</header>
+
+<div class="wrap title-block">
+  <div class="breadcrumb">Bormio / Annunci / Fumarogo 100D</div>
+  <h1>Fumarogo 100D</h1>
+  <div class="stats">
+    <span class="rating">★ 4.8</span>
+    <span>· 10 recensioni</span>
+    <span>· 📍 Bormio</span>
+    <span class="badge">Superhost</span>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="gallery">
+    <img class="g-main" src="images/fumarogo-100d/main.jpg" alt="Fumarogo 100D, facciata Residenza Santa Lucia">
+    <img src="images/fumarogo-100d/cucina.jpg" alt="Angolo cottura">
+    <img src="images/fumarogo-100d/soggiorno.jpg" alt="Zona pranzo e soggiorno">
+    <img src="images/fumarogo-100d/camera.jpg" alt="Camera da letto">
+    <img src="images/fumarogo-100d/bagno.jpg" alt="Bagno">
+  </div>
+</div>
+
+<div class="wrap content">
+  <div class="main">
+
+    <div class="section">
+      <h2>La casa</h2>
+      <p>A soli due minuti d'auto da Bormio, un appartamento accogliente in un residence tranquillo con vista sulle montagne. Una camera matrimoniale, due camere singole, zona giorno luminosa, cucina completamente attrezzata e due bagni offrono spazio comodo per famiglie o gruppi di amici. Balcone privato panoramico e garage incluso completano la proprietà.</p>
+      <p>Lo stile unisce il calore alpino tradizionale a un design funzionale e moderno, pensato per chi cerca sci d'inverno, escursioni d'estate, o semplicemente relax in un rifugio di montagna tutto l'anno.</p>
+    </div>
+
+    <div class="section">
+      <h2>Posizione</h2>
+      <p>Il residence è a due minuti d'auto dal centro di Bormio, con collegamento navetta rapido verso gli impianti di risalita. Perfetto punto di partenza sia per le terme e il centro storico d'inverno, sia per i sentieri e i percorsi in mountain bike d'estate.</p>
+    </div>
+
+    <div class="section">
+      <h2>Dove dormirai</h2>
+      <div class="rooms">
+        <div class="room"><span>Camera da letto 1</span><span>1 letto matrimoniale</span></div>
+        <div class="room"><span>Camera da letto 2</span><span>Letti singoli</span></div>
+        <div class="room"><span>Camera da letto 3</span><span>Letti singoli</span></div>
+      </div>
+    </div>
+
+    <div class="section" style="border-bottom:none;">
+      <h2>Cosa troverai</h2>
+      <div class="amenities">
+        <div class="amenity"><span class="dot"></span>Cucina completamente attrezzata</div>
+        <div class="amenity"><span class="dot"></span>Wi-Fi gratuito</div>
+        <div class="amenity"><span class="dot"></span>Parcheggio gratuito / garage</div>
+        <div class="amenity"><span class="dot"></span>Lavatrice</div>
+        <div class="amenity"><span class="dot"></span>TV</div>
+        <div class="amenity"><span class="dot"></span>Balcone panoramico</div>
+        <div class="amenity"><span class="dot"></span>Navetta vicina</div>
+        <div class="amenity"><span class="dot"></span>Self check-in</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="sidebar">
+    <div class="book-card">
+      <p class="stay-meta">7 ospiti · 3 camere · 5 letti · 2 bagni</p>
+      <be-widget
+        host="https://fumarodo100d.bookpage.io"
+        property-id="147076"
+        booking-network-id="2070"
+        default-adults="2"
+        default-children="0"
+        max-guests="7"
+        with-children="true"
+        expanded-occupation="true"
+        primary-color="#173226"
+        secondary-color="#006039"
+        background-color="#ffffff"
+        label-color="#173226"
+        border-color="#E3DCC9"
+        with-shadow="false"
+        with-box-border="false"
+        full-width="true"
+        button-text-color="#ffffff"
+        language="it"
+      ></be-widget>
+    </div>
+  </div>
+</div>
+
+<footer>© 2026 Immobilia — Milano · Bormio · Livigno</footer>
+
+</body>
+</html>

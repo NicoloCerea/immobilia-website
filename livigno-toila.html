@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Livigno Toilà — Immobilia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.ciaobooking.com/widget/js/app.js" defer></script>
+<style>
+  :root{
+    --forest:#173226; --forest-dark:#0f2119; --cream:#F6F2E9; --cream-soft:#EFE8D8;
+    --gold:#B9974E; --ink:#22261F; --ink-soft:#5B5F52; --line:#E3DCC9; --radius:14px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Inter',sans-serif;color:var(--ink);background:var(--cream);-webkit-font-smoothing:antialiased;}
+  h1,h2,h3,.serif{font-family:'Fraunces',serif;}
+  a{text-decoration:none;color:inherit;}
+  img{display:block;max-width:100%;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 32px;}
+
+  header{position:sticky;top:0;z-index:50;background:var(--cream);border-bottom:1px solid var(--line);}
+  nav{display:flex;align-items:center;justify-content:space-between;padding:16px 32px;max-width:1120px;margin:0 auto;}
+  .logo{display:flex;align-items:center;gap:10px;}
+  .logo-mark{width:34px;height:34px;border-radius:8px;background:var(--forest);display:flex;align-items:center;justify-content:center;color:var(--cream);font-family:'Fraunces',serif;font-weight:600;font-size:18px;}
+  .logo-text .name{font-weight:700;letter-spacing:.06em;font-size:13px;}
+  .logo-text .sub{font-size:10px;letter-spacing:.14em;color:var(--ink-soft);}
+  .back-link{font-size:13px;font-weight:600;color:var(--forest);}
+
+  .title-block{padding:32px 0 20px;}
+  .breadcrumb{font-size:12px;color:var(--ink-soft);margin-bottom:10px;}
+  h1{font-size:34px;font-weight:500;}
+  .stats{display:flex;align-items:center;gap:14px;font-size:13.5px;color:var(--ink-soft);margin-top:8px;}
+  .stats .badge{background:var(--cream-soft);color:var(--forest);padding:2px 9px;border-radius:999px;font-weight:700;font-size:11.5px;}
+
+  .gallery{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:repeat(2,180px);gap:8px;border-radius:var(--radius);overflow:hidden;margin:20px 0 40px;}
+  .gallery img{width:100%;height:100%;object-fit:cover;}
+  .gallery .g-main{grid-row:1/3;}
+
+  .content{display:grid;grid-template-columns:1.6fr 1fr;gap:56px;padding-bottom:60px;}
+  .section{padding:28px 0;border-bottom:1px solid var(--line);}
+  .section:first-child{padding-top:0;}
+  .section h2{font-size:20px;font-weight:600;margin-bottom:14px;}
+  .section p{font-size:14.5px;line-height:1.7;color:var(--ink-soft);}
+  .amenities{display:grid;grid-template-columns:1fr 1fr;gap:12px 20px;}
+  .amenity{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--ink);}
+  .amenity .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0;}
+
+  .rooms{display:flex;flex-direction:column;gap:12px;}
+  .room{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;background:#fff;border:1px solid var(--line);border-radius:10px;font-size:14px;}
+  .room span:last-child{color:var(--ink-soft);font-size:12.5px;}
+
+  .sidebar{position:sticky;top:90px;align-self:start;}
+  .book-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:0 12px 30px rgba(15,33,25,.08);}
+  .book-card .price-row{font-size:22px;font-weight:700;color:var(--forest);margin-bottom:4px;}
+  .book-card .price-row span{font-size:13px;font-weight:400;color:var(--ink-soft);}
+  .book-card p.note{font-size:12.5px;color:var(--ink-soft);margin-bottom:18px;}
+  .btn-avail{display:block;width:100%;text-align:center;background:var(--forest);color:var(--cream);padding:14px;border-radius:10px;font-size:14.5px;font-weight:700;}
+  .btn-avail:hover{background:var(--forest-dark);}
+
+  footer{padding:40px 32px;text-align:center;font-size:12px;color:var(--ink-soft);}
+
+  @media(max-width:880px){
+    .content{grid-template-columns:1fr;}
+    .gallery{grid-template-columns:1fr 1fr;grid-template-rows:140px 140px;}
+    .gallery .g-main{grid-column:1/3;grid-row:auto;height:220px;}
+    .sidebar{position:static;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo">
+      <div class="logo-mark">I</div>
+      <div class="logo-text"><div class="name">IMMOBILIA</div><div class="sub">MILANO · BORMIO · LIVIGNO</div></div>
+    </div>
+    <a class="back-link" href="index.html">← Tutti gli annunci</a>
+  </nav>
+</header>
+
+<div class="wrap title-block">
+  <div class="breadcrumb">Livigno / Annunci / Livigno Toilà</div>
+  <h1>Livigno Toilà</h1>
+  <div class="stats">
+    <span class="badge">Novità</span>
+    <span>· 📍 Livigno</span>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="gallery">
+    <img class="g-main" src="images/livigno-toila/foto1.jpg" alt="Livigno Toilà, esterno baita">
+    <img src="images/livigno-toila/foto2.jpg" alt="Livigno Toilà, camera da letto">
+    <img src="images/livigno-toila/foto3.jpg" alt="Livigno Toilà, soggiorno">
+    <img src="images/livigno-toila/foto4.jpg" alt="Livigno Toilà, cucina">
+    <img src="images/livigno-toila/foto5.jpg" alt="Livigno Toilà, dettaglio interno">
+  </div>
+</div>
+
+<div class="wrap content">
+  <div class="main">
+
+    <div class="section">
+      <h2>La casa</h2>
+      <p>Baita in stile alpino a Livigno, con interni curati e materiali naturali che richiamano l'atmosfera di montagna. Spazi luminosi e funzionali, pensati per garantire un soggiorno comodo in ogni stagione, tra sci d'inverno ed escursioni d'estate.</p>
+    </div>
+
+    <div class="section">
+      <h2>Posizione</h2>
+      <p>Situata a Livigno, a pochi minuti dal centro paese, dalla via dello shopping duty free e dagli impianti sciistici. Zona comoda sia per chi cerca la vita del paese sia per chi preferisce la tranquillità delle baite di montagna.</p>
+    </div>
+
+    <div class="section" style="border-bottom:none;">
+      <h2>Cosa troverai</h2>
+      <div class="amenities">
+        <div class="amenity"><span class="dot"></span>Cucina attrezzata</div>
+        <div class="amenity"><span class="dot"></span>Wi-Fi gratuito</div>
+        <div class="amenity"><span class="dot"></span>Parcheggio</div>
+        <div class="amenity"><span class="dot"></span>Deposito sci/bici</div>
+        <div class="amenity"><span class="dot"></span>TV</div>
+        <div class="amenity"><span class="dot"></span>Riscaldamento</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="sidebar">
+    <div class="book-card">
+      <p class="note">5 ospiti · 2 camere · 4 letti · 2 bagni</p>
+      <be-widget
+        host="https://baitariver.bookpage.io"
+        property-id="152305"
+        booking-network-id="2072"
+        default-adults="2"
+        default-children="0"
+        max-guests="5"
+        with-children="true"
+        expanded-occupation="true"
+        primary-color="#173226"
+        secondary-color="#006039"
+        background-color="#ffffff"
+        label-color="#173226"
+        border-color="#E3DCC9"
+        with-shadow="false"
+        with-box-border="false"
+        full-width="true"
+        button-text-color="#ffffff"
+        language="it"
+      ></be-widget>
+    </div>
+  </div>
+</div>
+
+<footer>© 2026 Immobilia — Milano · Bormio · Livigno</footer>
+
+</body>
+</html>

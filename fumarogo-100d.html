@@ -22,6 +22,7 @@
   header{position:sticky;top:0;z-index:50;background:var(--cream);border-bottom:1px solid var(--line);}
   nav{display:flex;align-items:center;justify-content:space-between;padding:16px 32px;max-width:1120px;margin:0 auto;}
   .logo{display:flex;align-items:center;gap:10px;}
+  .logo-img{height:36px;width:auto;display:block;}
   .logo-mark{width:34px;height:34px;border-radius:8px;background:var(--forest);display:flex;align-items:center;justify-content:center;color:var(--cream);font-family:'Fraunces',serif;font-weight:600;font-size:18px;}
   .logo-text .name{font-weight:700;letter-spacing:.06em;font-size:13px;}
   .logo-text .sub{font-size:10px;letter-spacing:.14em;color:var(--ink-soft);}
@@ -72,10 +73,9 @@
 
 <header>
   <nav>
-    <div class="logo">
-      <div class="logo-mark">I</div>
-      <div class="logo-text"><div class="name">IMMOBILIA</div><div class="sub">MILANO · BORMIO · LIVIGNO</div></div>
-    </div>
+    <a class="logo" href="index.html">
+      <img class="logo-img" src="images/logo/immobilia-logo.png" alt="Immobilia">
+    </a>
     <a class="back-link" href="index.html">← Tutti gli annunci</a>
   </nav>
 </header>

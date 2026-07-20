@@ -27,6 +27,8 @@
   .logo-text .name{font-weight:700;letter-spacing:.06em;font-size:13px;}
   .logo-text .sub{font-size:10px;letter-spacing:.14em;color:var(--ink-soft);}
   .back-link{font-size:13px;font-weight:600;color:var(--forest);}
+  .lang-select{border:1px solid var(--line);background:var(--cream-soft);color:var(--ink);padding:8px 10px;border-radius:8px;font-size:13px;font-family:inherit;cursor:pointer;}
+  nav{gap:16px;}
 
   .title-block{padding:32px 0 20px;}
   .breadcrumb{font-size:12px;color:var(--ink-soft);margin-bottom:10px;}
@@ -87,7 +89,16 @@
     <a class="logo" href="index.html">
       <img class="logo-img" src="images/logo/immobilia-logo.png" alt="Immobilia">
     </a>
-    <a class="back-link" href="index.html">← Tutti gli annunci</a>
+    <a class="back-link" href="index.html" data-i18n="nav_back">← Tutti gli annunci</a>
+    <select id="lang-select" class="lang-select">
+      <option value="it">🇮🇹 IT</option>
+      <option value="en">🇬🇧 EN</option>
+      <option value="es">🇪🇸 ES</option>
+      <option value="fr">🇫🇷 FR</option>
+      <option value="de">🇩🇪 DE</option>
+      <option value="ru">🇷🇺 RU</option>
+      <option value="zh">🇨🇳 ZH</option>
+    </select>
   </nav>
 </header>
 
@@ -140,17 +151,17 @@
   <div class="main">
 
     <div class="section">
-      <h2>La casa</h2>
+      <h2 data-i18n="sec_house">La casa</h2>
       <p>Nel cuore di Bormio, un appartamento pensato per chi cerca relax, natura e autenticità in ogni stagione. Due camere matrimoniali e una zona giorno luminosa con divano letto offrono spazio per famiglie o piccoli gruppi. Il balcone panoramico regala una vista diretta sulle piste da sci, mentre il deposito sci/bici gratuito e il parcheggio privato tolgono ogni pensiero logistico.</p>
     </div>
 
     <div class="section">
-      <h2>Posizione</h2>
+      <h2 data-i18n="sec_location">Posizione</h2>
       <p>Una strada residenziale tranquilla, a pochi passi da panetterie, bar e ristoranti tipici. Il centro storico di Bormio, con le sue vie medievali e le famose terme, si raggiunge in pochi minuti a piedi. Comodo l'accesso sia agli impianti di risalita d'inverno sia ai sentieri del Parco Nazionale dello Stelvio d'estate.</p>
     </div>
 
     <div class="section">
-      <h2>Dove dormirai</h2>
+      <h2 data-i18n="sec_rooms">Dove dormirai</h2>
       <div class="rooms">
         <div class="room"><span>Camera da letto 1</span><span>1 letto matrimoniale grande</span></div>
         <div class="room"><span>Camera da letto 2</span><span>1 letto matrimoniale (152x203)</span></div>
@@ -159,16 +170,16 @@
     </div>
 
     <div class="section" style="border-bottom:none;">
-      <h2>Cosa troverai</h2>
+      <h2 data-i18n="sec_amenities">Cosa troverai</h2>
       <div class="amenities">
-        <div class="amenity"><span class="dot"></span>Vista sulle montagne</div>
-        <div class="amenity"><span class="dot"></span>Cucina attrezzata</div>
-        <div class="amenity"><span class="dot"></span>Wi-Fi gratuito</div>
-        <div class="amenity"><span class="dot"></span>Parcheggio gratuito in loco</div>
-        <div class="amenity"><span class="dot"></span>TV</div>
-        <div class="amenity"><span class="dot"></span>Deposito sci/bici gratuito</div>
-        <div class="amenity"><span class="dot"></span>Balcone panoramico</div>
-        <div class="amenity"><span class="dot"></span>Self check-in</div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_mountainview">Vista sulle montagne</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_kitchen1">Cucina attrezzata</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_wifi">Wi-Fi gratuito</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_parking3">Parcheggio gratuito in loco</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_tv1">TV</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_ski3">Deposito sci/bici gratuito</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_balcony2">Balcone panoramico</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_selfcheckin">Self check-in</span></div>
       </div>
     </div>
 
@@ -209,6 +220,8 @@
     if (e.key === 'ArrowRight') navLightbox(1);
   });
 </script>
+
+<script src="js/translations.js"></script>
 
 </body>
 </html>

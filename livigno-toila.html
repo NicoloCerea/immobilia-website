@@ -27,6 +27,8 @@
   .logo-text .name{font-weight:700;letter-spacing:.06em;font-size:13px;}
   .logo-text .sub{font-size:10px;letter-spacing:.14em;color:var(--ink-soft);}
   .back-link{font-size:13px;font-weight:600;color:var(--forest);}
+  .lang-select{border:1px solid var(--line);background:var(--cream-soft);color:var(--ink);padding:8px 10px;border-radius:8px;font-size:13px;font-family:inherit;cursor:pointer;}
+  nav{gap:16px;}
 
   .title-block{padding:32px 0 20px;}
   .breadcrumb{font-size:12px;color:var(--ink-soft);margin-bottom:10px;}
@@ -91,7 +93,16 @@
     <a class="logo" href="index.html">
       <img class="logo-img" src="images/logo/immobilia-logo.png" alt="Immobilia">
     </a>
-    <a class="back-link" href="index.html">← Tutti gli annunci</a>
+    <a class="back-link" href="index.html" data-i18n="nav_back">← Tutti gli annunci</a>
+    <select id="lang-select" class="lang-select">
+      <option value="it">🇮🇹 IT</option>
+      <option value="en">🇬🇧 EN</option>
+      <option value="es">🇪🇸 ES</option>
+      <option value="fr">🇫🇷 FR</option>
+      <option value="de">🇩🇪 DE</option>
+      <option value="ru">🇷🇺 RU</option>
+      <option value="zh">🇨🇳 ZH</option>
+    </select>
   </nav>
 </header>
 
@@ -143,24 +154,24 @@
   <div class="main">
 
     <div class="section">
-      <h2>La casa</h2>
+      <h2 data-i18n="sec_house">La casa</h2>
       <p>Baita in stile alpino a Livigno, con interni curati e materiali naturali che richiamano l'atmosfera di montagna. Spazi luminosi e funzionali, pensati per garantire un soggiorno comodo in ogni stagione, tra sci d'inverno ed escursioni d'estate.</p>
     </div>
 
     <div class="section">
-      <h2>Posizione</h2>
+      <h2 data-i18n="sec_location">Posizione</h2>
       <p>Situata a Livigno, a pochi minuti dal centro paese, dalla via dello shopping duty free e dagli impianti sciistici. Zona comoda sia per chi cerca la vita del paese sia per chi preferisce la tranquillità delle baite di montagna.</p>
     </div>
 
     <div class="section" style="border-bottom:none;">
-      <h2>Cosa troverai</h2>
+      <h2 data-i18n="sec_amenities">Cosa troverai</h2>
       <div class="amenities">
-        <div class="amenity"><span class="dot"></span>Cucina attrezzata</div>
-        <div class="amenity"><span class="dot"></span>Wi-Fi gratuito</div>
-        <div class="amenity"><span class="dot"></span>Parcheggio</div>
-        <div class="amenity"><span class="dot"></span>Deposito sci/bici</div>
-        <div class="amenity"><span class="dot"></span>TV</div>
-        <div class="amenity"><span class="dot"></span>Riscaldamento</div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_kitchen1">Cucina attrezzata</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_wifi">Wi-Fi gratuito</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_parking1">Parcheggio</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_ski2">Deposito sci/bici</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_tv1">TV</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_heating">Riscaldamento</span></div>
       </div>
     </div>
 
@@ -201,6 +212,8 @@
     if (e.key === 'ArrowRight') navLightbox(1);
   });
 </script>
+
+<script src="js/translations.js"></script>
 
 </body>
 </html>

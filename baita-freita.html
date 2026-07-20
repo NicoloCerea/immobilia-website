@@ -24,6 +24,8 @@
   .logo{display:flex;align-items:center;gap:10px;}
   .logo-img{height:36px;width:auto;display:block;}
   .back-link{font-size:13px;font-weight:600;color:var(--forest);}
+  .lang-select{border:1px solid var(--line);background:var(--cream-soft);color:var(--ink);padding:8px 10px;border-radius:8px;font-size:13px;font-family:inherit;cursor:pointer;}
+  nav{gap:16px;}
 
   .title-block{padding:32px 0 20px;}
   .breadcrumb{font-size:12px;color:var(--ink-soft);margin-bottom:10px;}
@@ -86,7 +88,16 @@
     <a class="logo" href="index.html">
       <img class="logo-img" src="images/logo/immobilia-logo.png" alt="Immobilia">
     </a>
-    <a class="back-link" href="index.html">← Tutti gli annunci</a>
+    <a class="back-link" href="index.html" data-i18n="nav_back">← Tutti gli annunci</a>
+    <select id="lang-select" class="lang-select">
+      <option value="it">🇮🇹 IT</option>
+      <option value="en">🇬🇧 EN</option>
+      <option value="es">🇪🇸 ES</option>
+      <option value="fr">🇫🇷 FR</option>
+      <option value="de">🇩🇪 DE</option>
+      <option value="ru">🇷🇺 RU</option>
+      <option value="zh">🇨🇳 ZH</option>
+    </select>
   </nav>
 </header>
 
@@ -111,20 +122,20 @@
 
 <div class="wrap">
   <div class="quote-box">
-    <h3>Richiedi un preventivo</h3>
-    <p class="quote-sub">Inserisci le date del tuo soggiorno: la richiesta viene inviata direttamente su WhatsApp, ti risponderemo il prima possibile.</p>
+    <h3 data-i18n="quote_title">Richiedi un preventivo</h3>
+    <p class="quote-sub" data-i18n="quote_sub">Inserisci le date del tuo soggiorno: la richiesta viene inviata direttamente su WhatsApp, ti risponderemo il prima possibile.</p>
     <div class="quote-fields">
-      <label>Check-in
+      <label><span data-i18n="quote_checkin">Check-in</span>
         <input type="date" id="checkin-baita_freita">
       </label>
-      <label>Check-out
+      <label><span data-i18n="quote_checkout">Check-out</span>
         <input type="date" id="checkout-baita_freita">
       </label>
-      <label>Ospiti
+      <label><span data-i18n="quote_guests">Ospiti</span>
         <input type="number" id="guests-baita_freita" min="1" max="6" value="2">
       </label>
       <button class="quote-btn" onclick="sendQuote_baita_freita()">
-        Invia richiesta →
+        <span data-i18n="quote_btn">Invia richiesta →</span>
       </button>
     </div>
   </div>
@@ -134,13 +145,13 @@
   <div class="main">
 
     <div class="section">
-      <h2>La casa</h2>
+      <h2 data-i18n="sec_house">La casa</h2>
       <p>Situato al primo piano del complesso Baita Crosc a Livigno, con ingresso sul lato sinistro, l'appartamento si sviluppa su due piani e può ospitare fino a 6 persone con tre camere matrimoniali.</p>
       <p>Cucina completamente attrezzata (piastra a induzione, forno a microonde, macchina per caffè a cialde e bollitore) e balcone. A pochi passi dagli impianti del Carosello 3000.</p>
     </div>
 
     <div class="section">
-      <h2>Dove dormirai</h2>
+      <h2 data-i18n="sec_rooms">Dove dormirai</h2>
       <div class="rooms">
         <div class="room"><span>Camera da letto 1</span><span>1 letto matrimoniale</span></div>
         <div class="room"><span>Camera da letto 2</span><span>1 letto matrimoniale</span></div>
@@ -149,16 +160,16 @@
     </div>
 
     <div class="section" style="border-bottom:none;">
-      <h2>Cosa troverai</h2>
+      <h2 data-i18n="sec_amenities">Cosa troverai</h2>
       <div class="amenities">
-        <div class="amenity"><span class="dot"></span>Cucina attrezzata</div>
-        <div class="amenity"><span class="dot"></span>Wi-Fi gratuito</div>
-        <div class="amenity"><span class="dot"></span>Parcheggio privato</div>
-        <div class="amenity"><span class="dot"></span>Animali domestici ammessi</div>
-        <div class="amenity"><span class="dot"></span>Smart TV</div>
-        <div class="amenity"><span class="dot"></span>Deposito sci</div>
-        <div class="amenity"><span class="dot"></span>Balcone</div>
-        <div class="amenity"><span class="dot"></span>2 bagni</div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_kitchen1">Cucina attrezzata</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_wifi">Wi-Fi gratuito</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_parking2">Parcheggio privato</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_pets">Animali domestici ammessi</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_tv2">Smart TV</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_ski1">Deposito sci</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_balcony1">Balcone</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_bath1">2 bagni</span></div>
       </div>
     </div>
 
@@ -212,6 +223,8 @@
     if (e.key === 'ArrowRight') navLightbox(1);
   });
 </script>
+
+<script src="js/translations.js"></script>
 
 </body>
 </html>

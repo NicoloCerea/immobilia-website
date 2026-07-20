@@ -27,7 +27,14 @@
   .logo-text .name{font-weight:700;letter-spacing:.06em;font-size:13px;}
   .logo-text .sub{font-size:10px;letter-spacing:.14em;color:var(--ink-soft);}
   .back-link{font-size:13px;font-weight:600;color:var(--forest);}
-  .lang-select{border:1px solid var(--line);background:var(--cream-soft);color:var(--ink);padding:8px 10px;border-radius:8px;font-size:13px;font-family:inherit;cursor:pointer;}
+  .lang-select{
+    appearance:none; -webkit-appearance:none; -moz-appearance:none;
+    border:1px solid var(--line); background:var(--cream-soft) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="7" viewBox="0 0 10 7"><path d="M1 1l4 4 4-4" stroke="%23173226" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>') no-repeat right 12px center;
+    color:var(--ink); padding:9px 30px 9px 14px; border-radius:999px; font-size:13px; font-weight:600;
+    font-family:inherit; cursor:pointer; transition:border-color .2s, background-color .2s;
+  }
+  .lang-select:hover{border-color:var(--gold); background-color:#fff;}
+  .lang-select:focus{outline:none; border-color:var(--forest); box-shadow:0 0 0 3px rgba(23,50,38,.12);}
   nav{gap:16px;}
 
   .title-block{padding:32px 0 20px;}
@@ -84,6 +91,17 @@
   .lightbox-prev{left:20px;}
   .lightbox-next{right:20px;}
   .lightbox-counter{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);color:#fff;font-size:13px;background:rgba(255,255,255,.12);padding:6px 14px;border-radius:999px;}
+  input[type="date"], input[type="number"]{
+    appearance:none; -webkit-appearance:none;
+    font-family:inherit; transition:border-color .2s, box-shadow .2s;
+  }
+  input[type="date"]:hover, input[type="number"]:hover{border-color:var(--gold);}
+  input[type="date"]:focus, input[type="number"]:focus{outline:none; border-color:var(--forest); box-shadow:0 0 0 3px rgba(23,50,38,.12); background:#fff;}
+  input[type="date"]::-webkit-calendar-picker-indicator{
+    filter:invert(14%) sepia(24%) saturate(1400%) hue-rotate(115deg) brightness(90%);
+    cursor:pointer; opacity:.7; transition:opacity .2s;
+  }
+  input[type="date"]::-webkit-calendar-picker-indicator:hover{opacity:1;}
 </style>
 </head>
 <body>

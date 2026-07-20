@@ -178,26 +178,72 @@
     </div>
   </section>
 
-  <section class="destinations">
+  <section class="destinations" id="destinazioni">
     <div class="wrap">
       <div class="dest-head">
         <h2>Scopri le nostre destinazioni</h2>
-        <a href="#">Vedi tutte le proprietà →</a>
+        <a href="#destinazioni" onclick="selectTab('tutte')">Vedi tutte le proprietà →</a>
       </div>
       <div class="tabs">
-        <div class="tab" data-dest="milano">Milano</div>
-        <div class="tab active" data-dest="bormio">Bormio</div>
+        <div class="tab active" data-dest="tutte">Tutte</div>
+        <div class="tab" data-dest="bormio">Bormio</div>
         <div class="tab" data-dest="livigno">Livigno</div>
       </div>
 
-      <div class="cards" id="cards-milano">
-        <div class="card"><div class="card-img placeholder" data-label="foto Duomo Loft"></div><div class="card-body"><h3>Duomo Loft</h3><div class="card-loc">📍 Milano</div><div class="card-meta"><span>4 ospiti · 2 camere</span><span class="price">da €165/notte</span></div></div></div>
-        <div class="card"><div class="card-img placeholder" data-label="foto Brera Apartment"></div><div class="card-body"><h3>Brera Apartment</h3><div class="card-loc">📍 Milano</div><div class="card-meta"><span>4 ospiti · 1 camera</span><span class="price">da €145/notte</span></div></div></div>
-        <div class="card"><div class="card-img placeholder" data-label="foto Navigli Suite"></div><div class="card-body"><h3>Navigli Suite</h3><div class="card-loc">📍 Milano</div><div class="card-meta"><span>2 ospiti · 1 camera</span><span class="price">da €130/notte</span></div></div></div>
-        <div class="card"><div class="card-img placeholder" data-label="foto City Life"></div><div class="card-body"><h3>City Life Apartment</h3><div class="card-loc">📍 Milano</div><div class="card-meta"><span>4 ospiti · 2 bagni</span><span class="price">da €155/notte</span></div></div></div>
+      <div class="cards active" id="cards-tutte">
+        <div class="card">
+          <div class="card-img" style="background-image:url('https://a0.muscache.com/im/pictures/hosting/Hosting-1544756667684135226/original/7df94807-659f-4879-b0d2-06fbda28f591.jpeg?im_w=720')"></div>
+          <div class="card-body"><h3>Sertorelli 26</h3><div class="card-loc">📍 Bormio</div><div class="card-meta"><span>5 ospiti · 2 camere</span><span class="card-rating">★ 5.0 (32)</span></div></div>
+          <a class="card-link" href="sertorelli-26.html">Vedi annuncio →</a>
+        </div>
+        <div class="card">
+          <div class="card-img" style="background-image:url('https://a0.muscache.com/im/pictures/hosting/Hosting-1582486877490652166/original/c04abfb3-9dfb-4e1d-a1ca-b5573cee0c66.jpeg?im_w=720')"></div>
+          <div class="card-body"><h3>Fumarogo 100D</h3><div class="card-loc">📍 Bormio</div><div class="card-meta"><span>7 ospiti · 3 camere</span><span class="card-rating">★ 4.8 (10)</span></div></div>
+          <a class="card-link" href="fumarogo-100d.html">Vedi annuncio →</a>
+        </div>
+        <div class="card">
+          <div class="card-img" style="background-image:url('https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6Mjk3NDIxNA==/original/ecc1267b-777f-4c96-a3e9-805e856b112e.jpeg?im_w=720')"></div>
+          <div class="card-body"><h3>Monte Reit 7</h3><div class="card-loc">📍 Bormio</div><div class="card-meta"><span>5 ospiti · 2 camere</span><span class="card-rating">★ 4.75 (4)</span></div></div>
+          <a class="card-link" href="monte-reit-7.html">Vedi annuncio →</a>
+        </div>
+        <div class="card">
+          <div class="card-img" style="background-image:url('https://a0.muscache.com/im/pictures/hosting/Hosting-1587214653426287410/original/2f7dadd6-3f47-49e6-a51b-732e1e4fd07e.jpeg?im_w=720')"></div>
+          <div class="card-body"><h3>Livigno River</h3><div class="card-loc">📍 Livigno</div><div class="card-meta"><span>5 ospiti · 2 camere</span><span class="card-rating">Novità</span></div></div>
+          <a class="card-link" href="livigno-river.html">Vedi annuncio →</a>
+        </div>
+        <div class="card">
+          <div class="card-img" style="background-image:url('https://a0.muscache.com/im/pictures/hosting/Hosting-1725235075655113695/original/32c9717e-e035-4ea6-bff9-f14d84cd7263.png?im_w=720')"></div>
+          <div class="card-body"><h3>Livigno Toilà</h3><div class="card-loc">📍 Livigno</div><div class="card-meta"><span>5 ospiti · 2 camere</span><span class="card-rating">Novità</span></div></div>
+          <a class="card-link" href="livigno-toila.html">Vedi annuncio →</a>
+        </div>
+        <div class="card">
+          <div class="card-img" style="background-image:url('https://a0.muscache.com/im/pictures/hosting/Hosting-719086/original/7ba90557-5c22-4714-890f-f1353411080b.png?im_w=720')"></div>
+          <div class="card-body"><h3>Livigno Cantoni</h3><div class="card-loc">📍 Livigno</div><div class="card-meta"><span>4 ospiti · 2 camere</span><span class="card-rating">★ 4.83 (36)</span></div></div>
+          <a class="card-link" href="livigno-cantoni.html">Vedi annuncio →</a>
+        </div>
+        <div class="card">
+          <div class="card-img" style="background-image:url('images/baita-borch/foto01.jpg')"></div>
+          <div class="card-body"><h3>Appartamento Borch</h3><div class="card-loc">📍 Livigno</div><div class="card-meta"><span>5 ospiti · 2 camere</span><span class="card-rating">Baita Crosc</span></div></div>
+          <a class="card-link" href="baita-borch.html">Vedi annuncio →</a>
+        </div>
+        <div class="card">
+          <div class="card-img" style="background-image:url('images/baita-toila/foto01.jpg')"></div>
+          <div class="card-body"><h3>Appartamento Toilà</h3><div class="card-loc">📍 Livigno</div><div class="card-meta"><span>5 ospiti · 2 camere</span><span class="card-rating">Baita Crosc</span></div></div>
+          <a class="card-link" href="baita-toila.html">Vedi annuncio →</a>
+        </div>
+        <div class="card">
+          <div class="card-img" style="background-image:url('images/baita-pigna/foto01.jpg')"></div>
+          <div class="card-body"><h3>Appartamento Pigna</h3><div class="card-loc">📍 Livigno</div><div class="card-meta"><span>7 ospiti · 3 camere</span><span class="card-rating">Baita Crosc</span></div></div>
+          <a class="card-link" href="baita-pigna.html">Vedi annuncio →</a>
+        </div>
+        <div class="card">
+          <div class="card-img" style="background-image:url('images/baita-freita/foto01.jpg')"></div>
+          <div class="card-body"><h3>Appartamento Freita</h3><div class="card-loc">📍 Livigno</div><div class="card-meta"><span>6 ospiti · 3 camere</span><span class="card-rating">Baita Crosc</span></div></div>
+          <a class="card-link" href="baita-freita.html">Vedi annuncio →</a>
+        </div>
       </div>
 
-      <div class="cards active" id="cards-bormio">
+      <div class="cards" id="cards-bormio">
         <div class="card">
           <div class="card-img" style="background-image:url('https://a0.muscache.com/im/pictures/hosting/Hosting-1544756667684135226/original/7df94807-659f-4879-b0d2-06fbda28f591.jpeg?im_w=720')"></div>
           <div class="card-body"><h3>Sertorelli 26</h3><div class="card-loc">📍 Bormio</div><div class="card-meta"><span>5 ospiti · 2 camere</span><span class="card-rating">★ 5.0 (32)</span></div></div>
@@ -315,14 +361,14 @@
 
 <script>
   const tabs = document.querySelectorAll('.tab');
-  const cardGrids = { milano: document.getElementById('cards-milano'), bormio: document.getElementById('cards-bormio'), livigno: document.getElementById('cards-livigno') };
+  const cardGrids = { tutte: document.getElementById('cards-tutte'), bormio: document.getElementById('cards-bormio'), livigno: document.getElementById('cards-livigno') };
+  function selectTab(dest) {
+    tabs.forEach(t => t.classList.toggle('active', t.dataset.dest === dest));
+    Object.values(cardGrids).forEach(g => g.classList.remove('active'));
+    cardGrids[dest].classList.add('active');
+  }
   tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      tabs.forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-      Object.values(cardGrids).forEach(g => g.classList.remove('active'));
-      cardGrids[tab.dataset.dest].classList.add('active');
-    });
+    tab.addEventListener('click', () => selectTab(tab.dataset.dest));
   });
 
   const buttons = document.querySelectorAll('.switch button');

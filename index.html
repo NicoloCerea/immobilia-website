@@ -110,6 +110,18 @@
   .stat-num{font-family:'Fraunces',serif;font-size:36px;font-weight:600;color:var(--forest);}
   .stat-label{font-size:13px;color:var(--ink-soft);margin-top:4px;}
   .owners-process{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:56px;}
+  .trust-badges{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;padding:20px 0 0;font-size:13px;font-weight:600;color:rgba(246,242,233,.85);}
+  .trust-badges span{display:flex;align-items:center;gap:8px;}
+  .trust-badges span::before{content:"✓";color:var(--gold);font-weight:700;}
+  .compare-table{margin-top:56px;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:#fff;}
+  .compare-row{display:grid;grid-template-columns:1.2fr 1fr 1fr;}
+  .compare-row.head{background:var(--forest);color:var(--cream);font-weight:700;font-size:13px;}
+  .compare-row:not(.head){border-top:1px solid var(--line);font-size:13.5px;}
+  .compare-row > div{padding:16px 18px;}
+  .compare-row:not(.head) > div:first-child{font-weight:600;color:var(--ink);}
+  .compare-row:not(.head) > div:nth-child(2){color:var(--ink-soft);}
+  .compare-row:not(.head) > div:nth-child(3){color:var(--forest);font-weight:500;}
+  @media(max-width:720px){ .compare-row{grid-template-columns:1fr;} .compare-row > div{padding:10px 18px;} .compare-row:not(.head) > div:first-child{padding-top:16px;background:var(--cream-soft);} }
   .process-step{position:relative;padding-top:8px;}
   .process-num{font-family:'Fraunces',serif;font-size:15px;font-weight:700;color:var(--gold);border:1.5px solid var(--gold);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:14px;}
   .process-step h4{font-size:16px;font-weight:600;margin-bottom:8px;}
@@ -236,32 +248,32 @@
 
       <div class="cards active" id="cards-tutte">
         <div class="card">
-          <div class="card-img" style="background-image:url('https://a0.muscache.com/im/pictures/hosting/Hosting-1544756667684135226/original/7df94807-659f-4879-b0d2-06fbda28f591.jpeg?im_w=720')"></div>
+          <div class="card-img" style="background-image:url('images/sertorelli-26/foto01.jpg')"></div>
           <div class="card-body"><h3>Sertorelli 26</h3><div class="card-loc">📍 Bormio</div><div class="card-meta"><span>5 ospiti · 2 camere</span><span class="card-rating">★ 5.0 (32)</span></div></div>
           <a class="card-link" href="sertorelli-26.html" data-i18n="card_link">Vedi annuncio →</a>
         </div>
         <div class="card">
-          <div class="card-img" style="background-image:url('https://a0.muscache.com/im/pictures/hosting/Hosting-1582486877490652166/original/c04abfb3-9dfb-4e1d-a1ca-b5573cee0c66.jpeg?im_w=720')"></div>
+          <div class="card-img" style="background-image:url('images/fumarogo-100d/foto01.jpg')"></div>
           <div class="card-body"><h3>Fumarogo 100D</h3><div class="card-loc">📍 Bormio</div><div class="card-meta"><span>7 ospiti · 3 camere</span><span class="card-rating">★ 4.8 (10)</span></div></div>
           <a class="card-link" href="fumarogo-100d.html" data-i18n="card_link">Vedi annuncio →</a>
         </div>
         <div class="card">
-          <div class="card-img" style="background-image:url('https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6Mjk3NDIxNA==/original/ecc1267b-777f-4c96-a3e9-805e856b112e.jpeg?im_w=720')"></div>
+          <div class="card-img" style="background-image:url('images/monte-reit-7/foto01.jpg')"></div>
           <div class="card-body"><h3>Monte Reit 7</h3><div class="card-loc">📍 Bormio</div><div class="card-meta"><span>5 ospiti · 2 camere</span><span class="card-rating">★ 4.75 (4)</span></div></div>
           <a class="card-link" href="monte-reit-7.html" data-i18n="card_link">Vedi annuncio →</a>
         </div>
         <div class="card">
-          <div class="card-img" style="background-image:url('https://a0.muscache.com/im/pictures/hosting/Hosting-1587214653426287410/original/2f7dadd6-3f47-49e6-a51b-732e1e4fd07e.jpeg?im_w=720')"></div>
+          <div class="card-img" style="background-image:url('images/livigno-river/foto01.jpg')"></div>
           <div class="card-body"><h3>Livigno River</h3><div class="card-loc">📍 Livigno</div><div class="card-meta"><span>5 ospiti · 2 camere</span><span class="card-rating">Novità</span></div></div>
           <a class="card-link" href="livigno-river.html" data-i18n="card_link">Vedi annuncio →</a>
         </div>
         <div class="card">
-          <div class="card-img" style="background-image:url('https://a0.muscache.com/im/pictures/hosting/Hosting-1725235075655113695/original/32c9717e-e035-4ea6-bff9-f14d84cd7263.png?im_w=720')"></div>
+          <div class="card-img" style="background-image:url('images/livigno-toila/foto01.jpg')"></div>
           <div class="card-body"><h3>Livigno Toilà</h3><div class="card-loc">📍 Livigno</div><div class="card-meta"><span>5 ospiti · 2 camere</span><span class="card-rating">Novità</span></div></div>
           <a class="card-link" href="livigno-toila.html" data-i18n="card_link">Vedi annuncio →</a>
         </div>
         <div class="card">
-          <div class="card-img" style="background-image:url('https://a0.muscache.com/im/pictures/hosting/Hosting-719086/original/7ba90557-5c22-4714-890f-f1353411080b.png?im_w=720')"></div>
+          <div class="card-img" style="background-image:url('images/livigno-cantoni/foto01.jpg')"></div>
           <div class="card-body"><h3>Livigno Cantoni</h3><div class="card-loc">📍 Livigno</div><div class="card-meta"><span>4 ospiti · 2 camere</span><span class="card-rating">★ 4.83 (36)</span></div></div>
           <a class="card-link" href="livigno-cantoni.html" data-i18n="card_link">Vedi annuncio →</a>
         </div>
@@ -289,17 +301,17 @@
 
       <div class="cards" id="cards-bormio">
         <div class="card">
-          <div class="card-img" style="background-image:url('https://a0.muscache.com/im/pictures/hosting/Hosting-1544756667684135226/original/7df94807-659f-4879-b0d2-06fbda28f591.jpeg?im_w=720')"></div>
+          <div class="card-img" style="background-image:url('images/sertorelli-26/foto01.jpg')"></div>
           <div class="card-body"><h3>Sertorelli 26</h3><div class="card-loc">📍 Bormio</div><div class="card-meta"><span>5 ospiti · 2 camere</span><span class="card-rating">★ 5.0 (32)</span></div></div>
           <a class="card-link" href="sertorelli-26.html" data-i18n="card_link">Vedi annuncio →</a>
         </div>
         <div class="card">
-          <div class="card-img" style="background-image:url('https://a0.muscache.com/im/pictures/hosting/Hosting-1582486877490652166/original/c04abfb3-9dfb-4e1d-a1ca-b5573cee0c66.jpeg?im_w=720')"></div>
+          <div class="card-img" style="background-image:url('images/fumarogo-100d/foto01.jpg')"></div>
           <div class="card-body"><h3>Fumarogo 100D</h3><div class="card-loc">📍 Bormio</div><div class="card-meta"><span>7 ospiti · 3 camere</span><span class="card-rating">★ 4.8 (10)</span></div></div>
           <a class="card-link" href="fumarogo-100d.html" data-i18n="card_link">Vedi annuncio →</a>
         </div>
         <div class="card">
-          <div class="card-img" style="background-image:url('https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6Mjk3NDIxNA==/original/ecc1267b-777f-4c96-a3e9-805e856b112e.jpeg?im_w=720')"></div>
+          <div class="card-img" style="background-image:url('images/monte-reit-7/foto01.jpg')"></div>
           <div class="card-body"><h3>Monte Reit 7</h3><div class="card-loc">📍 Bormio</div><div class="card-meta"><span>5 ospiti · 2 camere</span><span class="card-rating">★ 4.75 (4)</span></div></div>
           <a class="card-link" href="monte-reit-7.html" data-i18n="card_link">Vedi annuncio →</a>
         </div>
@@ -307,17 +319,17 @@
 
       <div class="cards" id="cards-livigno">
         <div class="card">
-          <div class="card-img" style="background-image:url('https://a0.muscache.com/im/pictures/hosting/Hosting-1587214653426287410/original/2f7dadd6-3f47-49e6-a51b-732e1e4fd07e.jpeg?im_w=720')"></div>
+          <div class="card-img" style="background-image:url('images/livigno-river/foto01.jpg')"></div>
           <div class="card-body"><h3>Livigno River</h3><div class="card-loc">📍 Livigno</div><div class="card-meta"><span>5 ospiti · 2 camere</span><span class="card-rating">Novità</span></div></div>
           <a class="card-link" href="livigno-river.html" data-i18n="card_link">Vedi annuncio →</a>
         </div>
         <div class="card">
-          <div class="card-img" style="background-image:url('https://a0.muscache.com/im/pictures/hosting/Hosting-1725235075655113695/original/32c9717e-e035-4ea6-bff9-f14d84cd7263.png?im_w=720')"></div>
+          <div class="card-img" style="background-image:url('images/livigno-toila/foto01.jpg')"></div>
           <div class="card-body"><h3>Livigno Toilà</h3><div class="card-loc">📍 Livigno</div><div class="card-meta"><span>5 ospiti · 2 camere</span><span class="card-rating">Novità</span></div></div>
           <a class="card-link" href="livigno-toila.html" data-i18n="card_link">Vedi annuncio →</a>
         </div>
         <div class="card">
-          <div class="card-img" style="background-image:url('https://a0.muscache.com/im/pictures/hosting/Hosting-719086/original/7ba90557-5c22-4714-890f-f1353411080b.png?im_w=720')"></div>
+          <div class="card-img" style="background-image:url('images/livigno-cantoni/foto01.jpg')"></div>
           <div class="card-body"><h3>Livigno Cantoni</h3><div class="card-loc">📍 Livigno</div><div class="card-meta"><span>4 ospiti · 2 camere</span><span class="card-rating">★ 4.83 (36)</span></div></div>
           <a class="card-link" href="livigno-cantoni.html" data-i18n="card_link">Vedi annuncio →</a>
         </div>
@@ -361,6 +373,11 @@
     <div class="hero-copy">
       <h1><span data-i18n="owners_title">Il tuo immobile lavora per te.</span><br><em data-i18n="owners_title_em">Tu non devi fare nulla.</em></h1>
       <p data-i18n="owners_sub">Gestiamo il tuo appartamento su Airbnb e le principali piattaforme: annunci, ospiti, pulizie, contratti. Tutto incluso, zero pensieri.</p>
+      <div class="trust-badges">
+        <span data-i18n="badge1">Oltre 10 proprietari</span>
+        <span data-i18n="badge2">Superhost certificati</span>
+        <span data-i18n="badge3">Partner Airbnb</span>
+      </div>
     </div>
   </section>
 
@@ -413,6 +430,39 @@
           <span class="process-num">3</span>
           <h4 data-i18n="process3_h">Gestione continuativa</h4>
           <p data-i18n="process3_p">Gestiamo noi ogni aspetto operativo. Ricevi un report mensile con prenotazioni, entrate e occupazione.</p>
+        </div>
+      </div>
+
+      <div class="compare-table">
+        <div class="compare-row head">
+          <div data-i18n="cmp_head1">Variabili</div>
+          <div data-i18n="cmp_head2">Fai da te</div>
+          <div data-i18n="cmp_head3">Con noi</div>
+        </div>
+        <div class="compare-row">
+          <div data-i18n="cmp1_label">Tempo dedicato</div>
+          <div data-i18n="cmp1_diy">Continuativo (annunci, messaggi, check-in, pulizie...)</div>
+          <div data-i18n="cmp1_us">Gestiamo ogni aspetto operativo</div>
+        </div>
+        <div class="compare-row">
+          <div data-i18n="cmp2_label">Disponibilità richiesta</div>
+          <div data-i18n="cmp2_diy">7 giorni su 7, anche sera e festivi</div>
+          <div data-i18n="cmp2_us">Zero. Siamo noi il punto di riferimento degli ospiti</div>
+        </div>
+        <div class="compare-row">
+          <div data-i18n="cmp3_label">Ottimizzazione prezzo</div>
+          <div data-i18n="cmp3_diy">Manuale, spesso statica</div>
+          <div data-i18n="cmp3_us">Pricing dinamico aggiornato sulla domanda reale</div>
+        </div>
+        <div class="compare-row">
+          <div data-i18n="cmp4_label">Qualità dell'annuncio</div>
+          <div data-i18n="cmp4_diy">Dipende dall'esperienza del proprietario</div>
+          <div data-i18n="cmp4_us">Testi ottimizzati, fotografia professionale</div>
+        </div>
+        <div class="compare-row">
+          <div data-i18n="cmp5_label">Pratiche assicurative (AirCover)</div>
+          <div data-i18n="cmp5_diy">Complesse da gestire autonomamente</div>
+          <div data-i18n="cmp5_us">Gestite internamente da noi</div>
         </div>
       </div>
     </div>

@@ -104,7 +104,17 @@
   .owners-intro{padding:70px 0 20px;}
   .owners-intro h2{font-size:30px;font-weight:500;max-width:560px;}
   .owners-intro p{margin-top:14px;font-size:15px;color:var(--ink-soft);max-width:520px;line-height:1.6;}
-  .service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:36px;}
+  .service-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:36px;}
+  .owners-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:56px;padding:32px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .stat{text-align:center;}
+  .stat-num{font-family:'Fraunces',serif;font-size:36px;font-weight:600;color:var(--forest);}
+  .stat-label{font-size:13px;color:var(--ink-soft);margin-top:4px;}
+  .owners-process{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:56px;}
+  .process-step{position:relative;padding-top:8px;}
+  .process-num{font-family:'Fraunces',serif;font-size:15px;font-weight:700;color:var(--gold);border:1.5px solid var(--gold);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:14px;}
+  .process-step h4{font-size:16px;font-weight:600;margin-bottom:8px;}
+  .process-step p{font-size:13.5px;color:var(--ink-soft);line-height:1.6;}
+  .owners-cta-buttons{display:flex;gap:12px;flex-wrap:wrap;}
   .service-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px;}
   .service-card .num{font-size:12px;color:var(--gold);font-weight:700;letter-spacing:.08em;margin-bottom:10px;display:block;}
   .service-card h3{font-size:17px;font-weight:600;margin-bottom:8px;}
@@ -114,7 +124,11 @@
   .owners-cta-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;}
   .owners-cta h3{font-size:24px;font-weight:500;max-width:440px;}
   .owners-cta p{font-size:14px;color:rgba(246,242,233,.75);margin-top:8px;max-width:440px;}
-  .owners-cta-btn{background:var(--cream);color:var(--forest);padding:13px 26px;border-radius:999px;font-size:14px;font-weight:700;white-space:nowrap;}
+  .owners-cta-btn{padding:13px 26px;border-radius:999px;font-size:14px;font-weight:700;white-space:nowrap;display:inline-block;}
+  .owners-cta-btn.whatsapp{background:#25D366;color:#fff;}
+  .owners-cta-btn.whatsapp:hover{background:#1ebe57;}
+  .owners-cta-btn.email{background:transparent;color:var(--cream);border:1.5px solid var(--cream);}
+  .owners-cta-btn.email:hover{background:rgba(246,242,233,.1);}
 
   /* CTA BAND */
   .cta-band{background:var(--forest-dark);color:var(--cream);margin:0 32px 40px;border-radius:var(--radius);padding:26px 32px;display:flex;align-items:center;justify-content:space-between;max-width:1176px;margin-left:auto;margin-right:auto;}
@@ -129,6 +143,8 @@
     .trust-grid{grid-template-columns:repeat(2,1fr);}
     .cards{grid-template-columns:repeat(2,1fr);}
     .service-grid{grid-template-columns:1fr;}
+    .owners-stats{grid-template-columns:1fr;gap:24px;}
+    .owners-process{grid-template-columns:1fr;}
     .cta-band{flex-direction:column;gap:14px;text-align:center;}
     .owners-cta-inner{flex-direction:column;text-align:center;}
   }
@@ -341,33 +357,62 @@
 <div class="view" id="view-owners">
 
   <section class="hero">
-    <div class="hero-media" data-owners data-caption="Sostituisci con foto reale — interno curato / consegna chiavi"></div>
+    <div class="hero-media" data-owners></div>
     <div class="hero-copy">
-      <h1><span data-i18n="owners_title">Il tuo immobile,</span><br><em data-i18n="owners_title_em">gestito al meglio</em></h1>
-      <p data-i18n="owners_sub">Property management completo per affitti brevi a Milano, Bormio e Livigno: dagli annunci alla pulizia, dalla comunicazione ospiti al rendiconto mensile.</p>
+      <h1><span data-i18n="owners_title">Il tuo immobile lavora per te.</span><br><em data-i18n="owners_title_em">Tu non devi fare nulla.</em></h1>
+      <p data-i18n="owners_sub">Gestiamo il tuo appartamento su Airbnb e le principali piattaforme: annunci, ospiti, pulizie, contratti. Tutto incluso, zero pensieri.</p>
     </div>
   </section>
 
   <section class="owners-intro">
     <div class="wrap">
-      <h2 data-i18n="owners_h2">Cosa facciamo per te</h2>
-      <p data-i18n="owners_p">Ti occupi solo di possedere l'immobile. Al resto pensiamo noi: dalla creazione dell'annuncio alla gestione ospiti 24/7, fino alla manutenzione ordinaria.</p>
+      <h2 data-i18n="owners_h2">Un servizio completo, per chi vuole delegare davvero</h2>
+      <p data-i18n="owners_p">Gestire un affitto breve richiede competenze e disponibilità che vanno oltre pubblicare un annuncio: prezzi da aggiornare, ospiti da assistere, imprevisti da gestire. Una gestione strutturata fa la differenza tra un immobile che performa e uno che sottorende.</p>
 
       <div class="service-grid">
         <div class="service-card">
           <span class="num">ANNUNCI</span>
           <h3 data-i18n="service1_h">Gestione affitti brevi</h3>
-          <p data-i18n="service1_p">Creiamo e ottimizziamo gli annunci, gestiamo calendario, check-in/check-out e pulizie per il tuo appartamento.</p>
+          <p data-i18n="service1_p">Creazione e ottimizzazione degli annunci, pricing dinamico, gestione ospiti (check-in, check-out, assistenza), coordinamento pulizie e manutenzioni, pratiche burocratiche.</p>
         </div>
         <div class="service-card">
-          <span class="num">OSPITI</span>
-          <h3 data-i18n="service2_h">Comunicazione 24/7</h3>
-          <p data-i18n="service2_p">Assistenza dedicata prima, durante e dopo il soggiorno, per garantire recensioni sempre positive.</p>
+          <span class="num">CONTRATTI</span>
+          <h3 data-i18n="service2_h">Gestione affitti medi e lunghi</h3>
+          <p data-i18n="service2_p">Ricerca e selezione inquilini, verifica profili, gestione trattative, redazione e registrazione del contratto. Supporto continuativo per tutta la durata della locazione.</p>
         </div>
         <div class="service-card">
-          <span class="num">RENDITA</span>
-          <h3 data-i18n="service3_h">Consulenza proprietari</h3>
-          <p data-i18n="service3_p">Analizziamo il potenziale di rendita del tuo immobile e ti aiutiamo a massimizzarne il rendimento, con rendiconto trasparente ogni mese.</p>
+          <span class="num">FOTO</span>
+          <h3 data-i18n="service3_h">Servizio fotografico professionale</h3>
+          <p data-i18n="service3_p">Fotografia specializzata in interior e real estate, per aumentare l'attrattività dell'annuncio e le performance sulle piattaforme. Disponibile anche separatamente.</p>
+        </div>
+        <div class="service-card">
+          <span class="num">ASSICURAZIONI</span>
+          <h3 data-i18n="service4_h">Gestione pratiche assicurative</h3>
+          <p data-i18n="service4_p">Ci occupiamo di tutte le pratiche di rimborso tramite Airbnb AirCover: apertura delle richieste, documentazione, interlocuzione con la piattaforma fino alla risoluzione.</p>
+        </div>
+      </div>
+
+      <div class="owners-stats">
+        <div class="stat"><div class="stat-num">20+</div><div class="stat-label" data-i18n="stat1_label">Immobili gestiti</div></div>
+        <div class="stat"><div class="stat-num">96%</div><div class="stat-label" data-i18n="stat2_label">Soddisfazione proprietari</div></div>
+        <div class="stat"><div class="stat-num">5.0</div><div class="stat-label" data-i18n="stat3_label">Valutazione Superhost Airbnb</div></div>
+      </div>
+
+      <div class="owners-process">
+        <div class="process-step">
+          <span class="process-num">1</span>
+          <h4 data-i18n="process1_h">Consulenza iniziale</h4>
+          <p data-i18n="process1_p">Analizziamo insieme l'immobile: posizione, caratteristiche, potenziale di rendimento. Un confronto concreto, senza impegno.</p>
+        </div>
+        <div class="process-step">
+          <span class="process-num">2</span>
+          <h4 data-i18n="process2_h">Avvio e configurazione</h4>
+          <p data-i18n="process2_p">Ci occupiamo del setup completo: servizio fotografico, creazione annunci, strategia di prezzo. Operativo in pochi giorni.</p>
+        </div>
+        <div class="process-step">
+          <span class="process-num">3</span>
+          <h4 data-i18n="process3_h">Gestione continuativa</h4>
+          <p data-i18n="process3_p">Gestiamo noi ogni aspetto operativo. Ricevi un report mensile con prenotazioni, entrate e occupazione.</p>
         </div>
       </div>
     </div>
@@ -377,9 +422,16 @@
     <div class="wrap owners-cta-inner">
       <div>
         <h3 data-i18n="owners_cta_h">Vuoi sapere quanto può rendere il tuo immobile?</h3>
-        <p data-i18n="owners_cta_p">Richiedi una valutazione gratuita: ti rispondiamo entro 24 ore con una stima di rendita personalizzata.</p>
+        <p data-i18n="owners_cta_p">Richiedi una consulenza gratuita, senza impegno: scrivici su WhatsApp o via email.</p>
       </div>
-      <a class="owners-cta-btn" href="mailto:info@immobiliaita.it?subject=Valutazione%20immobile">data-i18n="owners_cta_btn">Richiedi valutazione</a>
+      <div class="owners-cta-buttons">
+        <a class="owners-cta-btn whatsapp" href="https://wa.me/393520184098" target="_blank" rel="noopener">
+          <span data-i18n="owners_cta_whatsapp">Scrivici su WhatsApp</span>
+        </a>
+        <a class="owners-cta-btn email" href="mailto:immobiliaita@gmail.com?subject=Valutazione%20immobile">
+          <span data-i18n="owners_cta_email">Scrivici una email</span>
+        </a>
+      </div>
     </div>
   </section>
 
@@ -398,6 +450,7 @@
   tabs.forEach(tab => {
     tab.addEventListener('click', () => selectTab(tab.dataset.dest));
   });
+
 
   const buttons = document.querySelectorAll('.switch button');
   const views = { booking: document.getElementById('view-booking'), owners: document.getElementById('view-owners') };

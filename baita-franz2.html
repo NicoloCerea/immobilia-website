@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Baita Franz 2 — Immobilia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --forest:#173226; --forest-dark:#0f2119; --cream:#F6F2E9; --cream-soft:#EFE8D8;
+    --gold:#B9974E; --ink:#22261F; --ink-soft:#5B5F52; --line:#E3DCC9; --radius:14px;
+    --whatsapp:#25D366;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Inter',sans-serif;color:var(--ink);background:var(--cream);-webkit-font-smoothing:antialiased;}
+  h1,h2,h3,.serif{font-family:'Fraunces',serif;}
+  a{text-decoration:none;color:inherit;}
+  img{display:block;max-width:100%;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 32px;}
+
+  header{position:sticky;top:0;z-index:50;background:var(--cream);border-bottom:1px solid var(--line);}
+  nav{display:flex;align-items:center;justify-content:space-between;padding:16px 32px;max-width:1120px;margin:0 auto;gap:16px;}
+  .logo{display:flex;align-items:center;gap:10px;}
+  .logo-img{height:36px;width:auto;display:block;}
+  .back-link{font-size:13px;font-weight:600;color:var(--forest);}
+  .lang-select{
+    appearance:none; -webkit-appearance:none; -moz-appearance:none;
+    border:1px solid var(--line); background:var(--cream-soft) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="7" viewBox="0 0 10 7"><path d="M1 1l4 4 4-4" stroke="%23173226" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>') no-repeat right 12px center;
+    color:var(--ink); padding:9px 30px 9px 14px; border-radius:999px; font-size:13px; font-weight:600;
+    font-family:inherit; cursor:pointer; transition:border-color .2s, background-color .2s;
+  }
+  .lang-select:hover{border-color:var(--gold); background-color:#fff;}
+  .lang-select:focus{outline:none; border-color:var(--forest); box-shadow:0 0 0 3px rgba(23,50,38,.12);}
+
+  .title-block{padding:32px 0 20px;}
+  .breadcrumb{font-size:12px;color:var(--ink-soft);margin-bottom:10px;}
+  h1{font-size:34px;font-weight:500;}
+  .stats{display:flex;align-items:center;gap:14px;font-size:13.5px;color:var(--ink-soft);margin-top:8px;}
+  .stats .rating{color:var(--gold);font-weight:700;}
+
+  .gallery{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:repeat(2,180px);gap:8px;border-radius:var(--radius);overflow:hidden;margin:20px 0 40px;}
+  .gallery .g-tile{position:relative;overflow:hidden;cursor:pointer;}
+  .gallery .g-tile img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s;}
+  .gallery .g-tile:hover img{transform:scale(1.04);}
+  .gallery .g-main{grid-row:1/3;}
+  .gallery .more-overlay{position:absolute;inset:0;background:rgba(15,33,25,.6);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;text-align:center;padding:10px;}
+
+  .quote-box{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px;margin:0 0 40px;box-shadow:0 12px 30px rgba(15,33,25,.08);}
+  .quote-box h3{font-size:19px;font-weight:600;margin-bottom:4px;}
+  .quote-box .quote-sub{font-size:13px;color:var(--ink-soft);margin-bottom:20px;}
+  .quote-fields{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:14px;align-items:end;}
+  .quote-fields label{display:flex;flex-direction:column;gap:6px;font-size:12.5px;font-weight:600;color:var(--ink-soft);}
+  .quote-fields input{padding:11px 12px;border:1px solid var(--line);border-radius:8px;font-size:14px;font-family:inherit;color:var(--ink);background:var(--cream-soft);}
+  .quote-btn{background:var(--whatsapp);color:#fff;border:none;padding:13px 22px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;white-space:nowrap;height:44px;}
+  .quote-btn:hover{background:#1ebe57;}
+  .quote-btn.email-btn{background:transparent;color:var(--forest);border:1.5px solid var(--forest);}
+  .quote-btn.email-btn:hover{background:var(--cream-soft);}
+  .quote-actions{display:flex;gap:10px;}
+  @media(max-width:720px){ .quote-fields{grid-template-columns:1fr 1fr;} .quote-actions{grid-column:1/3;} }
+
+  input[type="date"], input[type="number"]{
+    appearance:none; -webkit-appearance:none;
+    font-family:inherit; transition:border-color .2s, box-shadow .2s;
+  }
+  input[type="date"]:hover, input[type="number"]:hover{border-color:var(--gold);}
+  input[type="date"]:focus, input[type="number"]:focus{outline:none; border-color:var(--forest); box-shadow:0 0 0 3px rgba(23,50,38,.12); background:#fff;}
+  input[type="date"]::-webkit-calendar-picker-indicator{
+    filter:invert(14%) sepia(24%) saturate(1400%) hue-rotate(115deg) brightness(90%);
+    cursor:pointer; opacity:.7; transition:opacity .2s;
+  }
+  input[type="date"]::-webkit-calendar-picker-indicator:hover{opacity:1;}
+
+  .content{display:block;padding-bottom:60px;}
+  .section{padding:28px 0;border-bottom:1px solid var(--line);}
+  .section:first-child{padding-top:0;}
+  .section h2{font-size:20px;font-weight:600;margin-bottom:14px;}
+  .section p{font-size:14.5px;line-height:1.7;color:var(--ink-soft);}
+  .section p + p{margin-top:12px;}
+  .amenities{display:grid;grid-template-columns:1fr 1fr;gap:12px 20px;}
+  .amenity{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--ink);}
+  .amenity .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0;}
+  .rooms{display:flex;flex-direction:column;gap:12px;}
+  .room{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;background:#fff;border:1px solid var(--line);border-radius:10px;font-size:14px;}
+  .room span:last-child{color:var(--ink-soft);font-size:12.5px;}
+
+  .lightbox{position:fixed;inset:0;background:rgba(10,20,16,.94);z-index:300;display:none;align-items:center;justify-content:center;}
+  .lightbox.active{display:flex;}
+  .lightbox img{max-width:88vw;max-height:82vh;object-fit:contain;border-radius:6px;}
+  .lightbox-close{position:absolute;top:22px;right:28px;color:#fff;font-size:30px;cursor:pointer;line-height:1;background:rgba(255,255,255,.12);width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+  .lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);color:#fff;font-size:22px;cursor:pointer;padding:14px 18px;user-select:none;background:rgba(255,255,255,.12);border-radius:50%;}
+  .lightbox-prev{left:20px;}
+  .lightbox-next{right:20px;}
+  .lightbox-counter{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);color:#fff;font-size:13px;background:rgba(255,255,255,.12);padding:6px 14px;border-radius:999px;}
+
+  footer{padding:40px 32px;text-align:center;font-size:12px;color:var(--ink-soft);}
+
+  @media(max-width:880px){
+    .gallery{grid-template-columns:1fr 1fr;grid-template-rows:140px 140px;}
+    .gallery .g-main{grid-column:1/3;grid-row:auto;height:220px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a class="logo" href="index.html">
+      <img class="logo-img" src="images/logo/immobilia-logo.png" alt="Immobilia">
+    </a>
+    <a class="back-link" href="index.html" data-i18n="nav_back">← Tutti gli annunci</a>
+    <select id="lang-select" class="lang-select">
+      <option value="it">🇮🇹 IT</option>
+      <option value="en">🇬🇧 EN</option>
+      <option value="es">🇪🇸 ES</option>
+      <option value="fr">🇫🇷 FR</option>
+      <option value="de">🇩🇪 DE</option>
+      <option value="ru">🇷🇺 RU</option>
+      <option value="zh">🇨🇳 ZH</option>
+    </select>
+  </nav>
+</header>
+
+<div class="wrap title-block">
+  <div class="breadcrumb">Livigno / Annunci / Baita Franz 2</div>
+  <h1>Baita Franz 2</h1>
+  <div class="stats">
+    <span class="rating">★ 4.9</span>
+    <span>· 6 recensioni</span>
+    <span>📍 Livigno</span>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="gallery">
+    <div class="g-tile g-main" onclick="openLightbox(0)"><img src="images/baita-franz2/foto01.jpg" alt="Baita Franz 2, foto principale"></div>
+    <div class="g-tile" onclick="openLightbox(1)"><img src="images/baita-franz2/foto02.jpg" alt="Baita Franz 2"></div>
+    <div class="g-tile" onclick="openLightbox(2)"><img src="images/baita-franz2/foto03.jpg" alt="Baita Franz 2"></div>
+    <div class="g-tile" onclick="openLightbox(3)"><img src="images/baita-franz2/foto04.jpg" alt="Baita Franz 2"></div>
+    <div class="g-tile" onclick="openLightbox(4)"><img src="images/baita-franz2/foto05.jpg" alt="Baita Franz 2"><div class="more-overlay">+21 foto — vedi tutte</div></div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="quote-box">
+    <h3 data-i18n="quote_title">Richiedi un preventivo</h3>
+    <p class="quote-sub" data-i18n="quote_sub">Inserisci le date del tuo soggiorno: la richiesta viene inviata direttamente su WhatsApp, ti risponderemo il prima possibile.</p>
+    <div class="quote-fields">
+      <label><span data-i18n="quote_checkin">Check-in</span>
+        <input type="date" id="checkin-baita_franz2">
+      </label>
+      <label><span data-i18n="quote_checkout">Check-out</span>
+        <input type="date" id="checkout-baita_franz2">
+      </label>
+      <label><span data-i18n="quote_guests">Ospiti</span>
+        <input type="number" id="guests-baita_franz2" min="1" max="4" value="2">
+      </label>
+      <div class="quote-actions">
+        <button class="quote-btn" onclick="sendQuote_baita_franz2()">
+          <span data-i18n="quote_btn_wa">WhatsApp →</span>
+        </button>
+        <button class="quote-btn email-btn" onclick="sendQuoteEmail_baita_franz2()">
+          <span data-i18n="quote_btn_email">Email →</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap content">
+  <div class="main">
+
+    <div class="section">
+      <h2 data-i18n="sec_house">La casa</h2>
+      <p>La Baita Franz si trova all'ingresso di Livigno, in località Florin, in una zona tranquilla e immersa nel verde, perfetta per gli amanti della natura e degli sport all'aria aperta. L'appartamento Baita Franz 2, di 75 mq, offre una fantastica vista sulle montagne ed è composto da soggiorno, cucina completamente attrezzata con lavastoviglie, 2 camere da letto e 2 bagni — può ospitare fino a 4 persone.</p>
+      <p>La struttura ha accesso a un'area esterna in comune con giardino, mobili da giardino e barbecue: perfetta per rilassarsi dopo una giornata di sci o escursioni, godendosi la vista sulle montagne.</p>
+    </div>
+
+    <div class="section">
+      <h2 data-i18n="sec_location">Posizione</h2>
+      <p>A circa 200 metri dagli impianti di risalita (collegati al Carosello 3000 e agli impianti di Costa del Sol) e a pochi passi dalla fermata dell'autobus gratuito che porta in tutte le altre zone di Livigno. Nelle vicinanze corre la pista ciclabile e la passeggiata lungo il fiume Spöl, oltre a diversi sentieri per escursioni più impegnative. Supermercato a circa 700 metri, panetteria a 150 metri.</p>
+    </div>
+
+    <div class="section">
+      <h2 data-i18n="sec_rooms">Dove dormirai</h2>
+      <div class="rooms">
+        <div class="room"><span>Camera da letto 1</span><span>Letto matrimoniale</span></div>
+        <div class="room"><span>Camera da letto 2</span><span>Letto matrimoniale</span></div>
+      </div>
+    </div>
+
+    <div class="section" style="border-bottom:none;">
+      <h2 data-i18n="sec_amenities">Cosa troverai</h2>
+      <div class="amenities">
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_kitchen2">Cucina completamente attrezzata</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_wifi">Wi-Fi gratuito</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_parking3">Parcheggio gratuito in loco</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_pets">Animali domestici ammessi</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_tv1">TV</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_ski1">Deposito sci</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_balcony1">Balcone</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_bath1">2 bagni</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_dishwasher">Lavastoviglie</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_outdoor">Area esterna</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>© 2026 Immobilia — Milano · Bormio · Livigno</footer>
+
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-close" onclick="closeLightbox()">✕</div>
+  <div class="lightbox-nav lightbox-prev" onclick="navLightbox(-1)">‹</div>
+  <img id="lightbox-img" src="" alt="">
+  <div class="lightbox-nav lightbox-next" onclick="navLightbox(1)">›</div>
+  <div class="lightbox-counter" id="lightbox-counter"></div>
+</div>
+
+<script>
+  const photos = ["images/baita-franz2/foto01.jpg","images/baita-franz2/foto02.jpg","images/baita-franz2/foto03.jpg","images/baita-franz2/foto04.jpg","images/baita-franz2/foto05.jpg","images/baita-franz2/foto06.jpg","images/baita-franz2/foto07.jpg","images/baita-franz2/foto08.jpg","images/baita-franz2/foto09.jpg","images/baita-franz2/foto10.jpg","images/baita-franz2/foto11.jpg","images/baita-franz2/foto12.jpg","images/baita-franz2/foto13.jpg","images/baita-franz2/foto14.jpg","images/baita-franz2/foto15.jpg","images/baita-franz2/foto16.jpg","images/baita-franz2/foto17.jpg","images/baita-franz2/foto18.jpg","images/baita-franz2/foto19.jpg","images/baita-franz2/foto20.jpg","images/baita-franz2/foto21.jpg","images/baita-franz2/foto22.jpg","images/baita-franz2/foto23.jpg","images/baita-franz2/foto24.jpg","images/baita-franz2/foto25.jpg","images/baita-franz2/foto26.jpg"];
+  let currentIndex = 0;
+  function openLightbox(i) {
+    currentIndex = i;
+    document.getElementById('lightbox-img').src = photos[currentIndex];
+    document.getElementById('lightbox-counter').textContent = (currentIndex+1) + ' / ' + photos.length;
+    document.getElementById('lightbox').classList.add('active');
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+  }
+  function navLightbox(dir) {
+    currentIndex = (currentIndex + dir + photos.length) % photos.length;
+    openLightbox(currentIndex);
+  }
+  document.addEventListener('keydown', function(e) {
+    if (!document.getElementById('lightbox').classList.contains('active')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') navLightbox(-1);
+    if (e.key === 'ArrowRight') navLightbox(1);
+  });
+
+  function sendQuote_baita_franz2() {
+    const ci = document.getElementById('checkin-baita_franz2').value;
+    const co = document.getElementById('checkout-baita_franz2').value;
+    const g = document.getElementById('guests-baita_franz2').value || '2';
+    const fmt = d => d ? d.split('-').reverse().join('/') : '(da definire)';
+    const msg = `Ciao! Vorrei un preventivo per Baita Franz 2 (Livigno) dal ${fmt(ci)} al ${fmt(co)} per ${g} ospiti.`;
+    const phone = "393333269224";
+    const url = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
+    window.open(url, '_blank');
+  }
+  function sendQuoteEmail_baita_franz2() {
+    const ci = document.getElementById('checkin-baita_franz2').value;
+    const co = document.getElementById('checkout-baita_franz2').value;
+    const g = document.getElementById('guests-baita_franz2').value || '2';
+    const fmt = d => d ? d.split('-').reverse().join('/') : '(da definire)';
+    const subject = `Richiesta preventivo — Baita Franz 2`;
+    const body = `Ciao,%0D%0A%0D%0AVorrei un preventivo per Baita Franz 2 (Livigno) dal ${fmt(ci)} al ${fmt(co)} per ${g} ospiti.%0D%0A%0D%0AGrazie!`;
+    window.location.href = `mailto:immobiliaita@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+  }
+</script>
+<script src="js/translations.js"></script>
+
+</body>
+</html>

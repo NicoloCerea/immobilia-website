@@ -53,7 +53,10 @@
   .quote-fields input{padding:11px 12px;border:1px solid var(--line);border-radius:8px;font-size:14px;font-family:inherit;color:var(--ink);background:var(--cream-soft);}
   .quote-btn{background:var(--whatsapp);color:#fff;border:none;padding:13px 22px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;white-space:nowrap;height:44px;}
   .quote-btn:hover{background:#1ebe57;}
-  @media(max-width:720px){ .quote-fields{grid-template-columns:1fr 1fr;} .quote-btn{grid-column:1/3;} }
+  .quote-btn.email-btn{background:transparent;color:var(--forest);border:1.5px solid var(--forest);}
+  .quote-btn.email-btn:hover{background:var(--cream-soft);}
+  .quote-actions{display:flex;gap:10px;}
+  @media(max-width:720px){ .quote-fields{grid-template-columns:1fr 1fr;} .quote-actions{grid-column:1/3;} }
 
   .content{display:block;padding-bottom:60px;}
   .section{padding:28px 0;border-bottom:1px solid var(--line);}
@@ -155,9 +158,14 @@
       <label><span data-i18n="quote_guests">Ospiti</span>
         <input type="number" id="guests-baita_pigna" min="1" max="7" value="2">
       </label>
-      <button class="quote-btn" onclick="sendQuote_baita_pigna()">
-        <span data-i18n="quote_btn">Invia richiesta →</span>
-      </button>
+      <div class="quote-actions">
+        <button class="quote-btn" onclick="sendQuote_baita_pigna()">
+          <span data-i18n="quote_btn_wa">WhatsApp →</span>
+        </button>
+        <button class="quote-btn email-btn" onclick="sendQuoteEmail_baita_pigna()">
+          <span data-i18n="quote_btn_email">Email →</span>
+        </button>
+      </div>
     </div>
   </div>
 </div>
@@ -209,6 +217,15 @@
     const phone = "393333269224";
     const url = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
     window.open(url, '_blank');
+  }
+  function sendQuoteEmail_baita_pigna() {
+    const ci = document.getElementById('checkin-baita_pigna').value;
+    const co = document.getElementById('checkout-baita_pigna').value;
+    const g = document.getElementById('guests-baita_pigna').value || '2';
+    const fmt = d => d ? d.split('-').reverse().join('/') : '(da definire)';
+    const subject = `Richiesta preventivo — Appartamento Pigna`;
+    const body = `Ciao,%0D%0A%0D%0AVorrei un preventivo per Appartamento Pigna (Livigno) dal ${fmt(ci)} al ${fmt(co)} per ${g} ospiti.%0D%0A%0D%0AGrazie!`;
+    window.location.href = `mailto:immobiliaita@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
   }
 </script>
 

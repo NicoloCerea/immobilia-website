@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Appartamento Freita — Immobilia</title>
+<title>Livigno Cantoni — Immobilia</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.ciaobooking.com/widget/js/app.js" defer></script>
 <style>
   :root{
     --forest:#173226; --forest-dark:#0f2119; --cream:#F6F2E9; --cream-soft:#EFE8D8;
     --gold:#B9974E; --ink:#22261F; --ink-soft:#5B5F52; --line:#E3DCC9; --radius:14px;
-    --whatsapp:#25D366;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
   body{font-family:'Inter',sans-serif;color:var(--ink);background:var(--cream);-webkit-font-smoothing:antialiased;}
@@ -23,6 +23,9 @@
   nav{display:flex;align-items:center;justify-content:space-between;padding:16px 32px;max-width:1120px;margin:0 auto;}
   .logo{display:flex;align-items:center;gap:10px;}
   .logo-img{height:36px;width:auto;display:block;}
+  .logo-mark{width:34px;height:34px;border-radius:8px;background:var(--forest);display:flex;align-items:center;justify-content:center;color:var(--cream);font-family:'Fraunces',serif;font-weight:600;font-size:18px;}
+  .logo-text .name{font-weight:700;letter-spacing:.06em;font-size:13px;}
+  .logo-text .sub{font-size:10px;letter-spacing:.14em;color:var(--ink-soft);}
   .back-link{font-size:13px;font-weight:600;color:var(--forest);}
   .lang-select{
     appearance:none; -webkit-appearance:none; -moz-appearance:none;
@@ -36,6 +39,7 @@
 
   .title-block{padding:32px 0 20px;}
   .breadcrumb{font-size:12px;color:var(--ink-soft);margin-bottom:10px;}
+  .title-row{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:12px;}
   h1{font-size:34px;font-weight:500;}
   .stats{display:flex;align-items:center;gap:14px;font-size:13.5px;color:var(--ink-soft);margin-top:8px;}
   .stats .rating{color:var(--gold);font-weight:700;}
@@ -43,39 +47,37 @@
   .gallery{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:repeat(2,180px);gap:8px;border-radius:var(--radius);overflow:hidden;margin:20px 0 40px;}
   .gallery img{width:100%;height:100%;object-fit:cover;}
   .gallery .g-main{grid-row:1/3;}
-  .gallery .placeholder{display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#2c4a3a,#173226);color:rgba(246,242,233,.5);font-size:12px;font-style:italic;text-align:center;padding:10px;}
-
-  .quote-box{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px;margin:0 0 40px;box-shadow:0 12px 30px rgba(15,33,25,.08);}
-  .quote-box h3{font-size:19px;font-weight:600;margin-bottom:4px;}
-  .quote-box .quote-sub{font-size:13px;color:var(--ink-soft);margin-bottom:20px;}
-  .quote-fields{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:14px;align-items:end;}
-  .quote-fields label{display:flex;flex-direction:column;gap:6px;font-size:12.5px;font-weight:600;color:var(--ink-soft);}
-  .quote-fields input{padding:11px 12px;border:1px solid var(--line);border-radius:8px;font-size:14px;font-family:inherit;color:var(--ink);background:var(--cream-soft);}
-  .quote-btn{background:var(--whatsapp);color:#fff;border:none;padding:13px 22px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;white-space:nowrap;height:44px;}
-  .quote-btn:hover{background:#1ebe57;}
-  .quote-btn.email-btn{background:transparent;color:var(--forest);border:1.5px solid var(--forest);}
-  .quote-btn.email-btn:hover{background:var(--cream-soft);}
-  .quote-actions{display:flex;gap:10px;}
-  @media(max-width:720px){ .quote-fields{grid-template-columns:1fr 1fr;} .quote-actions{grid-column:1/3;} }
 
   .content{display:block;padding-bottom:60px;}
   .section{padding:28px 0;border-bottom:1px solid var(--line);}
   .section:first-child{padding-top:0;}
   .section h2{font-size:20px;font-weight:600;margin-bottom:14px;}
   .section p{font-size:14.5px;line-height:1.7;color:var(--ink-soft);}
-  .section p + p{margin-top:12px;}
   .amenities{display:grid;grid-template-columns:1fr 1fr;gap:12px 20px;}
   .amenity{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--ink);}
   .amenity .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0;}
+
   .rooms{display:flex;flex-direction:column;gap:12px;}
   .room{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;background:#fff;border:1px solid var(--line);border-radius:10px;font-size:14px;}
   .room span:last-child{color:var(--ink-soft);font-size:12.5px;}
 
+  .sidebar{position:sticky;top:90px;align-self:start;}
+  .booking-full{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px;margin:0 0 40px;box-shadow:0 12px 30px rgba(15,33,25,.08);}
+  .booking-full .stay-meta{font-size:13px;color:var(--ink-soft);margin-bottom:16px;}
+  .book-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:0 12px 30px rgba(15,33,25,.08);}
+  .book-card .price-row{font-size:22px;font-weight:700;color:var(--forest);margin-bottom:4px;}
+  .book-card .price-row span{font-size:13px;font-weight:400;color:var(--ink-soft);}
+  .book-card p.note{font-size:12.5px;color:var(--ink-soft);margin-bottom:18px;}
+  .btn-avail{display:block;width:100%;text-align:center;background:var(--forest);color:var(--cream);padding:14px;border-radius:10px;font-size:14.5px;font-weight:700;}
+  .btn-avail:hover{background:var(--forest-dark);}
+
   footer{padding:40px 32px;text-align:center;font-size:12px;color:var(--ink-soft);}
 
   @media(max-width:880px){
+    .content{grid-template-columns:1fr;}
     .gallery{grid-template-columns:1fr 1fr;grid-template-rows:140px 140px;}
     .gallery .g-main{grid-column:1/3;grid-row:auto;height:220px;}
+    .sidebar{position:static;}
   }
 
   .gallery .g-tile{position:relative;overflow:hidden;cursor:pointer;}
@@ -124,67 +126,72 @@
 </header>
 
 <div class="wrap title-block">
-  <div class="breadcrumb">Livigno / Baita Crosc / Appartamento Freita</div>
-  <h1>Appartamento Freita</h1>
-  <div class="stats">
-    <span class="rating">★ 5.0</span>
-    <span>· 2 recensioni</span>
-    <span>📍 Livigno</span>
-    <span>· CIN IT014037B42WANC5LM</span>
-  </div>
-</div>
-
-<div class="wrap">
-  <div class="gallery">
-    <div class="g-tile g-main" onclick="openLightbox(0)"><img src="images/baita-freita/foto04.jpg" alt="Foto 1"></div>
-    <div class="g-tile" onclick="openLightbox(1)"><img src="images/baita-freita/foto01.jpg" alt="Foto 2"></div>
-    <div class="g-tile" onclick="openLightbox(2)"><img src="images/baita-freita/foto02.jpg" alt="Foto 3"></div>
-    <div class="g-tile" onclick="openLightbox(3)"><img src="images/baita-freita/foto03.jpg" alt="Foto 4"></div>
-    <div class="g-tile" onclick="openLightbox(4)"><img src="images/baita-freita/foto05.jpg" alt="Foto 5"><div class="more-overlay">+12 foto — vedi tutte</div></div>
-  </div>
-</div>
-
-<div class="wrap">
-  <div class="quote-box">
-    <h3 data-i18n="quote_title">Richiedi un preventivo</h3>
-    <p class="quote-sub" data-i18n="quote_sub">Inserisci le date del tuo soggiorno: la richiesta viene inviata direttamente su WhatsApp, ti risponderemo il prima possibile.</p>
-    <div class="quote-fields">
-      <label><span data-i18n="quote_checkin">Check-in</span>
-        <input type="date" id="checkin-baita_freita">
-      </label>
-      <label><span data-i18n="quote_checkout">Check-out</span>
-        <input type="date" id="checkout-baita_freita">
-      </label>
-      <label><span data-i18n="quote_guests">Ospiti</span>
-        <input type="number" id="guests-baita_freita" min="1" max="6" value="2">
-      </label>
-      <div class="quote-actions">
-        <button class="quote-btn" onclick="sendQuote_baita_freita()">
-          <span data-i18n="quote_btn_wa">WhatsApp →</span>
-        </button>
-        <button class="quote-btn email-btn" onclick="sendQuoteEmail_baita_freita()">
-          <span data-i18n="quote_btn_email">Email →</span>
-        </button>
+  <div class="breadcrumb">Livigno / Annunci / Livigno Cantoni</div>
+  <div class="title-row">
+    <div>
+      <h1>Livigno Cantoni</h1>
+      <div class="stats">
+        <span class="rating">★ 4.9</span>
+        <span>· 36 recensioni</span>
+        <span>· 📍 Livigno</span>
       </div>
     </div>
   </div>
 </div>
 
+<div class="wrap">
+  <div class="gallery">
+    <div class="g-tile g-main" onclick="openLightbox(0)"><img src="images/livigno-cantoni/foto01.jpg" alt="Foto 1"></div>
+    <div class="g-tile" onclick="openLightbox(1)"><img src="images/livigno-cantoni/foto02.jpg" alt="Foto 2"></div>
+    <div class="g-tile" onclick="openLightbox(2)"><img src="images/livigno-cantoni/foto03.jpg" alt="Foto 3"></div>
+    <div class="g-tile" onclick="openLightbox(3)"><img src="images/livigno-cantoni/foto04.jpg" alt="Foto 4"></div>
+    <div class="g-tile" onclick="openLightbox(4)"><img src="images/livigno-cantoni/foto05.jpg" alt="Foto 5"><div class="more-overlay">+11 foto — vedi tutte</div></div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="booking-full">
+      <p class="note">4 ospiti · 2 camere · 4 letti · 1 bagno</p>
+      <be-widget
+        host="https://baitariver.bookpage.io"
+        property-id="152305"
+        booking-network-id="2072"
+        default-adults="2"
+        default-children="0"
+        max-guests="5"
+        with-children="true"
+        expanded-occupation="true"
+        primary-color="#173226"
+        secondary-color="#006039"
+        background-color="#ffffff"
+        label-color="#173226"
+        border-color="#E3DCC9"
+        with-shadow="false"
+        with-box-border="false"
+        full-width="true"
+        button-text-color="#ffffff"
+        language="it"
+      ></be-widget>
+    </div>
+</div>
 <div class="wrap content">
   <div class="main">
 
     <div class="section">
       <h2 data-i18n="sec_house">La casa</h2>
-      <p>Situato al primo piano del complesso Baita Crosc a Livigno, con ingresso sul lato sinistro, l'appartamento si sviluppa su due piani e può ospitare fino a 6 persone con tre camere matrimoniali.</p>
-      <p>Cucina completamente attrezzata (piastra a induzione, forno a microonde, macchina per caffè a cialde e bollitore) e balcone. A pochi passi dagli impianti del Carosello 3000.</p>
+      <p>Baita in stile alpino nel cuore di Livigno, pensata per chi cerca sport, natura e relax in ogni stagione. Wi-Fi gratuito, smart TV e un deposito dedicato per sci e biciclette completano gli spazi interni. All'esterno, un solarium privato con sdraio si affaccia sulle montagne circostanti — perfetto per una pausa dopo una giornata sulle piste o sui sentieri.</p>
+    </div>
+
+    <div class="section">
+      <h2 data-i18n="sec_location">Posizione</h2>
+      <p>Situata in una zona residenziale tranquilla ma centrale: l'ospedale è proprio di fronte, un supermercato è raggiungibile a piedi in pochi minuti, e la pista ciclopedonale che attraversa tutto il paese passa davanti alla porta. La celebre via dello shopping di Livigno, con le sue boutique duty free e i ristoranti tipici, è a pochi minuti.</p>
     </div>
 
     <div class="section">
       <h2 data-i18n="sec_rooms">Dove dormirai</h2>
       <div class="rooms">
-        <div class="room"><span>Camera da letto 1</span><span>1 letto matrimoniale</span></div>
-        <div class="room"><span>Camera da letto 2</span><span>1 letto matrimoniale</span></div>
-        <div class="room"><span>Camera da letto 3</span><span>1 letto matrimoniale</span></div>
+        <div class="room"><span>Camera da letto 1</span><span>2 letti singoli</span></div>
+        <div class="room"><span>Camera da letto 2</span><span>2 letti singoli</span></div>
       </div>
     </div>
 
@@ -196,9 +203,9 @@
         <div class="amenity"><span class="dot"></span><span data-i18n="a_parking2">Parcheggio privato</span></div>
         <div class="amenity"><span class="dot"></span><span data-i18n="a_pets">Animali domestici ammessi</span></div>
         <div class="amenity"><span class="dot"></span><span data-i18n="a_tv2">Smart TV</span></div>
-        <div class="amenity"><span class="dot"></span><span data-i18n="a_ski1">Deposito sci</span></div>
-        <div class="amenity"><span class="dot"></span><span data-i18n="a_balcony1">Balcone</span></div>
-        <div class="amenity"><span class="dot"></span><span data-i18n="a_bath1">2 bagni</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_ski2">Deposito sci/bici</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_courtyard">Vista sul cortile</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_solarium">Solarium privato</span></div>
       </div>
     </div>
 
@@ -206,28 +213,6 @@
 </div>
 
 <footer>© 2026 Immobilia — Milano · Bormio · Livigno</footer>
-
-<script>
-  function sendQuote_baita_freita() {
-    const ci = document.getElementById('checkin-baita_freita').value;
-    const co = document.getElementById('checkout-baita_freita').value;
-    const g = document.getElementById('guests-baita_freita').value || '2';
-    const fmt = d => d ? d.split('-').reverse().join('/') : '(da definire)';
-    const msg = `Ciao! Vorrei un preventivo per Appartamento Freita (Livigno) dal ${fmt(ci)} al ${fmt(co)} per ${g} ospiti.`;
-    const phone = "393333269224";
-    const url = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
-    window.open(url, '_blank');
-  }
-  function sendQuoteEmail_baita_freita() {
-    const ci = document.getElementById('checkin-baita_freita').value;
-    const co = document.getElementById('checkout-baita_freita').value;
-    const g = document.getElementById('guests-baita_freita').value || '2';
-    const fmt = d => d ? d.split('-').reverse().join('/') : '(da definire)';
-    const subject = `Richiesta preventivo — Appartamento Freita`;
-    const body = `Ciao,%0D%0A%0D%0AVorrei un preventivo per Appartamento Freita (Livigno) dal ${fmt(ci)} al ${fmt(co)} per ${g} ospiti.%0D%0A%0D%0AGrazie!`;
-    window.location.href = `mailto:immobiliaita@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
-  }
-</script>
 
 
 <div class="lightbox" id="lightbox">
@@ -239,7 +224,7 @@
 </div>
 
 <script>
-  const photos = ["images/baita-freita/foto04.jpg", "images/baita-freita/foto01.jpg", "images/baita-freita/foto02.jpg", "images/baita-freita/foto03.jpg", "images/baita-freita/foto05.jpg", "images/baita-freita/foto06.jpg", "images/baita-freita/foto07.jpg", "images/baita-freita/foto08.jpg", "images/baita-freita/foto09.jpg", "images/baita-freita/foto10.jpg", "images/baita-freita/foto11.jpg", "images/baita-freita/foto12.jpg", "images/baita-freita/foto13.jpg", "images/baita-freita/foto14.jpg", "images/baita-freita/foto15.jpg", "images/baita-freita/foto16.jpg", "images/baita-freita/foto17.jpg"];
+  const photos = ["images/livigno-cantoni/foto01.jpg", "images/livigno-cantoni/foto02.jpg", "images/livigno-cantoni/foto03.jpg", "images/livigno-cantoni/foto04.jpg", "images/livigno-cantoni/foto05.jpg", "images/livigno-cantoni/foto06.jpg", "images/livigno-cantoni/foto07.jpg", "images/livigno-cantoni/foto08.jpg", "images/livigno-cantoni/foto09.jpg", "images/livigno-cantoni/foto10.jpg", "images/livigno-cantoni/foto11.jpg", "images/livigno-cantoni/foto12.jpg", "images/livigno-cantoni/foto13.jpg", "images/livigno-cantoni/foto14.jpg", "images/livigno-cantoni/foto15.jpg", "images/livigno-cantoni/foto16.jpg"];
   let currentIndex = 0;
   function openLightbox(i) {
     currentIndex = i;

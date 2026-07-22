@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Appartamento Freita — Immobilia</title>
+<title>Appartamento Toilà — Immobilia</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -53,10 +53,7 @@
   .quote-fields input{padding:11px 12px;border:1px solid var(--line);border-radius:8px;font-size:14px;font-family:inherit;color:var(--ink);background:var(--cream-soft);}
   .quote-btn{background:var(--whatsapp);color:#fff;border:none;padding:13px 22px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;white-space:nowrap;height:44px;}
   .quote-btn:hover{background:#1ebe57;}
-  .quote-btn.email-btn{background:transparent;color:var(--forest);border:1.5px solid var(--forest);}
-  .quote-btn.email-btn:hover{background:var(--cream-soft);}
-  .quote-actions{display:flex;gap:10px;}
-  @media(max-width:720px){ .quote-fields{grid-template-columns:1fr 1fr;} .quote-actions{grid-column:1/3;} }
+  @media(max-width:720px){ .quote-fields{grid-template-columns:1fr 1fr;} .quote-btn{grid-column:1/3;} }
 
   .content{display:block;padding-bottom:60px;}
   .section{padding:28px 0;border-bottom:1px solid var(--line);}
@@ -124,25 +121,24 @@
 </header>
 
 <div class="wrap title-block">
-  <div class="breadcrumb">Livigno / Baita Crosc / Appartamento Freita</div>
-  <h1>Appartamento Freita</h1>
+  <div class="breadcrumb">Livigno / Baita Crosc / Appartamento Toilà</div>
+  <h1>Appartamento Toilà</h1>
   <div class="stats">
     <span class="rating">★ 5.0</span>
-    <span>· 2 recensioni</span>
+    <span>· 4 recensioni</span>
     <span>📍 Livigno</span>
-    <span>· CIN IT014037B42WANC5LM</span>
+    <span>· CIN IT014037B4RRIS7HV4</span>
   </div>
 </div>
 
 <div class="wrap">
   <div class="gallery">
-    <div class="g-tile g-main" onclick="openLightbox(0)"><img src="images/baita-freita/foto04.jpg" alt="Foto 1"></div>
-    <div class="g-tile" onclick="openLightbox(1)"><img src="images/baita-freita/foto01.jpg" alt="Foto 2"></div>
-    <div class="g-tile" onclick="openLightbox(2)"><img src="images/baita-freita/foto02.jpg" alt="Foto 3"></div>
-    <div class="g-tile" onclick="openLightbox(3)"><img src="images/baita-freita/foto03.jpg" alt="Foto 4"></div>
-    <div class="g-tile" onclick="openLightbox(4)"><img src="images/baita-freita/foto05.jpg" alt="Foto 5"><div class="more-overlay">+12 foto — vedi tutte</div></div>
-  </div>
-</div>
+    <div class="g-tile g-main" onclick="openLightbox(0)"><img src="images/baita-toila/foto01.jpg" alt="Foto 1"></div>
+    <div class="g-tile" onclick="openLightbox(1)"><img src="images/baita-toila/foto02.jpg" alt="Foto 2"></div>
+    <div class="g-tile" onclick="openLightbox(2)"><img src="images/baita-toila/foto03.jpg" alt="Foto 3"></div>
+    <div class="g-tile" onclick="openLightbox(3)"><img src="images/baita-toila/foto04.jpg" alt="Foto 4"></div>
+    <div class="g-tile" onclick="openLightbox(4)"><img src="images/baita-toila/foto05.jpg" alt="Foto 5"><div class="more-overlay">+5 foto — vedi tutte</div></div>
+  </div></div>
 
 <div class="wrap">
   <div class="quote-box">
@@ -150,22 +146,17 @@
     <p class="quote-sub" data-i18n="quote_sub">Inserisci le date del tuo soggiorno: la richiesta viene inviata direttamente su WhatsApp, ti risponderemo il prima possibile.</p>
     <div class="quote-fields">
       <label><span data-i18n="quote_checkin">Check-in</span>
-        <input type="date" id="checkin-baita_freita">
+        <input type="date" id="checkin-baita_toila">
       </label>
       <label><span data-i18n="quote_checkout">Check-out</span>
-        <input type="date" id="checkout-baita_freita">
+        <input type="date" id="checkout-baita_toila">
       </label>
       <label><span data-i18n="quote_guests">Ospiti</span>
-        <input type="number" id="guests-baita_freita" min="1" max="6" value="2">
+        <input type="number" id="guests-baita_toila" min="1" max="5" value="2">
       </label>
-      <div class="quote-actions">
-        <button class="quote-btn" onclick="sendQuote_baita_freita()">
-          <span data-i18n="quote_btn_wa">WhatsApp →</span>
-        </button>
-        <button class="quote-btn email-btn" onclick="sendQuoteEmail_baita_freita()">
-          <span data-i18n="quote_btn_email">Email →</span>
-        </button>
-      </div>
+      <button class="quote-btn" onclick="sendQuote_baita_toila()">
+        <span data-i18n="quote_btn">Invia richiesta →</span>
+      </button>
     </div>
   </div>
 </div>
@@ -175,16 +166,15 @@
 
     <div class="section">
       <h2 data-i18n="sec_house">La casa</h2>
-      <p>Situato al primo piano del complesso Baita Crosc a Livigno, con ingresso sul lato sinistro, l'appartamento si sviluppa su due piani e può ospitare fino a 6 persone con tre camere matrimoniali.</p>
-      <p>Cucina completamente attrezzata (piastra a induzione, forno a microonde, macchina per caffè a cialde e bollitore) e balcone. A pochi passi dagli impianti del Carosello 3000.</p>
+      <p>Situato al piano mansarda del complesso Baita Crosc a Livigno, di recentissima ristrutturazione, l'appartamento può ospitare fino a 5 persone su due livelli: una camera matrimoniale al piano terra e un open space con letto matrimoniale e letto singolo al piano superiore.</p>
+      <p>Cucina completamente attrezzata e due bagni con doccia, uno per piano. A pochi minuti dagli impianti del Carosello 3000 e dai market del paese.</p>
     </div>
 
     <div class="section">
       <h2 data-i18n="sec_rooms">Dove dormirai</h2>
       <div class="rooms">
         <div class="room"><span>Camera da letto 1</span><span>1 letto matrimoniale</span></div>
-        <div class="room"><span>Camera da letto 2</span><span>1 letto matrimoniale</span></div>
-        <div class="room"><span>Camera da letto 3</span><span>1 letto matrimoniale</span></div>
+        <div class="room"><span>Camera da letto 2 (open space)</span><span>1 matrimoniale + 1 singolo</span></div>
       </div>
     </div>
 
@@ -194,11 +184,11 @@
         <div class="amenity"><span class="dot"></span><span data-i18n="a_kitchen1">Cucina attrezzata</span></div>
         <div class="amenity"><span class="dot"></span><span data-i18n="a_wifi">Wi-Fi gratuito</span></div>
         <div class="amenity"><span class="dot"></span><span data-i18n="a_parking2">Parcheggio privato</span></div>
-        <div class="amenity"><span class="dot"></span><span data-i18n="a_pets">Animali domestici ammessi</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_dishwasher">Lavastoviglie</span></div>
         <div class="amenity"><span class="dot"></span><span data-i18n="a_tv2">Smart TV</span></div>
         <div class="amenity"><span class="dot"></span><span data-i18n="a_ski1">Deposito sci</span></div>
-        <div class="amenity"><span class="dot"></span><span data-i18n="a_balcony1">Balcone</span></div>
-        <div class="amenity"><span class="dot"></span><span data-i18n="a_bath1">2 bagni</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_bath2">2 bagni con doccia</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_outdoor">Area esterna</span></div>
       </div>
     </div>
 
@@ -208,24 +198,15 @@
 <footer>© 2026 Immobilia — Milano · Bormio · Livigno</footer>
 
 <script>
-  function sendQuote_baita_freita() {
-    const ci = document.getElementById('checkin-baita_freita').value;
-    const co = document.getElementById('checkout-baita_freita').value;
-    const g = document.getElementById('guests-baita_freita').value || '2';
+  function sendQuote_baita_toila() {
+    const ci = document.getElementById('checkin-baita_toila').value;
+    const co = document.getElementById('checkout-baita_toila').value;
+    const g = document.getElementById('guests-baita_toila').value || '2';
     const fmt = d => d ? d.split('-').reverse().join('/') : '(da definire)';
-    const msg = `Ciao! Vorrei un preventivo per Appartamento Freita (Livigno) dal ${fmt(ci)} al ${fmt(co)} per ${g} ospiti.`;
+    const msg = `Ciao! Vorrei un preventivo per Appartamento Toilà (Livigno) dal ${fmt(ci)} al ${fmt(co)} per ${g} ospiti.`;
     const phone = "393333269224";
     const url = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
     window.open(url, '_blank');
-  }
-  function sendQuoteEmail_baita_freita() {
-    const ci = document.getElementById('checkin-baita_freita').value;
-    const co = document.getElementById('checkout-baita_freita').value;
-    const g = document.getElementById('guests-baita_freita').value || '2';
-    const fmt = d => d ? d.split('-').reverse().join('/') : '(da definire)';
-    const subject = `Richiesta preventivo — Appartamento Freita`;
-    const body = `Ciao,%0D%0A%0D%0AVorrei un preventivo per Appartamento Freita (Livigno) dal ${fmt(ci)} al ${fmt(co)} per ${g} ospiti.%0D%0A%0D%0AGrazie!`;
-    window.location.href = `mailto:immobiliaita@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
   }
 </script>
 
@@ -239,7 +220,7 @@
 </div>
 
 <script>
-  const photos = ["images/baita-freita/foto04.jpg", "images/baita-freita/foto01.jpg", "images/baita-freita/foto02.jpg", "images/baita-freita/foto03.jpg", "images/baita-freita/foto05.jpg", "images/baita-freita/foto06.jpg", "images/baita-freita/foto07.jpg", "images/baita-freita/foto08.jpg", "images/baita-freita/foto09.jpg", "images/baita-freita/foto10.jpg", "images/baita-freita/foto11.jpg", "images/baita-freita/foto12.jpg", "images/baita-freita/foto13.jpg", "images/baita-freita/foto14.jpg", "images/baita-freita/foto15.jpg", "images/baita-freita/foto16.jpg", "images/baita-freita/foto17.jpg"];
+  const photos = ["images/baita-toila/foto01.jpg", "images/baita-toila/foto02.jpg", "images/baita-toila/foto03.jpg", "images/baita-toila/foto04.jpg", "images/baita-toila/foto05.jpg", "images/baita-toila/foto06.jpg", "images/baita-toila/foto07.jpg", "images/baita-toila/foto08.jpg", "images/baita-toila/foto09.jpg", "images/baita-toila/foto10.jpg"];
   let currentIndex = 0;
   function openLightbox(i) {
     currentIndex = i;

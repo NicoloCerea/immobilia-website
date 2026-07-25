@@ -103,6 +103,10 @@
     cursor:pointer; opacity:.7; transition:opacity .2s;
   }
   input[type="date"]::-webkit-calendar-picker-indicator:hover{opacity:1;}
+  .map-embed{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);margin-top:16px;box-shadow:0 8px 24px rgba(15,33,25,.07);}
+  .map-embed iframe{width:100%;height:280px;display:block;border:0;filter:sepia(8%) saturate(85%) hue-rotate(80deg) brightness(97%);}
+  .map-note{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ink-soft);margin-top:10px;}
+  .map-note .dot-pin{color:var(--gold);font-size:14px;}
 </style>
 </head>
 <body>
@@ -185,6 +189,10 @@
     <div class="section">
       <h2 data-i18n="sec_location">Posizione</h2>
       <p>Situata in una zona residenziale tranquilla ma centrale: l'ospedale è proprio di fronte, un supermercato è raggiungibile a piedi in pochi minuti, e la pista ciclopedonale che attraversa tutto il paese passa davanti alla porta. La celebre via dello shopping di Livigno, con le sue boutique duty free e i ristoranti tipici, è a pochi minuti.</p>
+      <div class="map-embed">
+        <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=10.118375,46.514134000000006,10.132375,46.522134&layer=mapnik&marker=46.518134,10.125375" loading="lazy"></iframe>
+      </div>
+      <div class="map-note"><span class="dot-pin">📍</span><span>Zona: Via Freita, Livigno — la posizione esatta viene condivisa dopo la conferma della prenotazione.</span></div>
     </div>
 
     <div class="section">

@@ -100,6 +100,10 @@
     cursor:pointer; opacity:.7; transition:opacity .2s;
   }
   input[type="date"]::-webkit-calendar-picker-indicator:hover{opacity:1;}
+  .map-embed{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);margin-top:16px;box-shadow:0 8px 24px rgba(15,33,25,.07);}
+  .map-embed iframe{width:100%;height:280px;display:block;border:0;filter:sepia(8%) saturate(85%) hue-rotate(80deg) brightness(97%);}
+  .map-note{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ink-soft);margin-top:10px;}
+  .map-note .dot-pin{color:var(--gold);font-size:14px;}
 </style>
 </head>
 <body>
@@ -180,6 +184,10 @@
     <div class="section">
       <h2 data-i18n="sec_location">Posizione</h2>
       <p>Zona residenziale tranquilla e ben collegata, a pochi passi da negozi, panetterie, bar, ristoranti e fermate dei mezzi pubblici. Il centro storico e le celebri terme QC di Bormio (Bagni Vecchi e Bagni Nuovi) sono a pochi minuti — comodo tutto l'anno, con accesso rapido sia agli impianti sciistici d'inverno sia ai sentieri del Parco Nazionale dello Stelvio d'estate.</p>
+      <div class="map-embed">
+        <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=10.362346,46.468716,10.376346,46.476715999999996&layer=mapnik&marker=46.472716,10.369346" loading="lazy"></iframe>
+      </div>
+      <div class="map-note"><span class="dot-pin">📍</span><span>Zona: Via Monte Reit, Bormio — la posizione esatta viene condivisa dopo la conferma della prenotazione.</span></div>
     </div>
 
     <div class="section">

@@ -102,8 +102,7 @@
     .gallery .g-main{grid-column:1/3;grid-row:auto;height:220px;}
   }
   .map-embed{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);margin-top:16px;box-shadow:0 8px 24px rgba(15,33,25,.07);height:300px;}
-  .leaflet-pin{width:22px;height:22px;border-radius:50% 50% 50% 0;background:var(--forest);border:3px solid var(--cream);transform:rotate(-45deg);box-shadow:0 2px 6px rgba(15,33,25,.4);}
-  .leaflet-pin::after{content:"";position:absolute;top:50%;left:50%;width:7px;height:7px;background:var(--gold);border-radius:50%;transform:translate(-50%,-50%) rotate(45deg);}
+  .leaflet-pin-home{width:40px;height:40px;border-radius:50%;background:var(--forest);display:flex;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(15,33,25,.35);border:3px solid var(--cream);}
   .leaflet-container{font-family:'Inter',sans-serif;background:var(--cream-soft) !important;}
   .leaflet-control-attribution{font-size:10px !important;background:rgba(246,242,233,.85) !important;}
   .map-note{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ink-soft);margin-top:10px;}
@@ -275,12 +274,23 @@
 <script src="js/translations.js"></script>
 
 <script>
-  var map_franz2 = L.map('map-franz2', {scrollWheelZoom:false}).setView([46.512256, 10.120646], 14);
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; OpenStreetMap &copy; CARTO',
-    maxZoom: 19
+  var map_franz2 = L.map('map-franz2', {scrollWheelZoom:false}).setView([46.512256, 10.120646], 15);
+  L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+    attribution: 'Map data: &copy; OpenStreetMap contributors, SRTM | Map style: &copy; OpenTopoMap (CC-BY-SA)',
+    maxZoom: 17
   }).addTo(map_franz2);
-  var icon_franz2 = L.divIcon({className:'', html:'<div class="leaflet-pin" style="position:relative;"></div>', iconSize:[22,22], iconAnchor:[11,22]});
+  L.circle([46.512256, 10.120646], {
+    radius: 180,
+    color: '#173226',
+    weight: 1,
+    fillColor: '#B9974E',
+    fillOpacity: 0.18
+  }).addTo(map_franz2);
+  var icon_franz2 = L.divIcon({
+    className: '',
+    html: '<div class="leaflet-pin-home"><svg viewBox="0 0 24 24" width="18" height="18" fill="#F6F2E9"><path d="M12 3l9 8h-3v9h-5v-6h-2v6H6v-9H3z"/></svg></div>',
+    iconSize: [40,40], iconAnchor: [20,20]
+  });
   L.marker([46.512256, 10.120646], {icon: icon_franz2}).addTo(map_franz2);
 </script>
 </body>

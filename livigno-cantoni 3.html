@@ -3,10 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Monte Reit 7 — Immobilia</title>
+<title>Livigno Cantoni — Immobilia</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.ciaobooking.com/widget/js/app.js" defer></script>
 <style>
@@ -41,10 +39,10 @@
 
   .title-block{padding:32px 0 20px;}
   .breadcrumb{font-size:12px;color:var(--ink-soft);margin-bottom:10px;}
+  .title-row{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:12px;}
   h1{font-size:34px;font-weight:500;}
   .stats{display:flex;align-items:center;gap:14px;font-size:13.5px;color:var(--ink-soft);margin-top:8px;}
   .stats .rating{color:var(--gold);font-weight:700;}
-  .stats .badge{background:var(--cream-soft);color:var(--forest);padding:2px 9px;border-radius:999px;font-weight:700;font-size:11.5px;}
 
   .gallery{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:repeat(2,180px);gap:8px;border-radius:var(--radius);overflow:hidden;margin:20px 0 40px;}
   .gallery img{width:100%;height:100%;object-fit:cover;}
@@ -55,7 +53,6 @@
   .section:first-child{padding-top:0;}
   .section h2{font-size:20px;font-weight:600;margin-bottom:14px;}
   .section p{font-size:14.5px;line-height:1.7;color:var(--ink-soft);}
-  .section p + p{margin-top:12px;}
   .amenities{display:grid;grid-template-columns:1fr 1fr;gap:12px 20px;}
   .amenity{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--ink);}
   .amenity .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0;}
@@ -67,8 +64,12 @@
   .sidebar{position:sticky;top:90px;align-self:start;}
   .booking-full{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px;margin:0 0 40px;box-shadow:0 12px 30px rgba(15,33,25,.08);}
   .booking-full .stay-meta{font-size:13px;color:var(--ink-soft);margin-bottom:16px;}
-  .book-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:0 12px 30px rgba(15,33,25,.08);}
-  .book-card .stay-meta{font-size:12.5px;color:var(--ink-soft);padding:0 4px 14px;}
+  .book-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:0 12px 30px rgba(15,33,25,.08);}
+  .book-card .price-row{font-size:22px;font-weight:700;color:var(--forest);margin-bottom:4px;}
+  .book-card .price-row span{font-size:13px;font-weight:400;color:var(--ink-soft);}
+  .book-card p.note{font-size:12.5px;color:var(--ink-soft);margin-bottom:18px;}
+  .btn-avail{display:block;width:100%;text-align:center;background:var(--forest);color:var(--cream);padding:14px;border-radius:10px;font-size:14.5px;font-weight:700;}
+  .btn-avail:hover{background:var(--forest-dark);}
 
   footer{padding:40px 32px;text-align:center;font-size:12px;color:var(--ink-soft);}
 
@@ -102,10 +103,8 @@
     cursor:pointer; opacity:.7; transition:opacity .2s;
   }
   input[type="date"]::-webkit-calendar-picker-indicator:hover{opacity:1;}
-  .map-embed{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);margin-top:16px;box-shadow:0 8px 24px rgba(15,33,25,.07);height:300px;}
-  .leaflet-pin-home{width:40px;height:40px;border-radius:50%;background:var(--forest);display:flex;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(15,33,25,.35);border:3px solid var(--cream);}
-  .leaflet-container{font-family:'Inter',sans-serif;background:var(--cream-soft) !important;}
-  .leaflet-control-attribution{font-size:10px !important;background:rgba(246,242,233,.85) !important;}
+  .map-embed{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);margin-top:16px;box-shadow:0 8px 24px rgba(15,33,25,.07);}
+  .map-embed iframe{width:100%;height:280px;display:block;border:0;filter:sepia(8%) saturate(85%) hue-rotate(80deg) brightness(97%);}
   .map-note{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ink-soft);margin-top:10px;}
   .map-note .dot-pin{color:var(--gold);font-size:14px;}
 </style>
@@ -131,33 +130,36 @@
 </header>
 
 <div class="wrap title-block">
-  <div class="breadcrumb">Bormio / Annunci / Monte Reit 7</div>
-  <h1>Monte Reit 7</h1>
-  <div class="stats">
-    <span class="rating">★ 4.9</span>
-    <span>· 4 recensioni</span>
-    <span>· 📍 Bormio</span>
-    <span class="badge">Superhost</span>
+  <div class="breadcrumb">Livigno / Annunci / Livigno Cantoni</div>
+  <div class="title-row">
+    <div>
+      <h1>Livigno Cantoni</h1>
+      <div class="stats">
+        <span class="rating">★ 4.9</span>
+        <span>· 36 recensioni</span>
+        <span>· 📍 Livigno</span>
+      </div>
+    </div>
   </div>
 </div>
 
 <div class="wrap">
   <div class="gallery">
-    <div class="g-tile g-main" onclick="openLightbox(0)"><img src="images/monte-reit-7/foto01.jpg" alt="Foto 1"></div>
-    <div class="g-tile" onclick="openLightbox(1)"><img src="images/monte-reit-7/foto02.jpg" alt="Foto 2"></div>
-    <div class="g-tile" onclick="openLightbox(2)"><img src="images/monte-reit-7/foto03.jpg" alt="Foto 3"></div>
-    <div class="g-tile" onclick="openLightbox(3)"><img src="images/monte-reit-7/foto04.jpg" alt="Foto 4"></div>
-    <div class="g-tile" onclick="openLightbox(4)"><img src="images/monte-reit-7/foto05.jpg" alt="Foto 5"><div class="more-overlay">+37 foto — vedi tutte</div></div>
+    <div class="g-tile g-main" onclick="openLightbox(0)"><img src="images/livigno-cantoni/foto02.jpg" alt="Foto 1"></div>
+    <div class="g-tile" onclick="openLightbox(1)"><img src="images/livigno-cantoni/foto01.jpg" alt="Foto 2"></div>
+    <div class="g-tile" onclick="openLightbox(2)"><img src="images/livigno-cantoni/foto03.jpg" alt="Foto 3"></div>
+    <div class="g-tile" onclick="openLightbox(3)"><img src="images/livigno-cantoni/foto04.jpg" alt="Foto 4"></div>
+    <div class="g-tile" onclick="openLightbox(4)"><img src="images/livigno-cantoni/foto05.jpg" alt="Foto 5"><div class="more-overlay">+11 foto — vedi tutte</div></div>
   </div>
 </div>
 
 <div class="wrap">
   <div class="booking-full">
-      <p class="stay-meta">5 ospiti · 2 camere · 3 letti · 1 bagno</p>
+      <p class="note">4 ospiti · 2 camere · 4 letti · 1 bagno</p>
       <be-widget
-        host="https://montereit7.bookpage.io"
-        property-id="146799"
-        booking-network-id="2071"
+        host="https://baitariver.bookpage.io"
+        property-id="152305"
+        booking-network-id="2072"
         default-adults="2"
         default-children="0"
         max-guests="5"
@@ -181,37 +183,37 @@
 
     <div class="section">
       <h2 data-i18n="sec_house">La casa</h2>
-      <p>Un appartamento al piano terra interamente rivestito in legno chiaro, che regala un'atmosfera calda e autentica in ogni stanza. Due camere matrimoniali, una zona giorno luminosa con vista panoramica, cucina completamente attrezzata (forno, macchina caffè, frigo e freezer) e comfort moderni come Wi-Fi e garage privato lo rendono ideale per chi cerca relax vicino a impianti sciistici e trasporti.</p>
-      <p>Il legno naturale caratterizza pareti e arredi in ogni ambiente, dalla zona notte al salotto, con grandi finestre che portano luce e connessione con il paesaggio circostante.</p>
+      <p>Baita in stile alpino nel cuore di Livigno, pensata per chi cerca sport, natura e relax in ogni stagione. Wi-Fi gratuito, smart TV e un deposito dedicato per sci e biciclette completano gli spazi interni. All'esterno, un solarium privato con sdraio si affaccia sulle montagne circostanti — perfetto per una pausa dopo una giornata sulle piste o sui sentieri.</p>
     </div>
 
     <div class="section">
       <h2 data-i18n="sec_location">Posizione</h2>
-      <p>Zona residenziale tranquilla e ben collegata, a pochi passi da negozi, panetterie, bar, ristoranti e fermate dei mezzi pubblici. Il centro storico e le celebri terme QC di Bormio (Bagni Vecchi e Bagni Nuovi) sono a pochi minuti — comodo tutto l'anno, con accesso rapido sia agli impianti sciistici d'inverno sia ai sentieri del Parco Nazionale dello Stelvio d'estate.</p>
-      <div class="map-embed" id="map-montereit"></div>
-      <div class="map-note"><span class="dot-pin">📍</span><span>Zona: Via Monte Reit, Bormio — la posizione esatta viene condivisa dopo la conferma della prenotazione.</span></div>
+      <p>Situata in una zona residenziale tranquilla ma centrale: l'ospedale è proprio di fronte, un supermercato è raggiungibile a piedi in pochi minuti, e la pista ciclopedonale che attraversa tutto il paese passa davanti alla porta. La celebre via dello shopping di Livigno, con le sue boutique duty free e i ristoranti tipici, è a pochi minuti.</p>
+      <div class="map-embed">
+        <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=10.118375,46.514134000000006,10.132375,46.522134&layer=mapnik&marker=46.518134,10.125375" loading="lazy"></iframe>
+      </div>
+      <div class="map-note"><span class="dot-pin">📍</span><span>Zona: Via Freita, Livigno — la posizione esatta viene condivisa dopo la conferma della prenotazione.</span></div>
     </div>
 
     <div class="section">
       <h2 data-i18n="sec_rooms">Dove dormirai</h2>
       <div class="rooms">
-        <div class="room"><span>Camera da letto 1</span><span>1 letto matrimoniale</span></div>
-        <div class="room"><span>Camera da letto 2</span><span>1 divano letto matrimoniale</span></div>
-        <div class="room"><span>Salotto</span><span>1 divano letto singolo</span></div>
+        <div class="room"><span>Camera da letto 1</span><span>2 letti singoli</span></div>
+        <div class="room"><span>Camera da letto 2</span><span>2 letti singoli</span></div>
       </div>
     </div>
 
     <div class="section" style="border-bottom:none;">
       <h2 data-i18n="sec_amenities">Cosa troverai</h2>
       <div class="amenities">
-        <div class="amenity"><span class="dot"></span><span data-i18n="a_kitchen2">Cucina completamente attrezzata</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_kitchen1">Cucina attrezzata</span></div>
         <div class="amenity"><span class="dot"></span><span data-i18n="a_wifi">Wi-Fi gratuito</span></div>
-        <div class="amenity"><span class="dot"></span><span data-i18n="a_workspace">Spazio di lavoro dedicato</span></div>
-        <div class="amenity"><span class="dot"></span><span data-i18n="a_parking4">Parcheggio gratuito / garage</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_parking2">Parcheggio privato</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_pets">Animali domestici ammessi</span></div>
         <div class="amenity"><span class="dot"></span><span data-i18n="a_tv2">Smart TV</span></div>
-        <div class="amenity"><span class="dot"></span><span data-i18n="a_washer">Lavatrice</span></div>
-        <div class="amenity"><span class="dot"></span><span data-i18n="a_heating">Riscaldamento</span></div>
-        <div class="amenity"><span class="dot"></span><span data-i18n="a_selfcheckin">Self check-in</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_ski2">Deposito sci/bici</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_courtyard">Vista sul cortile</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_solarium">Solarium privato</span></div>
       </div>
     </div>
 
@@ -230,7 +232,7 @@
 </div>
 
 <script>
-  const photos = ["images/monte-reit-7/foto01.jpg", "images/monte-reit-7/foto02.jpg", "images/monte-reit-7/foto03.jpg", "images/monte-reit-7/foto04.jpg", "images/monte-reit-7/foto05.jpg", "images/monte-reit-7/foto06.jpg", "images/monte-reit-7/foto07.jpg", "images/monte-reit-7/foto08.jpg", "images/monte-reit-7/foto09.jpg", "images/monte-reit-7/foto10.jpg", "images/monte-reit-7/foto11.jpg", "images/monte-reit-7/foto12.jpg", "images/monte-reit-7/foto13.jpg", "images/monte-reit-7/foto14.jpg", "images/monte-reit-7/foto15.jpg", "images/monte-reit-7/foto16.jpg", "images/monte-reit-7/foto17.jpg", "images/monte-reit-7/foto18.jpg", "images/monte-reit-7/foto19.jpg", "images/monte-reit-7/foto20.jpg", "images/monte-reit-7/foto21.jpg", "images/monte-reit-7/foto22.jpg", "images/monte-reit-7/foto23.jpg", "images/monte-reit-7/foto24.jpg", "images/monte-reit-7/foto25.jpg", "images/monte-reit-7/foto26.jpg", "images/monte-reit-7/foto27.jpg", "images/monte-reit-7/foto28.jpg", "images/monte-reit-7/foto29.jpg", "images/monte-reit-7/foto30.jpg", "images/monte-reit-7/foto31.jpg", "images/monte-reit-7/foto32.jpg", "images/monte-reit-7/foto33.jpg", "images/monte-reit-7/foto34.jpg", "images/monte-reit-7/foto35.jpg", "images/monte-reit-7/foto36.jpg", "images/monte-reit-7/foto37.jpg", "images/monte-reit-7/foto38.jpg", "images/monte-reit-7/foto39.jpg", "images/monte-reit-7/foto40.jpg", "images/monte-reit-7/foto41.jpg", "images/monte-reit-7/foto42.jpg"];
+  const photos = ["images/livigno-cantoni/foto02.jpg", "images/livigno-cantoni/foto01.jpg", "images/livigno-cantoni/foto03.jpg", "images/livigno-cantoni/foto04.jpg", "images/livigno-cantoni/foto05.jpg", "images/livigno-cantoni/foto06.jpg", "images/livigno-cantoni/foto07.jpg", "images/livigno-cantoni/foto08.jpg", "images/livigno-cantoni/foto09.jpg", "images/livigno-cantoni/foto10.jpg", "images/livigno-cantoni/foto11.jpg", "images/livigno-cantoni/foto12.jpg", "images/livigno-cantoni/foto13.jpg", "images/livigno-cantoni/foto14.jpg", "images/livigno-cantoni/foto15.jpg", "images/livigno-cantoni/foto16.jpg"];
   let currentIndex = 0;
   function openLightbox(i) {
     currentIndex = i;
@@ -255,25 +257,5 @@
 
 <script src="js/translations.js"></script>
 
-<script>
-  var map_montereit = L.map('map-montereit', {scrollWheelZoom:false}).setView([46.472716, 10.369346], 15);
-  L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
-    attribution: 'Map data: &copy; OpenStreetMap contributors, SRTM | Map style: &copy; OpenTopoMap (CC-BY-SA)',
-    maxZoom: 17
-  }).addTo(map_montereit);
-  L.circle([46.472716, 10.369346], {
-    radius: 180,
-    color: '#173226',
-    weight: 1,
-    fillColor: '#B9974E',
-    fillOpacity: 0.18
-  }).addTo(map_montereit);
-  var icon_montereit = L.divIcon({
-    className: '',
-    html: '<div class="leaflet-pin-home"><svg viewBox="0 0 24 24" width="18" height="18" fill="#F6F2E9"><path d="M12 3l9 8h-3v9h-5v-6h-2v6H6v-9H3z"/></svg></div>',
-    iconSize: [40,40], iconAnchor: [20,20]
-  });
-  L.marker([46.472716, 10.369346], {icon: icon_montereit}).addTo(map_montereit);
-</script>
 </body>
 </html>

@@ -277,10 +277,10 @@
 <script src="js/translations.js"></script>
 
 <script>
-  var map_baitatoila = L.map('map-baitatoila', {scrollWheelZoom:false}).setView([46.519202, 10.124503], 15);
-  L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
-    attribution: 'Map data: &copy; OpenStreetMap contributors, SRTM | Map style: &copy; OpenTopoMap (CC-BY-SA)',
-    maxZoom: 17
+  var map_baitatoila = L.map('map-baitatoila', {scrollWheelZoom:false}).setView([46.519202, 10.124503], 16);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+    maxZoom: 19
   }).addTo(map_baitatoila);
   L.circle([46.519202, 10.124503], {
     radius: 180,

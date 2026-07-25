@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Livigno Cantoni — Immobilia</title>
+<title>Sertorelli 26 — Immobilia</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -41,7 +41,6 @@
 
   .title-block{padding:32px 0 20px;}
   .breadcrumb{font-size:12px;color:var(--ink-soft);margin-bottom:10px;}
-  .title-row{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:12px;}
   h1{font-size:34px;font-weight:500;}
   .stats{display:flex;align-items:center;gap:14px;font-size:13.5px;color:var(--ink-soft);margin-top:8px;}
   .stats .rating{color:var(--gold);font-weight:700;}
@@ -66,12 +65,8 @@
   .sidebar{position:sticky;top:90px;align-self:start;}
   .booking-full{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px;margin:0 0 40px;box-shadow:0 12px 30px rgba(15,33,25,.08);}
   .booking-full .stay-meta{font-size:13px;color:var(--ink-soft);margin-bottom:16px;}
-  .book-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:0 12px 30px rgba(15,33,25,.08);}
-  .book-card .price-row{font-size:22px;font-weight:700;color:var(--forest);margin-bottom:4px;}
-  .book-card .price-row span{font-size:13px;font-weight:400;color:var(--ink-soft);}
-  .book-card p.note{font-size:12.5px;color:var(--ink-soft);margin-bottom:18px;}
-  .btn-avail{display:block;width:100%;text-align:center;background:var(--forest);color:var(--cream);padding:14px;border-radius:10px;font-size:14.5px;font-weight:700;}
-  .btn-avail:hover{background:var(--forest-dark);}
+  .book-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:0 12px 30px rgba(15,33,25,.08);}
+  .book-card .stay-meta{font-size:12.5px;color:var(--ink-soft);padding:0 4px 14px;}
 
   footer{padding:40px 32px;text-align:center;font-size:12px;color:var(--ink-soft);}
 
@@ -106,7 +101,8 @@
   }
   input[type="date"]::-webkit-calendar-picker-indicator:hover{opacity:1;}
   .map-embed{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);margin-top:16px;box-shadow:0 8px 24px rgba(15,33,25,.07);height:300px;}
-  .leaflet-pin-home{width:40px;height:40px;border-radius:50%;background:var(--forest);display:flex;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(15,33,25,.35);border:3px solid var(--cream);}
+  .leaflet-pin{width:22px;height:22px;border-radius:50% 50% 50% 0;background:var(--forest);border:3px solid var(--cream);transform:rotate(-45deg);box-shadow:0 2px 6px rgba(15,33,25,.4);}
+  .leaflet-pin::after{content:"";position:absolute;top:50%;left:50%;width:7px;height:7px;background:var(--gold);border-radius:50%;transform:translate(-50%,-50%) rotate(45deg);}
   .leaflet-container{font-family:'Inter',sans-serif;background:var(--cream-soft) !important;}
   .leaflet-control-attribution{font-size:10px !important;background:rgba(246,242,233,.85) !important;}
   .map-note{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ink-soft);margin-top:10px;}
@@ -134,36 +130,32 @@
 </header>
 
 <div class="wrap title-block">
-  <div class="breadcrumb">Livigno / Annunci / Livigno Cantoni</div>
-  <div class="title-row">
-    <div>
-      <h1>Livigno Cantoni</h1>
-      <div class="stats">
-        <span class="rating">★ 4.9</span>
-        <span>· 36 recensioni</span>
-        <span>· 📍 Livigno</span>
-      </div>
-    </div>
+  <div class="breadcrumb">Bormio / Annunci / Sertorelli 26</div>
+  <h1>Sertorelli 26</h1>
+  <div class="stats">
+    <span class="rating">★ 5.0</span>
+    <span>· 32 recensioni</span>
+    <span>· 📍 Bormio</span>
   </div>
 </div>
 
 <div class="wrap">
   <div class="gallery">
-    <div class="g-tile g-main" onclick="openLightbox(0)"><img src="images/livigno-cantoni/foto02.jpg" alt="Foto 1"></div>
-    <div class="g-tile" onclick="openLightbox(1)"><img src="images/livigno-cantoni/foto01.jpg" alt="Foto 2"></div>
-    <div class="g-tile" onclick="openLightbox(2)"><img src="images/livigno-cantoni/foto03.jpg" alt="Foto 3"></div>
-    <div class="g-tile" onclick="openLightbox(3)"><img src="images/livigno-cantoni/foto04.jpg" alt="Foto 4"></div>
-    <div class="g-tile" onclick="openLightbox(4)"><img src="images/livigno-cantoni/foto05.jpg" alt="Foto 5"><div class="more-overlay">+11 foto — vedi tutte</div></div>
+    <div class="g-tile g-main" onclick="openLightbox(0)"><img src="images/sertorelli-26/foto17.jpg" alt="Foto 1"></div>
+    <div class="g-tile" onclick="openLightbox(1)"><img src="images/sertorelli-26/foto01.jpg" alt="Foto 2"></div>
+    <div class="g-tile" onclick="openLightbox(2)"><img src="images/sertorelli-26/foto02.jpg" alt="Foto 3"></div>
+    <div class="g-tile" onclick="openLightbox(3)"><img src="images/sertorelli-26/foto03.jpg" alt="Foto 4"></div>
+    <div class="g-tile" onclick="openLightbox(4)"><img src="images/sertorelli-26/foto04.jpg" alt="Foto 5"><div class="more-overlay">+12 foto — vedi tutte</div></div>
   </div>
 </div>
 
 <div class="wrap">
   <div class="booking-full">
-      <p class="note">4 ospiti · 2 camere · 4 letti · 1 bagno</p>
+      <p class="stay-meta">5 ospiti · 2 camere · 3 letti · 1 bagno</p>
       <be-widget
-        host="https://baitariver.bookpage.io"
-        property-id="152305"
-        booking-network-id="2072"
+        host="https://sertorelli.bookpage.io"
+        property-id="145903"
+        booking-network-id="2069"
         default-adults="2"
         default-children="0"
         max-guests="5"
@@ -187,35 +179,36 @@
 
     <div class="section">
       <h2 data-i18n="sec_house">La casa</h2>
-      <p>Baita in stile alpino nel cuore di Livigno, pensata per chi cerca sport, natura e relax in ogni stagione. Wi-Fi gratuito, smart TV e un deposito dedicato per sci e biciclette completano gli spazi interni. All'esterno, un solarium privato con sdraio si affaccia sulle montagne circostanti — perfetto per una pausa dopo una giornata sulle piste o sui sentieri.</p>
+      <p>Nel cuore di Bormio, un appartamento pensato per chi cerca relax, natura e autenticità in ogni stagione. Due camere matrimoniali e una zona giorno luminosa con divano letto offrono spazio per famiglie o piccoli gruppi. Il balcone panoramico regala una vista diretta sulle piste da sci, mentre il deposito sci/bici gratuito e il parcheggio privato tolgono ogni pensiero logistico.</p>
     </div>
 
     <div class="section">
       <h2 data-i18n="sec_location">Posizione</h2>
-      <p>Situata in una zona residenziale tranquilla ma centrale: l'ospedale è proprio di fronte, un supermercato è raggiungibile a piedi in pochi minuti, e la pista ciclopedonale che attraversa tutto il paese passa davanti alla porta. La celebre via dello shopping di Livigno, con le sue boutique duty free e i ristoranti tipici, è a pochi minuti.</p>
-      <div class="map-embed" id="map-cantoni"></div>
-      <div class="map-note"><span class="dot-pin">📍</span><span>Zona: Via Freita, Livigno — la posizione esatta viene condivisa dopo la conferma della prenotazione.</span></div>
+      <p>Una strada residenziale tranquilla, a pochi passi da panetterie, bar e ristoranti tipici. Il centro storico di Bormio, con le sue vie medievali e le famose terme, si raggiunge in pochi minuti a piedi. Comodo l'accesso sia agli impianti di risalita d'inverno sia ai sentieri del Parco Nazionale dello Stelvio d'estate.</p>
+      <div class="map-embed" id="map-sertorelli"></div>
+      <div class="map-note"><span class="dot-pin">📍</span><span>Zona: Via Sertorelli, Bormio — la posizione esatta viene condivisa dopo la conferma della prenotazione.</span></div>
     </div>
 
     <div class="section">
       <h2 data-i18n="sec_rooms">Dove dormirai</h2>
       <div class="rooms">
-        <div class="room"><span>Camera da letto 1</span><span>2 letti singoli</span></div>
-        <div class="room"><span>Camera da letto 2</span><span>2 letti singoli</span></div>
+        <div class="room"><span>Camera da letto 1</span><span>1 letto matrimoniale grande</span></div>
+        <div class="room"><span>Camera da letto 2</span><span>1 letto matrimoniale (152x203)</span></div>
+        <div class="room"><span>Salotto</span><span>1 divano letto</span></div>
       </div>
     </div>
 
     <div class="section" style="border-bottom:none;">
       <h2 data-i18n="sec_amenities">Cosa troverai</h2>
       <div class="amenities">
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_mountainview">Vista sulle montagne</span></div>
         <div class="amenity"><span class="dot"></span><span data-i18n="a_kitchen1">Cucina attrezzata</span></div>
         <div class="amenity"><span class="dot"></span><span data-i18n="a_wifi">Wi-Fi gratuito</span></div>
-        <div class="amenity"><span class="dot"></span><span data-i18n="a_parking2">Parcheggio privato</span></div>
-        <div class="amenity"><span class="dot"></span><span data-i18n="a_pets">Animali domestici ammessi</span></div>
-        <div class="amenity"><span class="dot"></span><span data-i18n="a_tv2">Smart TV</span></div>
-        <div class="amenity"><span class="dot"></span><span data-i18n="a_ski2">Deposito sci/bici</span></div>
-        <div class="amenity"><span class="dot"></span><span data-i18n="a_courtyard">Vista sul cortile</span></div>
-        <div class="amenity"><span class="dot"></span><span data-i18n="a_solarium">Solarium privato</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_parking3">Parcheggio gratuito in loco</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_tv1">TV</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_ski3">Deposito sci/bici gratuito</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_balcony2">Balcone panoramico</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_selfcheckin">Self check-in</span></div>
       </div>
     </div>
 
@@ -234,7 +227,7 @@
 </div>
 
 <script>
-  const photos = ["images/livigno-cantoni/foto02.jpg", "images/livigno-cantoni/foto01.jpg", "images/livigno-cantoni/foto03.jpg", "images/livigno-cantoni/foto04.jpg", "images/livigno-cantoni/foto05.jpg", "images/livigno-cantoni/foto06.jpg", "images/livigno-cantoni/foto07.jpg", "images/livigno-cantoni/foto08.jpg", "images/livigno-cantoni/foto09.jpg", "images/livigno-cantoni/foto10.jpg", "images/livigno-cantoni/foto11.jpg", "images/livigno-cantoni/foto12.jpg", "images/livigno-cantoni/foto13.jpg", "images/livigno-cantoni/foto14.jpg", "images/livigno-cantoni/foto15.jpg", "images/livigno-cantoni/foto16.jpg"];
+  const photos = ["images/sertorelli-26/foto17.jpg", "images/sertorelli-26/foto01.jpg", "images/sertorelli-26/foto02.jpg", "images/sertorelli-26/foto03.jpg", "images/sertorelli-26/foto04.jpg", "images/sertorelli-26/foto05.jpg", "images/sertorelli-26/foto06.jpg", "images/sertorelli-26/foto07.jpg", "images/sertorelli-26/foto08.jpg", "images/sertorelli-26/foto09.jpg", "images/sertorelli-26/foto10.jpg", "images/sertorelli-26/foto11.jpg", "images/sertorelli-26/foto12.jpg", "images/sertorelli-26/foto13.jpg", "images/sertorelli-26/foto14.jpg", "images/sertorelli-26/foto15.jpg", "images/sertorelli-26/foto16.jpg"];
   let currentIndex = 0;
   function openLightbox(i) {
     currentIndex = i;
@@ -260,24 +253,13 @@
 <script src="js/translations.js"></script>
 
 <script>
-  var map_cantoni = L.map('map-cantoni', {scrollWheelZoom:false}).setView([46.518134, 10.125375], 16);
+  var map_sertorelli = L.map('map-sertorelli', {scrollWheelZoom:false}).setView([46.473946, 10.370863], 14);
   L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+    attribution: '&copy; OpenStreetMap &copy; CARTO',
     maxZoom: 19
-  }).addTo(map_cantoni);
-  L.circle([46.518134, 10.125375], {
-    radius: 180,
-    color: '#173226',
-    weight: 1,
-    fillColor: '#B9974E',
-    fillOpacity: 0.18
-  }).addTo(map_cantoni);
-  var icon_cantoni = L.divIcon({
-    className: '',
-    html: '<div class="leaflet-pin-home"><svg viewBox="0 0 24 24" width="18" height="18" fill="#F6F2E9"><path d="M12 3l9 8h-3v9h-5v-6h-2v6H6v-9H3z"/></svg></div>',
-    iconSize: [40,40], iconAnchor: [20,20]
-  });
-  L.marker([46.518134, 10.125375], {icon: icon_cantoni}).addTo(map_cantoni);
+  }).addTo(map_sertorelli);
+  var icon_sertorelli = L.divIcon({className:'', html:'<div class="leaflet-pin" style="position:relative;"></div>', iconSize:[22,22], iconAnchor:[11,22]});
+  L.marker([46.473946, 10.370863], {icon: icon_sertorelli}).addTo(map_sertorelli);
 </script>
 </body>
 </html>

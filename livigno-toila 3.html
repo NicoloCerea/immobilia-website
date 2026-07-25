@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Livigno Cantoni — Immobilia</title>
+<title>Livigno Toilà — Immobilia</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -41,10 +41,9 @@
 
   .title-block{padding:32px 0 20px;}
   .breadcrumb{font-size:12px;color:var(--ink-soft);margin-bottom:10px;}
-  .title-row{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:12px;}
   h1{font-size:34px;font-weight:500;}
   .stats{display:flex;align-items:center;gap:14px;font-size:13.5px;color:var(--ink-soft);margin-top:8px;}
-  .stats .rating{color:var(--gold);font-weight:700;}
+  .stats .badge{background:var(--cream-soft);color:var(--forest);padding:2px 9px;border-radius:999px;font-weight:700;font-size:11.5px;}
 
   .gallery{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:repeat(2,180px);gap:8px;border-radius:var(--radius);overflow:hidden;margin:20px 0 40px;}
   .gallery img{width:100%;height:100%;object-fit:cover;}
@@ -106,7 +105,8 @@
   }
   input[type="date"]::-webkit-calendar-picker-indicator:hover{opacity:1;}
   .map-embed{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);margin-top:16px;box-shadow:0 8px 24px rgba(15,33,25,.07);height:300px;}
-  .leaflet-pin-home{width:40px;height:40px;border-radius:50%;background:var(--forest);display:flex;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(15,33,25,.35);border:3px solid var(--cream);}
+  .leaflet-pin{width:22px;height:22px;border-radius:50% 50% 50% 0;background:var(--forest);border:3px solid var(--cream);transform:rotate(-45deg);box-shadow:0 2px 6px rgba(15,33,25,.4);}
+  .leaflet-pin::after{content:"";position:absolute;top:50%;left:50%;width:7px;height:7px;background:var(--gold);border-radius:50%;transform:translate(-50%,-50%) rotate(45deg);}
   .leaflet-container{font-family:'Inter',sans-serif;background:var(--cream-soft) !important;}
   .leaflet-control-attribution{font-size:10px !important;background:rgba(246,242,233,.85) !important;}
   .map-note{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ink-soft);margin-top:10px;}
@@ -134,32 +134,28 @@
 </header>
 
 <div class="wrap title-block">
-  <div class="breadcrumb">Livigno / Annunci / Livigno Cantoni</div>
-  <div class="title-row">
-    <div>
-      <h1>Livigno Cantoni</h1>
-      <div class="stats">
-        <span class="rating">★ 4.9</span>
-        <span>· 36 recensioni</span>
-        <span>· 📍 Livigno</span>
-      </div>
-    </div>
+  <div class="breadcrumb">Livigno / Annunci / Livigno Toilà</div>
+  <h1>Livigno Toilà</h1>
+  <div class="stats">
+    <span class="rating">★ 4.9</span>
+    <span>· 5 recensioni</span>
+    <span>· 📍 Livigno</span>
   </div>
 </div>
 
 <div class="wrap">
   <div class="gallery">
-    <div class="g-tile g-main" onclick="openLightbox(0)"><img src="images/livigno-cantoni/foto02.jpg" alt="Foto 1"></div>
-    <div class="g-tile" onclick="openLightbox(1)"><img src="images/livigno-cantoni/foto01.jpg" alt="Foto 2"></div>
-    <div class="g-tile" onclick="openLightbox(2)"><img src="images/livigno-cantoni/foto03.jpg" alt="Foto 3"></div>
-    <div class="g-tile" onclick="openLightbox(3)"><img src="images/livigno-cantoni/foto04.jpg" alt="Foto 4"></div>
-    <div class="g-tile" onclick="openLightbox(4)"><img src="images/livigno-cantoni/foto05.jpg" alt="Foto 5"><div class="more-overlay">+11 foto — vedi tutte</div></div>
+    <div class="g-tile g-main" onclick="openLightbox(0)"><img src="images/livigno-toila/foto13.jpg" alt="Foto 1"></div>
+    <div class="g-tile" onclick="openLightbox(1)"><img src="images/livigno-toila/foto01.jpg" alt="Foto 2"></div>
+    <div class="g-tile" onclick="openLightbox(2)"><img src="images/livigno-toila/foto02.jpg" alt="Foto 3"></div>
+    <div class="g-tile" onclick="openLightbox(3)"><img src="images/livigno-toila/foto03.jpg" alt="Foto 4"></div>
+    <div class="g-tile" onclick="openLightbox(4)"><img src="images/livigno-toila/foto04.jpg" alt="Foto 5"><div class="more-overlay">+23 foto — vedi tutte</div></div>
   </div>
 </div>
 
 <div class="wrap">
   <div class="booking-full">
-      <p class="note">4 ospiti · 2 camere · 4 letti · 1 bagno</p>
+      <p class="note">5 ospiti · 2 camere · 4 letti · 2 bagni</p>
       <be-widget
         host="https://baitariver.bookpage.io"
         property-id="152305"
@@ -187,22 +183,14 @@
 
     <div class="section">
       <h2 data-i18n="sec_house">La casa</h2>
-      <p>Baita in stile alpino nel cuore di Livigno, pensata per chi cerca sport, natura e relax in ogni stagione. Wi-Fi gratuito, smart TV e un deposito dedicato per sci e biciclette completano gli spazi interni. All'esterno, un solarium privato con sdraio si affaccia sulle montagne circostanti — perfetto per una pausa dopo una giornata sulle piste o sui sentieri.</p>
+      <p>Baita in stile alpino a Livigno, con interni curati e materiali naturali che richiamano l'atmosfera di montagna. Spazi luminosi e funzionali, pensati per garantire un soggiorno comodo in ogni stagione, tra sci d'inverno ed escursioni d'estate.</p>
     </div>
 
     <div class="section">
       <h2 data-i18n="sec_location">Posizione</h2>
-      <p>Situata in una zona residenziale tranquilla ma centrale: l'ospedale è proprio di fronte, un supermercato è raggiungibile a piedi in pochi minuti, e la pista ciclopedonale che attraversa tutto il paese passa davanti alla porta. La celebre via dello shopping di Livigno, con le sue boutique duty free e i ristoranti tipici, è a pochi minuti.</p>
-      <div class="map-embed" id="map-cantoni"></div>
+      <p>Situata a Livigno, a pochi minuti dal centro paese, dalla via dello shopping duty free e dagli impianti sciistici. Zona comoda sia per chi cerca la vita del paese sia per chi preferisce la tranquillità delle baite di montagna.</p>
+      <div class="map-embed" id="map-livtoila"></div>
       <div class="map-note"><span class="dot-pin">📍</span><span>Zona: Via Freita, Livigno — la posizione esatta viene condivisa dopo la conferma della prenotazione.</span></div>
-    </div>
-
-    <div class="section">
-      <h2 data-i18n="sec_rooms">Dove dormirai</h2>
-      <div class="rooms">
-        <div class="room"><span>Camera da letto 1</span><span>2 letti singoli</span></div>
-        <div class="room"><span>Camera da letto 2</span><span>2 letti singoli</span></div>
-      </div>
     </div>
 
     <div class="section" style="border-bottom:none;">
@@ -210,12 +198,10 @@
       <div class="amenities">
         <div class="amenity"><span class="dot"></span><span data-i18n="a_kitchen1">Cucina attrezzata</span></div>
         <div class="amenity"><span class="dot"></span><span data-i18n="a_wifi">Wi-Fi gratuito</span></div>
-        <div class="amenity"><span class="dot"></span><span data-i18n="a_parking2">Parcheggio privato</span></div>
-        <div class="amenity"><span class="dot"></span><span data-i18n="a_pets">Animali domestici ammessi</span></div>
-        <div class="amenity"><span class="dot"></span><span data-i18n="a_tv2">Smart TV</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_parking1">Parcheggio</span></div>
         <div class="amenity"><span class="dot"></span><span data-i18n="a_ski2">Deposito sci/bici</span></div>
-        <div class="amenity"><span class="dot"></span><span data-i18n="a_courtyard">Vista sul cortile</span></div>
-        <div class="amenity"><span class="dot"></span><span data-i18n="a_solarium">Solarium privato</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_tv1">TV</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_heating">Riscaldamento</span></div>
       </div>
     </div>
 
@@ -234,7 +220,7 @@
 </div>
 
 <script>
-  const photos = ["images/livigno-cantoni/foto02.jpg", "images/livigno-cantoni/foto01.jpg", "images/livigno-cantoni/foto03.jpg", "images/livigno-cantoni/foto04.jpg", "images/livigno-cantoni/foto05.jpg", "images/livigno-cantoni/foto06.jpg", "images/livigno-cantoni/foto07.jpg", "images/livigno-cantoni/foto08.jpg", "images/livigno-cantoni/foto09.jpg", "images/livigno-cantoni/foto10.jpg", "images/livigno-cantoni/foto11.jpg", "images/livigno-cantoni/foto12.jpg", "images/livigno-cantoni/foto13.jpg", "images/livigno-cantoni/foto14.jpg", "images/livigno-cantoni/foto15.jpg", "images/livigno-cantoni/foto16.jpg"];
+  const photos = ["images/livigno-toila/foto13.jpg", "images/livigno-toila/foto01.jpg", "images/livigno-toila/foto02.jpg", "images/livigno-toila/foto03.jpg", "images/livigno-toila/foto04.jpg", "images/livigno-toila/foto05.jpg", "images/livigno-toila/foto06.jpg", "images/livigno-toila/foto07.jpg", "images/livigno-toila/foto08.jpg", "images/livigno-toila/foto09.jpg", "images/livigno-toila/foto10.jpg", "images/livigno-toila/foto11.jpg", "images/livigno-toila/foto12.jpg", "images/livigno-toila/foto14.jpg", "images/livigno-toila/foto15.jpg", "images/livigno-toila/foto16.jpg", "images/livigno-toila/foto17.jpg", "images/livigno-toila/foto18.jpg", "images/livigno-toila/foto19.jpg", "images/livigno-toila/foto20.jpg", "images/livigno-toila/foto21.jpg", "images/livigno-toila/foto22.jpg", "images/livigno-toila/foto23.jpg", "images/livigno-toila/foto24.jpg", "images/livigno-toila/foto25.jpg", "images/livigno-toila/foto26.jpg", "images/livigno-toila/foto27.jpg", "images/livigno-toila/foto28.jpg"];
   let currentIndex = 0;
   function openLightbox(i) {
     currentIndex = i;
@@ -260,24 +246,13 @@
 <script src="js/translations.js"></script>
 
 <script>
-  var map_cantoni = L.map('map-cantoni', {scrollWheelZoom:false}).setView([46.518134, 10.125375], 16);
+  var map_livtoila = L.map('map-livtoila', {scrollWheelZoom:false}).setView([46.518134, 10.125375], 14);
   L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+    attribution: '&copy; OpenStreetMap &copy; CARTO',
     maxZoom: 19
-  }).addTo(map_cantoni);
-  L.circle([46.518134, 10.125375], {
-    radius: 180,
-    color: '#173226',
-    weight: 1,
-    fillColor: '#B9974E',
-    fillOpacity: 0.18
-  }).addTo(map_cantoni);
-  var icon_cantoni = L.divIcon({
-    className: '',
-    html: '<div class="leaflet-pin-home"><svg viewBox="0 0 24 24" width="18" height="18" fill="#F6F2E9"><path d="M12 3l9 8h-3v9h-5v-6h-2v6H6v-9H3z"/></svg></div>',
-    iconSize: [40,40], iconAnchor: [20,20]
-  });
-  L.marker([46.518134, 10.125375], {icon: icon_cantoni}).addTo(map_cantoni);
+  }).addTo(map_livtoila);
+  var icon_livtoila = L.divIcon({className:'', html:'<div class="leaflet-pin" style="position:relative;"></div>', iconSize:[22,22], iconAnchor:[11,22]});
+  L.marker([46.518134, 10.125375], {icon: icon_livtoila}).addTo(map_livtoila);
 </script>
 </body>
 </html>

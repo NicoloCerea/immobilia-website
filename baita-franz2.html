@@ -274,10 +274,10 @@
 <script src="js/translations.js"></script>
 
 <script>
-  var map_franz2 = L.map('map-franz2', {scrollWheelZoom:false}).setView([46.512256, 10.120646], 15);
-  L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
-    attribution: 'Map data: &copy; OpenStreetMap contributors, SRTM | Map style: &copy; OpenTopoMap (CC-BY-SA)',
-    maxZoom: 17
+  var map_franz2 = L.map('map-franz2', {scrollWheelZoom:false}).setView([46.512256, 10.120646], 16);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+    maxZoom: 19
   }).addTo(map_franz2);
   L.circle([46.512256, 10.120646], {
     radius: 180,

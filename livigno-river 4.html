@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Livigno Cantoni — Immobilia</title>
+<title>Livigno River — Immobilia</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -41,10 +41,10 @@
 
   .title-block{padding:32px 0 20px;}
   .breadcrumb{font-size:12px;color:var(--ink-soft);margin-bottom:10px;}
-  .title-row{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:12px;}
   h1{font-size:34px;font-weight:500;}
   .stats{display:flex;align-items:center;gap:14px;font-size:13.5px;color:var(--ink-soft);margin-top:8px;}
   .stats .rating{color:var(--gold);font-weight:700;}
+  .stats .badge{background:var(--cream-soft);color:var(--forest);padding:2px 9px;border-radius:999px;font-weight:700;font-size:11.5px;}
 
   .gallery{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:repeat(2,180px);gap:8px;border-radius:var(--radius);overflow:hidden;margin:20px 0 40px;}
   .gallery img{width:100%;height:100%;object-fit:cover;}
@@ -55,6 +55,7 @@
   .section:first-child{padding-top:0;}
   .section h2{font-size:20px;font-weight:600;margin-bottom:14px;}
   .section p{font-size:14.5px;line-height:1.7;color:var(--ink-soft);}
+  .section p + p{margin-top:12px;}
   .amenities{display:grid;grid-template-columns:1fr 1fr;gap:12px 20px;}
   .amenity{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--ink);}
   .amenity .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0;}
@@ -66,12 +67,8 @@
   .sidebar{position:sticky;top:90px;align-self:start;}
   .booking-full{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px;margin:0 0 40px;box-shadow:0 12px 30px rgba(15,33,25,.08);}
   .booking-full .stay-meta{font-size:13px;color:var(--ink-soft);margin-bottom:16px;}
-  .book-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:0 12px 30px rgba(15,33,25,.08);}
-  .book-card .price-row{font-size:22px;font-weight:700;color:var(--forest);margin-bottom:4px;}
-  .book-card .price-row span{font-size:13px;font-weight:400;color:var(--ink-soft);}
-  .book-card p.note{font-size:12.5px;color:var(--ink-soft);margin-bottom:18px;}
-  .btn-avail{display:block;width:100%;text-align:center;background:var(--forest);color:var(--cream);padding:14px;border-radius:10px;font-size:14.5px;font-weight:700;}
-  .btn-avail:hover{background:var(--forest-dark);}
+  .book-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:0 12px 30px rgba(15,33,25,.08);}
+  .book-card .stay-meta{font-size:12.5px;color:var(--ink-soft);padding:0 4px 14px;}
 
   footer{padding:40px 32px;text-align:center;font-size:12px;color:var(--ink-soft);}
 
@@ -106,7 +103,8 @@
   }
   input[type="date"]::-webkit-calendar-picker-indicator:hover{opacity:1;}
   .map-embed{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);margin-top:16px;box-shadow:0 8px 24px rgba(15,33,25,.07);height:300px;}
-  .leaflet-pin-home{width:40px;height:40px;border-radius:50%;background:var(--forest);display:flex;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(15,33,25,.35);border:3px solid var(--cream);}
+  .leaflet-pin{width:22px;height:22px;border-radius:50% 50% 50% 0;background:var(--forest);border:3px solid var(--cream);transform:rotate(-45deg);box-shadow:0 2px 6px rgba(15,33,25,.4);}
+  .leaflet-pin::after{content:"";position:absolute;top:50%;left:50%;width:7px;height:7px;background:var(--gold);border-radius:50%;transform:translate(-50%,-50%) rotate(45deg);}
   .leaflet-container{font-family:'Inter',sans-serif;background:var(--cream-soft) !important;}
   .leaflet-control-attribution{font-size:10px !important;background:rgba(246,242,233,.85) !important;}
   .map-note{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ink-soft);margin-top:10px;}
@@ -134,32 +132,28 @@
 </header>
 
 <div class="wrap title-block">
-  <div class="breadcrumb">Livigno / Annunci / Livigno Cantoni</div>
-  <div class="title-row">
-    <div>
-      <h1>Livigno Cantoni</h1>
-      <div class="stats">
-        <span class="rating">★ 4.9</span>
-        <span>· 36 recensioni</span>
-        <span>· 📍 Livigno</span>
-      </div>
-    </div>
+  <div class="breadcrumb">Livigno / Annunci / Livigno River</div>
+  <h1>Livigno River</h1>
+  <div class="stats">
+    <span class="rating">★ 5.0</span>
+    <span>· 3 recensioni</span>
+    <span>· 📍 Livigno</span>
   </div>
 </div>
 
 <div class="wrap">
   <div class="gallery">
-    <div class="g-tile g-main" onclick="openLightbox(0)"><img src="images/livigno-cantoni/foto02.jpg" alt="Foto 1"></div>
-    <div class="g-tile" onclick="openLightbox(1)"><img src="images/livigno-cantoni/foto01.jpg" alt="Foto 2"></div>
-    <div class="g-tile" onclick="openLightbox(2)"><img src="images/livigno-cantoni/foto03.jpg" alt="Foto 3"></div>
-    <div class="g-tile" onclick="openLightbox(3)"><img src="images/livigno-cantoni/foto04.jpg" alt="Foto 4"></div>
-    <div class="g-tile" onclick="openLightbox(4)"><img src="images/livigno-cantoni/foto05.jpg" alt="Foto 5"><div class="more-overlay">+11 foto — vedi tutte</div></div>
+    <div class="g-tile g-main" onclick="openLightbox(0)"><img src="images/livigno-river/foto01.jpg" alt="Foto 1"></div>
+    <div class="g-tile" onclick="openLightbox(1)"><img src="images/livigno-river/foto02.jpg" alt="Foto 2"></div>
+    <div class="g-tile" onclick="openLightbox(2)"><img src="images/livigno-river/foto03.jpg" alt="Foto 3"></div>
+    <div class="g-tile" onclick="openLightbox(3)"><img src="images/livigno-river/foto04.jpg" alt="Foto 4"></div>
+    <div class="g-tile" onclick="openLightbox(4)"><img src="images/livigno-river/foto05.jpg" alt="Foto 5"><div class="more-overlay">+23 foto — vedi tutte</div></div>
   </div>
 </div>
 
 <div class="wrap">
   <div class="booking-full">
-      <p class="note">4 ospiti · 2 camere · 4 letti · 1 bagno</p>
+      <p class="stay-meta">5 ospiti · 2 camere · 5 letti · 1 bagno</p>
       <be-widget
         host="https://baitariver.bookpage.io"
         property-id="152305"
@@ -187,13 +181,14 @@
 
     <div class="section">
       <h2 data-i18n="sec_house">La casa</h2>
-      <p>Baita in stile alpino nel cuore di Livigno, pensata per chi cerca sport, natura e relax in ogni stagione. Wi-Fi gratuito, smart TV e un deposito dedicato per sci e biciclette completano gli spazi interni. All'esterno, un solarium privato con sdraio si affaccia sulle montagne circostanti — perfetto per una pausa dopo una giornata sulle piste o sui sentieri.</p>
+      <p>Un accogliente appartamento di 80 mq nel cuore di Livigno, ideale per ospitare fino a 5 persone. Il luminoso soggiorno con TV e servizi on demand è perfetto per rilassarsi dopo una giornata all'aria aperta, mentre la cucina completamente attrezzata permette di cucinare in totale autonomia. Tre balconi privati regalano viste sulle montagne circostanti.</p>
+      <p>Gli spazi, arredati in autentico stile alpino, uniscono il calore della montagna ai comfort moderni — perfetti per una vacanza in famiglia, in coppia o con amici.</p>
     </div>
 
     <div class="section">
       <h2 data-i18n="sec_location">Posizione</h2>
-      <p>Situata in una zona residenziale tranquilla ma centrale: l'ospedale è proprio di fronte, un supermercato è raggiungibile a piedi in pochi minuti, e la pista ciclopedonale che attraversa tutto il paese passa davanti alla porta. La celebre via dello shopping di Livigno, con le sue boutique duty free e i ristoranti tipici, è a pochi minuti.</p>
-      <div class="map-embed" id="map-cantoni"></div>
+      <p>Situata in Via Freita, in una zona tranquilla e strategica. Di fronte si trova l'ospedale, un supermercato è raggiungibile in pochi passi, e la pista ciclopedonale che attraversa tutto il paese passa proprio davanti alla casa. La celebre via dello shopping di Livigno, con boutique duty free e ristoranti tipici, è a pochi minuti.</p>
+      <div class="map-embed" id="map-river"></div>
       <div class="map-note"><span class="dot-pin">📍</span><span>Zona: Via Freita, Livigno — la posizione esatta viene condivisa dopo la conferma della prenotazione.</span></div>
     </div>
 
@@ -201,21 +196,21 @@
       <h2 data-i18n="sec_rooms">Dove dormirai</h2>
       <div class="rooms">
         <div class="room"><span>Camera da letto 1</span><span>2 letti singoli</span></div>
-        <div class="room"><span>Camera da letto 2</span><span>2 letti singoli</span></div>
+        <div class="room"><span>Camera da letto 2</span><span>3 letti singoli</span></div>
       </div>
     </div>
 
     <div class="section" style="border-bottom:none;">
       <h2 data-i18n="sec_amenities">Cosa troverai</h2>
       <div class="amenities">
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_mountainview">Vista sulle montagne</span></div>
         <div class="amenity"><span class="dot"></span><span data-i18n="a_kitchen1">Cucina attrezzata</span></div>
         <div class="amenity"><span class="dot"></span><span data-i18n="a_wifi">Wi-Fi gratuito</span></div>
-        <div class="amenity"><span class="dot"></span><span data-i18n="a_parking2">Parcheggio privato</span></div>
-        <div class="amenity"><span class="dot"></span><span data-i18n="a_pets">Animali domestici ammessi</span></div>
-        <div class="amenity"><span class="dot"></span><span data-i18n="a_tv2">Smart TV</span></div>
-        <div class="amenity"><span class="dot"></span><span data-i18n="a_ski2">Deposito sci/bici</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_parking3">Parcheggio gratuito in loco</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_tv3">TV con servizi on demand</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_balcony3">Tre balconi privati</span></div>
         <div class="amenity"><span class="dot"></span><span data-i18n="a_courtyard">Vista sul cortile</span></div>
-        <div class="amenity"><span class="dot"></span><span data-i18n="a_solarium">Solarium privato</span></div>
+        <div class="amenity"><span class="dot"></span><span data-i18n="a_welcome">Accoglienza personale</span></div>
       </div>
     </div>
 
@@ -234,7 +229,7 @@
 </div>
 
 <script>
-  const photos = ["images/livigno-cantoni/foto02.jpg", "images/livigno-cantoni/foto01.jpg", "images/livigno-cantoni/foto03.jpg", "images/livigno-cantoni/foto04.jpg", "images/livigno-cantoni/foto05.jpg", "images/livigno-cantoni/foto06.jpg", "images/livigno-cantoni/foto07.jpg", "images/livigno-cantoni/foto08.jpg", "images/livigno-cantoni/foto09.jpg", "images/livigno-cantoni/foto10.jpg", "images/livigno-cantoni/foto11.jpg", "images/livigno-cantoni/foto12.jpg", "images/livigno-cantoni/foto13.jpg", "images/livigno-cantoni/foto14.jpg", "images/livigno-cantoni/foto15.jpg", "images/livigno-cantoni/foto16.jpg"];
+  const photos = ["images/livigno-river/foto01.jpg", "images/livigno-river/foto02.jpg", "images/livigno-river/foto03.jpg", "images/livigno-river/foto04.jpg", "images/livigno-river/foto05.jpg", "images/livigno-river/foto06.jpg", "images/livigno-river/foto07.jpg", "images/livigno-river/foto08.jpg", "images/livigno-river/foto09.jpg", "images/livigno-river/foto10.jpg", "images/livigno-river/foto11.jpg", "images/livigno-river/foto12.jpg", "images/livigno-river/foto13.jpg", "images/livigno-river/foto14.jpg", "images/livigno-river/foto15.jpg", "images/livigno-river/foto16.jpg", "images/livigno-river/foto17.jpg", "images/livigno-river/foto18.jpg", "images/livigno-river/foto19.jpg", "images/livigno-river/foto20.jpg", "images/livigno-river/foto21.jpg", "images/livigno-river/foto22.jpg", "images/livigno-river/foto23.jpg", "images/livigno-river/foto24.jpg", "images/livigno-river/foto25.jpg", "images/livigno-river/foto26.jpg", "images/livigno-river/foto27.jpg", "images/livigno-river/foto28.jpg"];
   let currentIndex = 0;
   function openLightbox(i) {
     currentIndex = i;
@@ -260,24 +255,13 @@
 <script src="js/translations.js"></script>
 
 <script>
-  var map_cantoni = L.map('map-cantoni', {scrollWheelZoom:false}).setView([46.518134, 10.125375], 16);
+  var map_river = L.map('map-river', {scrollWheelZoom:false}).setView([46.518134, 10.125375], 14);
   L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+    attribution: '&copy; OpenStreetMap &copy; CARTO',
     maxZoom: 19
-  }).addTo(map_cantoni);
-  L.circle([46.518134, 10.125375], {
-    radius: 180,
-    color: '#173226',
-    weight: 1,
-    fillColor: '#B9974E',
-    fillOpacity: 0.18
-  }).addTo(map_cantoni);
-  var icon_cantoni = L.divIcon({
-    className: '',
-    html: '<div class="leaflet-pin-home"><svg viewBox="0 0 24 24" width="18" height="18" fill="#F6F2E9"><path d="M12 3l9 8h-3v9h-5v-6h-2v6H6v-9H3z"/></svg></div>',
-    iconSize: [40,40], iconAnchor: [20,20]
-  });
-  L.marker([46.518134, 10.125375], {icon: icon_cantoni}).addTo(map_cantoni);
+  }).addTo(map_river);
+  var icon_river = L.divIcon({className:'', html:'<div class="leaflet-pin" style="position:relative;"></div>', iconSize:[22,22], iconAnchor:[11,22]});
+  L.marker([46.518134, 10.125375], {icon: icon_river}).addTo(map_river);
 </script>
 </body>
 </html>

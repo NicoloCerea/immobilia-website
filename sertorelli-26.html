@@ -252,10 +252,10 @@
 <script src="js/translations.js"></script>
 
 <script>
-  var map_sertorelli = L.map('map-sertorelli', {scrollWheelZoom:false}).setView([46.473946, 10.370863], 15);
-  L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
-    attribution: 'Map data: &copy; OpenStreetMap contributors, SRTM | Map style: &copy; OpenTopoMap (CC-BY-SA)',
-    maxZoom: 17
+  var map_sertorelli = L.map('map-sertorelli', {scrollWheelZoom:false}).setView([46.473946, 10.370863], 16);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+    maxZoom: 19
   }).addTo(map_sertorelli);
   L.circle([46.473946, 10.370863], {
     radius: 180,

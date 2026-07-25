@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fumarogo 100D — Immobilia</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.ciaobooking.com/widget/js/app.js" defer></script>
 <style>
@@ -100,8 +102,11 @@
     cursor:pointer; opacity:.7; transition:opacity .2s;
   }
   input[type="date"]::-webkit-calendar-picker-indicator:hover{opacity:1;}
-  .map-embed{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);margin-top:16px;box-shadow:0 8px 24px rgba(15,33,25,.07);}
-  .map-embed iframe{width:100%;height:280px;display:block;border:0;filter:sepia(8%) saturate(85%) hue-rotate(80deg) brightness(97%);}
+  .map-embed{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);margin-top:16px;box-shadow:0 8px 24px rgba(15,33,25,.07);height:300px;}
+  .leaflet-pin{width:22px;height:22px;border-radius:50% 50% 50% 0;background:var(--forest);border:3px solid var(--cream);transform:rotate(-45deg);box-shadow:0 2px 6px rgba(15,33,25,.4);}
+  .leaflet-pin::after{content:"";position:absolute;top:50%;left:50%;width:7px;height:7px;background:var(--gold);border-radius:50%;transform:translate(-50%,-50%) rotate(45deg);}
+  .leaflet-container{font-family:'Inter',sans-serif;background:var(--cream-soft) !important;}
+  .leaflet-control-attribution{font-size:10px !important;background:rgba(246,242,233,.85) !important;}
   .map-note{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ink-soft);margin-top:10px;}
   .map-note .dot-pin{color:var(--gold);font-size:14px;}
 </style>
@@ -184,9 +189,7 @@
     <div class="section">
       <h2 data-i18n="sec_location">Posizione</h2>
       <p>Il residence è a due minuti d'auto dal centro di Bormio, con collegamento navetta rapido verso gli impianti di risalita. Perfetto punto di partenza sia per le terme e il centro storico d'inverno, sia per i sentieri e i percorsi in mountain bike d'estate.</p>
-      <div class="map-embed">
-        <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=10.3636,46.4621,10.3776,46.470099999999995&layer=mapnik&marker=46.4661,10.3706" loading="lazy"></iframe>
-      </div>
+      <div class="map-embed" id="map-fumarogo"></div>
       <div class="map-note"><span class="dot-pin">📍</span><span>Zona: Bormio — la posizione esatta viene condivisa dopo la conferma della prenotazione.</span></div>
     </div>
 
@@ -253,5 +256,14 @@
 
 <script src="js/translations.js"></script>
 
+<script>
+  var map_fumarogo = L.map('map-fumarogo', {scrollWheelZoom:false}).setView([46.4661, 10.3706], 14);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; OpenStreetMap &copy; CARTO',
+    maxZoom: 19
+  }).addTo(map_fumarogo);
+  var icon_fumarogo = L.divIcon({className:'', html:'<div class="leaflet-pin" style="position:relative;"></div>', iconSize:[22,22], iconAnchor:[11,22]});
+  L.marker([46.4661, 10.3706], {icon: icon_fumarogo}).addTo(map_fumarogo);
+</script>
 </body>
 </html>

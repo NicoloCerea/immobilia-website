@@ -28,7 +28,7 @@ export default async function handler(req, res) {
     res.status(400).json({ error: `Proprietà sconosciuta: ${property}` });
     return;
   }
-  if (!cfg.stripeAccountId) {
+  if (!cfg.platformOwned && !cfg.stripeAccountId) {
     res.status(400).json({
       error: `Il proprietario di questa proprietà non ha ancora completato la verifica Stripe. Usa /api/stripe-onboard?property=${property} per generare il link.`,
     });
@@ -45,7 +45,8 @@ export default async function handler(req, res) {
 
   try {
     const origin = `https://${req.headers.host}`;
-    const session = await stripe.checkout.sessions.create({
+
+    const sessionConfig = {
       mode: "payment",
       payment_method_types: ["card"],
       line_items: [
@@ -61,15 +62,22 @@ export default async function handler(req, res) {
           quantity: 1,
         },
       ],
-      payment_intent_data: {
-        application_fee_amount: feeCents, // trattenuto da Immobilia
-        transfer_data: {
-          destination: cfg.stripeAccountId, // il resto va al proprietario
-        },
-      },
       success_url: `${origin}/${property}.html?booking=success`,
       cancel_url: `${origin}/${property}.html?booking=cancelled`,
-    });
+    };
+
+    // Solo per le proprietà di proprietari esterni: smista automaticamente
+    // parte dell'importo al loro account, trattenendo la commissione.
+    if (!cfg.platformOwned) {
+      sessionConfig.payment_intent_data = {
+        application_fee_amount: feeCents,
+        transfer_data: {
+          destination: cfg.stripeAccountId,
+        },
+      };
+    }
+
+    const session = await stripe.checkout.sessions.create(sessionConfig);
 
     res.status(200).json({ url: session.url });
   } catch (err) {

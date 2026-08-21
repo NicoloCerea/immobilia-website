@@ -16,8 +16,9 @@ export const PROPERTIES = {
     cleaningFeePerGuest: 7,
     baseOccupancy: 2,
     extraGuestFeePerNight: 10,
-    stripeAccountId: null, // si popola dopo l\'onboarding del proprietario (vedi /api/stripe-onboard)
-    commissionPercent: 15, // % trattenuta da Immobilia come commissione di gestione
+    stripeAccountId: null,
+    commissionPercent: 15,
+    platformOwned: true, // proprietà di Immobilia stessa: nessuno smistamento, resta sull'account principale
   },
   "fumarogo-100d": {
     icalUrl:
@@ -28,7 +29,7 @@ export const PROPERTIES = {
     cleaningFeePerGuest: 7,
     baseOccupancy: 2,
     extraGuestFeePerNight: 10,
-    stripeAccountId: null, // si popola dopo l\'onboarding del proprietario (vedi /api/stripe-onboard)
+    stripeAccountId: null, // si popola dopo l'onboarding del proprietario (vedi /api/stripe-onboard)
     commissionPercent: 15, // % trattenuta da Immobilia come commissione di gestione
   },
   "monte-reit-7": {
@@ -40,7 +41,7 @@ export const PROPERTIES = {
     cleaningFeePerGuest: 7,
     baseOccupancy: 2,
     extraGuestFeePerNight: 10,
-    stripeAccountId: null, // si popola dopo l\'onboarding del proprietario (vedi /api/stripe-onboard)
+    stripeAccountId: null, // si popola dopo l'onboarding del proprietario (vedi /api/stripe-onboard)
     commissionPercent: 15, // % trattenuta da Immobilia come commissione di gestione
   },
   "livigno-cantoni": {
@@ -52,7 +53,7 @@ export const PROPERTIES = {
     cleaningFeePerGuest: 0,
     baseOccupancy: 2,
     extraGuestFeePerNight: 10,
-    stripeAccountId: null, // si popola dopo l\'onboarding del proprietario (vedi /api/stripe-onboard)
+    stripeAccountId: null, // si popola dopo l'onboarding del proprietario (vedi /api/stripe-onboard)
     commissionPercent: 15, // % trattenuta da Immobilia come commissione di gestione
   },
   "livigno-river": {
@@ -64,7 +65,7 @@ export const PROPERTIES = {
     cleaningFeePerGuest: 0,
     baseOccupancy: 2,
     extraGuestFeePerNight: 10,
-    stripeAccountId: null, // si popola dopo l\'onboarding del proprietario (vedi /api/stripe-onboard)
+    stripeAccountId: null, // si popola dopo l'onboarding del proprietario (vedi /api/stripe-onboard)
     commissionPercent: 15, // % trattenuta da Immobilia come commissione di gestione
   },
   "livigno-toila": {
@@ -76,7 +77,7 @@ export const PROPERTIES = {
     cleaningFeePerGuest: 0,
     baseOccupancy: 2,
     extraGuestFeePerNight: 10,
-    stripeAccountId: null, // si popola dopo l\'onboarding del proprietario (vedi /api/stripe-onboard)
+    stripeAccountId: null, // si popola dopo l'onboarding del proprietario (vedi /api/stripe-onboard)
     commissionPercent: 15, // % trattenuta da Immobilia come commissione di gestione
   },
 };

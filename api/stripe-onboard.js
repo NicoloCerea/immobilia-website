@@ -29,6 +29,12 @@ export default async function handler(req, res) {
     res.status(400).json({ error: `Proprietà sconosciuta: ${property}` });
     return;
   }
+  if (cfg.platformOwned) {
+    res.status(400).json({
+      error: `${property} è una proprietà gestita direttamente da Immobilia: non serve un account collegato, i pagamenti restano sull'account principale.`,
+    });
+    return;
+  }
 
   const stripe = new Stripe(SECRET_KEY);
 

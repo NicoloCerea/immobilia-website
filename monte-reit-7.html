@@ -341,11 +341,25 @@
     return blockedSet.has(dateStr);
   }
 
+  function firstBlockedAfter(startDateStr) {
+    // Trova la prima notte occupata dopo checkin (cercando fino a 400 giorni avanti).
+    let cur = new Date(startDateStr);
+    cur.setDate(cur.getDate() + 1);
+    for (let i = 0; i < 400; i++) {
+      const ds = fmt(cur);
+      if (isBlocked(ds)) return ds;
+      cur.setDate(cur.getDate() + 1);
+    }
+    return null;
+  }
+
   function renderCalendar() {
     const container = document.getElementById("cal-container");
     const first = new Date(viewYear, viewMonth, 1);
     const startWeekday = (first.getDay() + 6) % 7;
     const daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
+
+    const edgeCheckoutDay = checkin && !checkout ? firstBlockedAfter(checkin) : null;
 
     let cellsHtml = "";
     for (let i = 0; i < startWeekday; i++) {
@@ -356,11 +370,11 @@
       const dateStr = fmt(dateObj);
       const isPast = dateObj < new Date(today.getFullYear(), today.getMonth(), today.getDate());
       const nightOccupied = isBlocked(dateStr);
-      // Se stiamo scegliendo la partenza (check-in già selezionato), un giorno può essere
-      // selezionato come checkout anche se quella notte è occupata da un altro ospite:
-      // chi parte quel giorno non dorme lì, semplicemente libera la stanza al mattino.
-      const selectingCheckout = checkin && !checkout && dateStr > checkin;
-      const blocked = isPast || (nightOccupied && !selectingCheckout);
+      // Se stiamo scegliendo la partenza, il giorno resta selezionabile come checkout SOLO
+      // se è il primo giorno occupato subito dopo l'ultimo tratto libero (chi parte quel
+      // giorno non dorme lì). Le date occupate oltre quel punto restano chiuse.
+      const isEdgeCheckoutDay = edgeCheckoutDay && dateStr === edgeCheckoutDay;
+      const blocked = isPast || (nightOccupied && !isEdgeCheckoutDay);
       const priceInfo = priceMap[dateStr];
       const priceLabel = priceInfo && !isPast ? `€${Math.round(priceInfo.price)}` : "";
 

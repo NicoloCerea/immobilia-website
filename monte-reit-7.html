@@ -355,9 +355,14 @@
       const dateObj = new Date(viewYear, viewMonth, d);
       const dateStr = fmt(dateObj);
       const isPast = dateObj < new Date(today.getFullYear(), today.getMonth(), today.getDate());
-      const blocked = isBlocked(dateStr) || isPast;
+      const nightOccupied = isBlocked(dateStr);
+      // Se stiamo scegliendo la partenza (check-in già selezionato), un giorno può essere
+      // selezionato come checkout anche se quella notte è occupata da un altro ospite:
+      // chi parte quel giorno non dorme lì, semplicemente libera la stanza al mattino.
+      const selectingCheckout = checkin && !checkout && dateStr > checkin;
+      const blocked = isPast || (nightOccupied && !selectingCheckout);
       const priceInfo = priceMap[dateStr];
-      const priceLabel = priceInfo && !blocked ? `€${Math.round(priceInfo.price)}` : "";
+      const priceLabel = priceInfo && !isPast ? `€${Math.round(priceInfo.price)}` : "";
 
       let cls = "cal-day";
       if (blocked) cls += " disabled";

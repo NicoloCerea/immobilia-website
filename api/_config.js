@@ -16,6 +16,8 @@ export const PROPERTIES = {
     cleaningFeePerGuest: 7,
     baseOccupancy: 2,
     extraGuestFeePerNight: 10,
+    stripeAccountId: null, // si popola dopo l\'onboarding del proprietario (vedi /api/stripe-onboard)
+    commissionPercent: 15, // % trattenuta da Immobilia come commissione di gestione
   },
   "fumarogo-100d": {
     icalUrl:
@@ -26,6 +28,8 @@ export const PROPERTIES = {
     cleaningFeePerGuest: 7,
     baseOccupancy: 2,
     extraGuestFeePerNight: 10,
+    stripeAccountId: null, // si popola dopo l\'onboarding del proprietario (vedi /api/stripe-onboard)
+    commissionPercent: 15, // % trattenuta da Immobilia come commissione di gestione
   },
   "monte-reit-7": {
     icalUrl:
@@ -36,6 +40,8 @@ export const PROPERTIES = {
     cleaningFeePerGuest: 7,
     baseOccupancy: 2,
     extraGuestFeePerNight: 10,
+    stripeAccountId: null, // si popola dopo l\'onboarding del proprietario (vedi /api/stripe-onboard)
+    commissionPercent: 15, // % trattenuta da Immobilia come commissione di gestione
   },
   "livigno-cantoni": {
     icalUrl:
@@ -46,6 +52,8 @@ export const PROPERTIES = {
     cleaningFeePerGuest: 0,
     baseOccupancy: 2,
     extraGuestFeePerNight: 10,
+    stripeAccountId: null, // si popola dopo l\'onboarding del proprietario (vedi /api/stripe-onboard)
+    commissionPercent: 15, // % trattenuta da Immobilia come commissione di gestione
   },
   "livigno-river": {
     icalUrl:
@@ -56,6 +64,8 @@ export const PROPERTIES = {
     cleaningFeePerGuest: 0,
     baseOccupancy: 2,
     extraGuestFeePerNight: 10,
+    stripeAccountId: null, // si popola dopo l\'onboarding del proprietario (vedi /api/stripe-onboard)
+    commissionPercent: 15, // % trattenuta da Immobilia come commissione di gestione
   },
   "livigno-toila": {
     icalUrl:
@@ -66,5 +76,7 @@ export const PROPERTIES = {
     cleaningFeePerGuest: 0,
     baseOccupancy: 2,
     extraGuestFeePerNight: 10,
+    stripeAccountId: null, // si popola dopo l\'onboarding del proprietario (vedi /api/stripe-onboard)
+    commissionPercent: 15, // % trattenuta da Immobilia come commissione di gestione
   },
 };

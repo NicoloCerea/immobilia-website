@@ -85,6 +85,13 @@
   .cal-summary strong{color:var(--forest);}
   .cal-actions{margin-top:14px;display:flex;gap:10px;}
   .cal-loading{font-size:13px;color:var(--ink-soft);padding:20px;text-align:center;}
+  .cal-guests{display:flex;align-items:center;justify-content:space-between;background:var(--cream-soft);border-radius:10px;padding:10px 14px;margin-bottom:14px;font-size:13.5px;}
+  .cal-guests .g-btn{width:26px;height:26px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--forest);font-weight:700;cursor:pointer;}
+  .cal-guests .g-btn:hover{background:var(--gold);color:#fff;}
+  .cal-guests .g-count{font-weight:700;color:var(--forest);min-width:20px;text-align:center;}
+  .cal-breakdown{margin-top:10px;font-size:12.5px;color:var(--ink-soft);}
+  .cal-breakdown div{display:flex;justify-content:space-between;padding:2px 0;}
+  .cal-breakdown .total-row{border-top:1px solid var(--line);margin-top:6px;padding-top:6px;font-weight:700;color:var(--forest);}
   .book-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:0 12px 30px rgba(15,33,25,.08);}
   .book-card .stay-meta{font-size:12.5px;color:var(--ink-soft);padding:0 4px 14px;}
 
@@ -278,7 +285,9 @@
 </script>
 <script>
 (function () {
+  const PROPERTY_SLUG = "sertorelli-26";
   const PROPERTY_NAME = "Sertorelli 26";
+  const MAX_GUESTS = 5;
   const WHATSAPP_PHONE = "393333269224";
   const EMAIL_TO = "immobiliaita@gmail.com";
   const MONTHS_IT = ["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"];
@@ -286,9 +295,10 @@
 
   let blockedSet = new Set();
   let priceMap = {};
-  let viewYear, viewMonth; // mese visualizzato (0-based)
+  let rules = { cleaningFeeBase: 0, cleaningFeePerGuest: 0, baseOccupancy: 2, extraGuestFeePerNight: 0 };
+  let viewYear, viewMonth;
   let checkin = null, checkout = null;
-  let loaded = false;
+  let guests = 2;
 
   const today = new Date();
   viewYear = today.getFullYear();
@@ -305,15 +315,16 @@
     const end = fmt(endDate);
 
     try {
-      const [availRes, priceRes] = await Promise.all([
-        fetch(`/api/availability?property=sertorelli-26`).then((r) => r.json()),
-        fetch(`/api/pricing?property=sertorelli-26&start=${start}&end=${end}`).then((r) => r.json()),
+      const [availRes, priceRes, rulesRes] = await Promise.all([
+        fetch(`/api/availability?property=${PROPERTY_SLUG}`).then((r) => r.json()),
+        fetch(`/api/pricing?property=${PROPERTY_SLUG}&start=${start}&end=${end}`).then((r) => r.json()),
+        fetch(`/api/rules?property=${PROPERTY_SLUG}`).then((r) => r.json()),
       ]);
 
       (availRes.blocked || []).forEach((b) => blockedSet.add(b.start));
       (priceRes.prices || []).forEach((p) => { priceMap[p.date] = p; });
+      if (!rulesRes.error) rules = rulesRes;
 
-      loaded = true;
       renderCalendar();
     } catch (err) {
       document.getElementById("cal-container").innerHTML =
@@ -328,7 +339,7 @@
   function renderCalendar() {
     const container = document.getElementById("cal-container");
     const first = new Date(viewYear, viewMonth, 1);
-    const startWeekday = (first.getDay() + 6) % 7; // lunedì = 0
+    const startWeekday = (first.getDay() + 6) % 7;
     const daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
 
     let cellsHtml = "";
@@ -347,7 +358,6 @@
       if (blocked) cls += " disabled";
       if (checkin === dateStr || checkout === dateStr) cls += " selected";
       else if (checkin && checkout && dateStr > checkin && dateStr < checkout) cls += " in-range";
-      else if (checkin && !checkout && dateStr > checkin) cls += "";
 
       cellsHtml += `<div class="${cls}" ${blocked ? "" : `onclick="calSelect('${dateStr}')"`}>
         <span class="d-num">${d}</span>
@@ -356,6 +366,14 @@
     }
 
     container.innerHTML = `
+      <div class="cal-guests">
+        <span>Ospiti</span>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <button class="g-btn" onclick="calGuests(-1)">−</button>
+          <span class="g-count">${guests}</span>
+          <button class="g-btn" onclick="calGuests(1)">+</button>
+        </div>
+      </div>
       <div class="cal-nav">
         <button onclick="calNav(-1)">‹</button>
         <span>${MONTHS_IT[viewMonth]} ${viewYear}</span>
@@ -367,7 +385,7 @@
       </div>
       <div class="cal-summary" id="cal-summary">${summaryText()}</div>
       <div class="cal-actions">
-        <button class="quote-btn" id="cal-wa-btn" onclick="calSendWhatsapp()" ${checkin && checkout ? "" : "disabled"} style="${checkin && checkout ? "" : "opacity:.5;cursor:not-allowed;"}">
+        <button class="quote-btn" onclick="calSendWhatsapp()" ${checkin && checkout ? "" : "disabled"} style="${checkin && checkout ? "" : "opacity:.5;cursor:not-allowed;"}">
           WhatsApp →
         </button>
         <button class="quote-btn email-btn" onclick="calSendEmail()" ${checkin && checkout ? "" : "disabled"} style="${checkin && checkout ? "" : "opacity:.5;cursor:not-allowed;"}">
@@ -377,12 +395,35 @@
     `;
   }
 
+  function priceBreakdown(a, b) {
+    const nights = nightsBetween(a, b);
+    let nightly = 0;
+    let cur = new Date(a);
+    const end = new Date(b);
+    while (cur < end) {
+      const ds = fmt(cur);
+      nightly += priceMap[ds] ? priceMap[ds].price : 0;
+      cur.setDate(cur.getDate() + 1);
+    }
+    const extraGuests = Math.max(0, guests - (rules.baseOccupancy || 2));
+    const extraGuestTotal = extraGuests * (rules.extraGuestFeePerNight || 0) * nights;
+    const cleaning = (rules.cleaningFeeBase || 0) + (rules.cleaningFeePerGuest || 0) * guests;
+    const total = Math.round(nightly + extraGuestTotal + cleaning);
+    return { nights, nightly: Math.round(nightly), extraGuestTotal: Math.round(extraGuestTotal), cleaning: Math.round(cleaning), total };
+  }
+
   function summaryText() {
     if (!checkin && !checkout) return "Seleziona la data di arrivo nel calendario.";
     if (checkin && !checkout) return `Arrivo: <strong>${checkin.split("-").reverse().join("/")}</strong> — ora seleziona la partenza.`;
-    const nights = nightsBetween(checkin, checkout);
-    const total = totalPrice(checkin, checkout);
-    return `<strong>${checkin.split("-").reverse().join("/")} → ${checkout.split("-").reverse().join("/")}</strong> · ${nights} nott${nights === 1 ? "e" : "i"} · Totale stimato: <strong>€${total}</strong>`;
+    const b = priceBreakdown(checkin, checkout);
+    let html = `<strong>${checkin.split("-").reverse().join("/")} → ${checkout.split("-").reverse().join("/")}</strong> · ${b.nights} nott${b.nights === 1 ? "e" : "i"} · ${guests} ospiti`;
+    html += `<div class="cal-breakdown">`;
+    html += `<div><span>Soggiorno</span><span>€${b.nightly}</span></div>`;
+    if (b.extraGuestTotal > 0) html += `<div><span>Supplemento ospiti extra</span><span>€${b.extraGuestTotal}</span></div>`;
+    html += `<div><span>Pulizia finale</span><span>€${b.cleaning}</span></div>`;
+    html += `<div class="total-row"><span>Totale stimato</span><span>€${b.total}</span></div>`;
+    html += `</div>`;
+    return html;
   }
 
   function nightsBetween(a, b) {
@@ -390,17 +431,10 @@
     return Math.round((d2 - d1) / 86400000);
   }
 
-  function totalPrice(a, b) {
-    let total = 0;
-    let cur = new Date(a);
-    const end = new Date(b);
-    while (cur < end) {
-      const ds = fmt(cur);
-      total += priceMap[ds] ? priceMap[ds].price : 0;
-      cur.setDate(cur.getDate() + 1);
-    }
-    return Math.round(total);
-  }
+  window.calGuests = function (dir) {
+    guests = Math.max(1, Math.min(MAX_GUESTS, guests + dir));
+    renderCalendar();
+  };
 
   window.calNav = function (dir) {
     viewMonth += dir;
@@ -417,7 +451,6 @@
       checkin = dateStr;
       checkout = null;
     } else {
-      // verifica che non ci siano notti bloccate nel mezzo
       let cur = new Date(checkin);
       const end = new Date(dateStr);
       let hasBlocked = false;
@@ -437,18 +470,16 @@
 
   window.calSendWhatsapp = function () {
     if (!checkin || !checkout) return;
-    const nights = nightsBetween(checkin, checkout);
-    const total = totalPrice(checkin, checkout);
-    const msg = `Ciao! Vorrei prenotare ${PROPERTY_NAME} dal ${checkin.split("-").reverse().join("/")} al ${checkout.split("-").reverse().join("/")} (${nights} notti). Prezzo indicato sul sito: €${total}.`;
+    const b = priceBreakdown(checkin, checkout);
+    const msg = `Ciao! Vorrei prenotare ${PROPERTY_NAME} dal ${checkin.split("-").reverse().join("/")} al ${checkout.split("-").reverse().join("/")} (${b.nights} notti, ${guests} ospiti). Prezzo indicato sul sito: €${b.total} (soggiorno €${b.nightly} + pulizia €${b.cleaning}${b.extraGuestTotal > 0 ? ` + supplemento ospiti €${b.extraGuestTotal}` : ""}).`;
     window.open(`https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(msg)}`, "_blank");
   };
 
   window.calSendEmail = function () {
     if (!checkin || !checkout) return;
-    const nights = nightsBetween(checkin, checkout);
-    const total = totalPrice(checkin, checkout);
+    const b = priceBreakdown(checkin, checkout);
     const subject = `Richiesta prenotazione — ${PROPERTY_NAME}`;
-    const body = `Ciao,%0D%0A%0D%0AVorrei prenotare ${PROPERTY_NAME} dal ${checkin.split("-").reverse().join("/")} al ${checkout.split("-").reverse().join("/")} (${nights} notti). Prezzo indicato sul sito: €${total}.%0D%0A%0D%0AGrazie!`;
+    const body = `Ciao,%0D%0A%0D%0AVorrei prenotare ${PROPERTY_NAME} dal ${checkin.split("-").reverse().join("/")} al ${checkout.split("-").reverse().join("/")} (${b.nights} notti, ${guests} ospiti).%0D%0APrezzo indicato sul sito: €${b.total} (soggiorno €${b.nightly} + pulizia €${b.cleaning}${b.extraGuestTotal > 0 ? ` + supplemento ospiti €${b.extraGuestTotal}` : ""}).%0D%0A%0D%0AGrazie!`;
     window.location.href = `mailto:${EMAIL_TO}?subject=${encodeURIComponent(subject)}&body=${body}`;
   };
 

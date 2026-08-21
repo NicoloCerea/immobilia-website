@@ -70,9 +70,25 @@
   /* SEARCH / WIDGET CARD */
   .search-card{position:relative;margin-top:-56px;z-index:10;max-width:1240px;margin-left:auto;margin-right:auto;padding:0 32px;}
   .search-inner{background:var(--cream);border-radius:var(--radius);box-shadow:0 20px 50px rgba(15,33,25,.25);padding:16px;}
-  .search-form{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:12px;align-items:end;}
-  .search-field{display:flex;flex-direction:column;gap:6px;font-size:12px;font-weight:600;color:var(--ink-soft);}
-  .search-field input{padding:12px 14px;border:1px solid var(--line);border-radius:10px;font-size:14px;font-family:inherit;color:var(--ink);background:#fff;}
+  .search-form{display:grid;grid-template-columns:1fr 1fr 1fr 1fr auto;gap:12px;align-items:end;}
+  .search-field{display:flex;flex-direction:column;gap:6px;font-size:12px;font-weight:600;color:var(--ink-soft);position:relative;}
+  .search-field input,.search-field select{padding:12px 14px;border:1px solid var(--line);border-radius:10px;font-size:14px;font-family:inherit;color:var(--ink);background:#fff;}
+  .search-date-btn{padding:12px 14px;border:1px solid var(--line);border-radius:10px;font-size:14px;font-family:inherit;color:var(--ink);background:#fff;text-align:left;cursor:pointer;}
+  .search-date-btn.placeholder{color:var(--ink-soft);}
+  .search-date-btn:hover{border-color:var(--ink);}
+  .search-cal-popover{position:absolute;top:calc(100% + 8px);left:0;background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 16px 40px rgba(15,33,25,.18);padding:18px;z-index:100;width:300px;display:none;}
+  .search-cal-popover.active{display:block;}
+  .search-cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+  .search-cal-nav button{background:transparent;border:1px solid var(--line);width:30px;height:30px;border-radius:50%;font-size:14px;cursor:pointer;}
+  .search-cal-nav button:hover{border-color:var(--ink);}
+  .search-cal-nav span{font-family:'Fraunces',serif;font-weight:600;font-size:14px;text-transform:capitalize;}
+  .search-cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;}
+  .search-cal-dow{font-size:10px;color:var(--ink-soft);text-align:center;font-weight:700;padding-bottom:6px;}
+  .search-cal-day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:12.5px;cursor:pointer;border-radius:50%;}
+  .search-cal-day:hover:not(.empty):not(.past){background:var(--cream-soft);}
+  .search-cal-day.empty,.search-cal-day.past{visibility:hidden;pointer-events:none;}
+  .search-cal-day.sel{background:var(--forest);color:#fff;}
+  .search-cal-day.range{background:var(--cream-soft);border-radius:0;}
   .search-btn{background:var(--forest);color:#fff;border:none;padding:14px 24px;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;height:46px;}
   .search-btn:hover{background:var(--forest-dark);}
   .search-results{padding:50px 0;}
@@ -87,7 +103,7 @@
   .result-body .r-loc{font-size:12.5px;color:var(--ink-soft);margin-bottom:10px;}
   .result-body .r-nights{font-size:12.5px;color:var(--ink-soft);}
   .search-empty{grid-column:1/-1;text-align:center;padding:40px 0;color:var(--ink-soft);font-size:14px;}
-  @media(max-width:880px){ .search-form{grid-template-columns:1fr 1fr;} .search-btn{grid-column:1/3;} .search-results-grid{grid-template-columns:1fr;} }
+  @media(max-width:880px){ .search-form{grid-template-columns:1fr 1fr;} .search-btn{grid-column:1/3;} .search-results-grid{grid-template-columns:1fr;} .search-cal-popover{width:260px;left:auto;right:0;} }
 
   /* TRUST STRIP */
   .trust{padding:60px 0 36px;}
@@ -229,13 +245,23 @@
     <div class="search-inner">
       <div class="search-form">
         <label class="search-field">
+          <span>Zona</span>
+          <select id="search-zone">
+            <option value="">Tutte</option>
+            <option value="Bormio">Bormio</option>
+            <option value="Livigno">Livigno</option>
+          </select>
+        </label>
+        <div class="search-field">
           <span>Check-in</span>
-          <input type="date" id="search-checkin">
-        </label>
-        <label class="search-field">
+          <div class="search-date-btn placeholder" id="search-checkin-btn" onclick="toggleCal('checkin')">Aggiungi data</div>
+          <div class="search-cal-popover" id="search-checkin-cal"></div>
+        </div>
+        <div class="search-field">
           <span>Check-out</span>
-          <input type="date" id="search-checkout">
-        </label>
+          <div class="search-date-btn placeholder" id="search-checkout-btn" onclick="toggleCal('checkout')">Aggiungi data</div>
+          <div class="search-cal-popover" id="search-checkout-cal"></div>
+        </div>
         <label class="search-field">
           <span>Ospiti</span>
           <input type="number" id="search-guests" min="1" max="10" value="2">
@@ -559,10 +585,98 @@
     "livigno-cantoni": { name: "Livigno Cantoni", loc: "Livigno", img: "images/livigno-cantoni/foto02.jpg" },
   };
 
+  // --- Calendario di ricerca personalizzato (niente input nativi) ---
+  const MONTHS_IT = ["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"];
+  const DOW_IT = ["Lu","Ma","Me","Gi","Ve","Sa","Do"];
+  let searchCheckin = null, searchCheckout = null;
+  const today = new Date();
+  let calView = { checkin: { y: today.getFullYear(), m: today.getMonth() }, checkout: { y: today.getFullYear(), m: today.getMonth() } };
+
+  function fmtD(date) { return date.toISOString().slice(0, 10); }
+
+  window.toggleCal = function (which) {
+    const pop = document.getElementById(`search-${which}-cal`);
+    const isOpen = pop.classList.contains('active');
+    document.querySelectorAll('.search-cal-popover').forEach((p) => p.classList.remove('active'));
+    if (!isOpen) {
+      pop.classList.add('active');
+      renderSearchCal(which);
+    }
+  };
+
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('.search-field')) {
+      document.querySelectorAll('.search-cal-popover').forEach((p) => p.classList.remove('active'));
+    }
+  });
+
+  function renderSearchCal(which) {
+    const pop = document.getElementById(`search-${which}-cal`);
+    const view = calView[which];
+    const first = new Date(view.y, view.m, 1);
+    const startWeekday = (first.getDay() + 6) % 7;
+    const daysInMonth = new Date(view.y, view.m + 1, 0).getDate();
+
+    let cells = "";
+    for (let i = 0; i < startWeekday; i++) cells += '<div class="search-cal-day empty"></div>';
+    for (let d = 1; d <= daysInMonth; d++) {
+      const dateObj = new Date(view.y, view.m, d);
+      const dateStr = fmtD(dateObj);
+      const isPast = dateObj < new Date(today.getFullYear(), today.getMonth(), today.getDate());
+      let cls = "search-cal-day";
+      if (isPast) cls += " past";
+      if (dateStr === searchCheckin || dateStr === searchCheckout) cls += " sel";
+      else if (searchCheckin && searchCheckout && dateStr > searchCheckin && dateStr < searchCheckout) cls += " range";
+      cells += `<div class="${cls}" onclick="pickSearchDate('${which}','${dateStr}')">${d}</div>`;
+    }
+
+    pop.innerHTML = `
+      <div class="search-cal-nav">
+        <button onclick="navSearchCal('${which}',-1)">‹</button>
+        <span>${MONTHS_IT[view.m]} ${view.y}</span>
+        <button onclick="navSearchCal('${which}',1)">›</button>
+      </div>
+      <div class="search-cal-grid">
+        ${DOW_IT.map((d) => `<div class="search-cal-dow">${d}</div>`).join("")}
+        ${cells}
+      </div>
+    `;
+  }
+
+  window.navSearchCal = function (which, dir) {
+    const view = calView[which];
+    view.m += dir;
+    if (view.m < 0) { view.m = 11; view.y--; }
+    if (view.m > 11) { view.m = 0; view.y++; }
+    renderSearchCal(which);
+  };
+
+  window.pickSearchDate = function (which, dateStr) {
+    if (which === 'checkin') {
+      searchCheckin = dateStr;
+      if (searchCheckout && searchCheckout <= searchCheckin) searchCheckout = null;
+      document.getElementById('search-checkin-btn').textContent = dateStr.split('-').reverse().join('/');
+      document.getElementById('search-checkin-btn').classList.remove('placeholder');
+      if (searchCheckout) document.getElementById('search-checkout-btn').textContent = searchCheckout.split('-').reverse().join('/');
+      else { document.getElementById('search-checkout-btn').textContent = 'Aggiungi data'; document.getElementById('search-checkout-btn').classList.add('placeholder'); }
+      document.getElementById('search-checkin-cal').classList.remove('active');
+      renderSearchCal('checkin');
+    } else {
+      if (searchCheckin && dateStr > searchCheckin) {
+        searchCheckout = dateStr;
+        document.getElementById('search-checkout-btn').textContent = dateStr.split('-').reverse().join('/');
+        document.getElementById('search-checkout-btn').classList.remove('placeholder');
+        document.getElementById('search-checkout-cal').classList.remove('active');
+      }
+      renderSearchCal('checkout');
+    }
+  };
+
   window.runSearch = async function () {
-    const checkin = document.getElementById('search-checkin').value;
-    const checkout = document.getElementById('search-checkout').value;
+    const checkin = searchCheckin;
+    const checkout = searchCheckout;
     const guests = document.getElementById('search-guests').value || 2;
+    const zone = document.getElementById('search-zone').value;
     const section = document.getElementById('search-results-section');
     const grid = document.getElementById('search-results-grid');
     const title = document.getElementById('search-results-title');
@@ -580,11 +694,15 @@
     try {
       const res = await fetch(`/api/search?checkin=${checkin}&checkout=${checkout}&guests=${guests}`);
       const data = await res.json();
-      const results = data.results || [];
+      let results = data.results || [];
+
+      if (zone) {
+        results = results.filter((r) => (PROPERTY_INFO[r.slug] || {}).loc === zone);
+      }
 
       if (results.length === 0) {
-        title.textContent = 'Nessuna disponibilità per queste date';
-        grid.innerHTML = '<div class="search-empty">Prova a cambiare le date, oppure scrivici direttamente.</div>';
+        title.textContent = 'Nessuna disponibilità per queste date' + (zone ? ` a ${zone}` : '');
+        grid.innerHTML = '<div class="search-empty">Prova a cambiare le date o la zona, oppure scrivici direttamente.</div>';
         return;
       }
 

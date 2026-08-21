@@ -70,6 +70,24 @@
   /* SEARCH / WIDGET CARD */
   .search-card{position:relative;margin-top:-56px;z-index:10;max-width:1240px;margin-left:auto;margin-right:auto;padding:0 32px;}
   .search-inner{background:var(--cream);border-radius:var(--radius);box-shadow:0 20px 50px rgba(15,33,25,.25);padding:16px;}
+  .search-form{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:12px;align-items:end;}
+  .search-field{display:flex;flex-direction:column;gap:6px;font-size:12px;font-weight:600;color:var(--ink-soft);}
+  .search-field input{padding:12px 14px;border:1px solid var(--line);border-radius:10px;font-size:14px;font-family:inherit;color:var(--ink);background:#fff;}
+  .search-btn{background:var(--forest);color:#fff;border:none;padding:14px 24px;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;height:46px;}
+  .search-btn:hover{background:var(--forest-dark);}
+  .search-results{padding:50px 0;}
+  .search-results h2{font-family:'Fraunces',serif;font-size:24px;font-weight:500;margin-bottom:24px;}
+  .search-results-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .result-card{border-radius:var(--radius);overflow:hidden;background:#fff;border:1px solid var(--line);transition:box-shadow .2s;}
+  .result-card:hover{box-shadow:0 12px 30px rgba(15,33,25,.1);}
+  .result-img{height:220px;background-size:cover;background-position:center;position:relative;}
+  .result-price-badge{position:absolute;bottom:12px;left:12px;background:#fff;color:var(--ink);padding:6px 12px;border-radius:999px;font-size:13px;font-weight:700;box-shadow:0 4px 10px rgba(0,0,0,.15);}
+  .result-body{padding:16px;}
+  .result-body h3{font-size:16px;font-weight:600;margin-bottom:4px;}
+  .result-body .r-loc{font-size:12.5px;color:var(--ink-soft);margin-bottom:10px;}
+  .result-body .r-nights{font-size:12.5px;color:var(--ink-soft);}
+  .search-empty{grid-column:1/-1;text-align:center;padding:40px 0;color:var(--ink-soft);font-size:14px;}
+  @media(max-width:880px){ .search-form{grid-template-columns:1fr 1fr;} .search-btn{grid-column:1/3;} .search-results-grid{grid-template-columns:1fr;} }
 
   /* TRUST STRIP */
   .trust{padding:60px 0 36px;}
@@ -209,20 +227,30 @@
 
   <div class="search-card">
     <div class="search-inner">
-      <be-widget
-        host="https://immobilia.bookpage.io"
-        booking-network-id="2050"
-        default-adults="2"
-        default-children="0"
-        primary-color="#173226"
-        secondary-color="#a9ddd6"
-        background-color="#ffffff"
-        border-color="#E3DCC9"
-        button-text-color="#ffffff"
-        language="it"
-      ></be-widget>
+      <div class="search-form">
+        <label class="search-field">
+          <span>Check-in</span>
+          <input type="date" id="search-checkin">
+        </label>
+        <label class="search-field">
+          <span>Check-out</span>
+          <input type="date" id="search-checkout">
+        </label>
+        <label class="search-field">
+          <span>Ospiti</span>
+          <input type="number" id="search-guests" min="1" max="10" value="2">
+        </label>
+        <button class="search-btn" onclick="runSearch()">Cerca disponibilità</button>
+      </div>
     </div>
   </div>
+
+  <section class="search-results" id="search-results-section" style="display:none;">
+    <div class="wrap">
+      <h2 id="search-results-title">Risultati</h2>
+      <div class="search-results-grid" id="search-results-grid"></div>
+    </div>
+  </section>
 
   <section class="trust">
     <div class="wrap trust-grid">
@@ -521,6 +549,67 @@
 
 <script>
   const tabs = document.querySelectorAll('.tab');
+
+  const PROPERTY_INFO = {
+    "sertorelli-26": { name: "Sertorelli 26", loc: "Bormio", img: "images/sertorelli-26/foto17.jpg" },
+    "fumarogo-100d": { name: "Fumarogo 100D", loc: "Bormio", img: "images/fumarogo-100d/foto01.jpg" },
+    "monte-reit-7": { name: "Monte Reit 7", loc: "Bormio", img: "images/monte-reit-7/foto01.jpg" },
+    "livigno-river": { name: "Livigno River", loc: "Livigno", img: "images/livigno-river/foto01.jpg" },
+    "livigno-toila": { name: "Livigno Toilà", loc: "Livigno", img: "images/livigno-toila/foto13.jpg" },
+    "livigno-cantoni": { name: "Livigno Cantoni", loc: "Livigno", img: "images/livigno-cantoni/foto02.jpg" },
+  };
+
+  window.runSearch = async function () {
+    const checkin = document.getElementById('search-checkin').value;
+    const checkout = document.getElementById('search-checkout').value;
+    const guests = document.getElementById('search-guests').value || 2;
+    const section = document.getElementById('search-results-section');
+    const grid = document.getElementById('search-results-grid');
+    const title = document.getElementById('search-results-title');
+
+    if (!checkin || !checkout) {
+      alert('Seleziona check-in e check-out.');
+      return;
+    }
+
+    section.style.display = 'block';
+    title.textContent = 'Cerchiamo le disponibilità...';
+    grid.innerHTML = '';
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    try {
+      const res = await fetch(`/api/search?checkin=${checkin}&checkout=${checkout}&guests=${guests}`);
+      const data = await res.json();
+      const results = data.results || [];
+
+      if (results.length === 0) {
+        title.textContent = 'Nessuna disponibilità per queste date';
+        grid.innerHTML = '<div class="search-empty">Prova a cambiare le date, oppure scrivici direttamente.</div>';
+        return;
+      }
+
+      title.textContent = `${results.length} appartament${results.length === 1 ? 'o disponibile' : 'i disponibili'} · ${checkin.split('-').reverse().join('/')} → ${checkout.split('-').reverse().join('/')}`;
+      grid.innerHTML = results.map((r) => {
+        const info = PROPERTY_INFO[r.slug] || { name: r.slug, loc: '', img: '' };
+        return `
+          <a class="result-card" href="${r.slug}.html?checkin=${checkin}&checkout=${checkout}&guests=${guests}" style="text-decoration:none;color:inherit;display:block;">
+            <div class="result-img" style="background-image:url('${info.img}')">
+              <div class="result-price-badge">€${r.total} totale</div>
+            </div>
+            <div class="result-body">
+              <h3>${info.name}</h3>
+              <div class="r-loc">📍 ${info.loc}</div>
+              <div class="r-nights">${r.nights} nott${r.nights === 1 ? 'e' : 'i'}</div>
+            </div>
+          </a>
+        `;
+      }).join('');
+    } catch (err) {
+      title.textContent = 'Errore nella ricerca';
+      grid.innerHTML = '<div class="search-empty">Riprova tra qualche istante, oppure scrivici direttamente.</div>';
+    }
+  };
+
   const cardGrids = { tutte: document.getElementById('cards-tutte'), bormio: document.getElementById('cards-bormio'), livigno: document.getElementById('cards-livigno') };
   function selectTab(dest) {
     tabs.forEach(t => t.classList.toggle('active', t.dataset.dest === dest));

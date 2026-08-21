@@ -307,6 +307,20 @@
   viewYear = today.getFullYear();
   viewMonth = today.getMonth();
 
+  // Se si arriva da una ricerca in home, pre-seleziona date e ospiti
+  const urlParams = new URLSearchParams(window.location.search);
+  const urlCheckin = urlParams.get('checkin');
+  const urlCheckout = urlParams.get('checkout');
+  const urlGuests = parseInt(urlParams.get('guests'), 10);
+  if (urlCheckin) {
+    checkin = urlCheckin;
+    const d = new Date(urlCheckin);
+    viewYear = d.getFullYear();
+    viewMonth = d.getMonth();
+  }
+  if (urlCheckout) checkout = urlCheckout;
+  if (urlGuests) guests = Math.max(1, Math.min(MAX_GUESTS, urlGuests));
+
   function fmt(date) {
     return date.toISOString().slice(0, 10);
   }

@@ -25,6 +25,7 @@
   nav{display:flex;align-items:center;justify-content:space-between;padding:16px 32px;max-width:1120px;margin:0 auto;}
   .logo{display:flex;align-items:center;gap:10px;}
   .logo-img{height:36px;width:auto;display:block;}
+  .nav-right{display:flex;align-items:center;gap:16px;flex-shrink:0;}
   .logo-mark{width:34px;height:34px;border-radius:8px;background:var(--forest);display:flex;align-items:center;justify-content:center;color:var(--cream);font-family:'Fraunces',serif;font-weight:600;font-size:18px;}
   .logo-text .name{font-weight:700;letter-spacing:.06em;font-size:13px;}
   .logo-text .sub{font-size:10px;letter-spacing:.14em;color:var(--ink-soft);}
@@ -66,6 +67,25 @@
   .sidebar{position:sticky;top:90px;align-self:start;}
   .booking-full{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px;margin:0 0 40px;box-shadow:0 12px 30px rgba(15,33,25,.08);}
   .booking-full .stay-meta{font-size:13px;color:var(--ink-soft);margin-bottom:16px;}
+  .cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+  .cal-nav button{background:var(--cream-soft);border:1px solid var(--line);width:32px;height:32px;border-radius:50%;font-size:16px;color:var(--forest);cursor:pointer;}
+  .cal-nav button:hover{background:var(--gold);color:#fff;}
+  .cal-nav span{font-family:'Fraunces',serif;font-size:16px;font-weight:600;text-transform:capitalize;}
+  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;}
+  .cal-dow{font-size:11px;color:var(--ink-soft);text-align:center;font-weight:700;padding-bottom:6px;}
+  .cal-day{position:relative;aspect-ratio:1;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:12px;cursor:pointer;background:var(--cream-soft);border:1px solid transparent;transition:all .15s;}
+  .cal-day .d-num{font-weight:600;font-size:13px;}
+  .cal-day .d-price{font-size:9.5px;color:var(--forest);font-weight:600;}
+  .cal-day:hover:not(.disabled):not(.empty){border-color:var(--gold);}
+  .cal-day.disabled{background:transparent;color:#c9c4b3;cursor:not-allowed;text-decoration:line-through;}
+  .cal-day.empty{visibility:hidden;cursor:default;}
+  .cal-day.selected{background:var(--forest);color:#fff;}
+  .cal-day.selected .d-price{color:rgba(246,242,233,.8);}
+  .cal-day.in-range{background:rgba(185,151,78,.22);}
+  .cal-summary{margin-top:16px;padding:14px;background:var(--cream-soft);border-radius:10px;font-size:13.5px;color:var(--ink-soft);}
+  .cal-summary strong{color:var(--forest);}
+  .cal-actions{margin-top:14px;display:flex;gap:10px;}
+  .cal-loading{font-size:13px;color:var(--ink-soft);padding:20px;text-align:center;}
   .book-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:0 12px 30px rgba(15,33,25,.08);}
   .book-card .price-row{font-size:22px;font-weight:700;color:var(--forest);margin-bottom:4px;}
   .book-card .price-row span{font-size:13px;font-weight:400;color:var(--ink-soft);}
@@ -120,16 +140,18 @@
     <a class="logo" href="index.html">
       <img class="logo-img" src="images/logo/immobilia-logo.png" alt="Immobilia">
     </a>
-    <a class="back-link" href="index.html" data-i18n="nav_back">← Tutti gli annunci</a>
-    <select id="lang-select" class="lang-select">
-      <option value="it">🇮🇹 IT</option>
-      <option value="en">🇬🇧 EN</option>
-      <option value="es">🇪🇸 ES</option>
-      <option value="fr">🇫🇷 FR</option>
-      <option value="de">🇩🇪 DE</option>
-      <option value="ru">🇷🇺 RU</option>
-      <option value="zh">🇨🇳 ZH</option>
-    </select>
+    <div class="nav-right">
+      <a class="back-link" href="index.html" data-i18n="nav_back">← Tutti gli annunci</a>
+      <select id="lang-select" class="lang-select">
+        <option value="it">🇮🇹 IT</option>
+        <option value="en">🇬🇧 EN</option>
+        <option value="es">🇪🇸 ES</option>
+        <option value="fr">🇫🇷 FR</option>
+        <option value="de">🇩🇪 DE</option>
+        <option value="ru">🇷🇺 RU</option>
+        <option value="zh">🇨🇳 ZH</option>
+      </select>
+    </div>
   </nav>
 </header>
 
@@ -159,27 +181,10 @@
 
 <div class="wrap">
   <div class="booking-full">
-      <p class="note">4 ospiti · 2 camere · 4 letti · 1 bagno</p>
-      <be-widget
-        host="https://baitariver.bookpage.io"
-        property-id="152305"
-        booking-network-id="2072"
-        default-adults="2"
-        default-children="0"
-        max-guests="5"
-        with-children="true"
-        expanded-occupation="true"
-        primary-color="#173226"
-        secondary-color="#006039"
-        background-color="#ffffff"
-        label-color="#173226"
-        border-color="#E3DCC9"
-        with-shadow="false"
-        with-box-border="false"
-        full-width="true"
-        button-text-color="#ffffff"
-        language="it"
-      ></be-widget>
+      <p class="stay-meta">4 ospiti · 2 camere · 4 letti · 1 bagno</p>
+      <div id="cal-container">
+        <div class="cal-loading">Caricamento disponibilità e prezzi...</div>
+      </div>
     </div>
 </div>
 <div class="wrap content">
@@ -279,5 +284,182 @@
   });
   L.marker([46.518134, 10.125375], {icon: icon_cantoni}).addTo(map_cantoni);
 </script>
+<script>
+(function () {
+  const PROPERTY_SLUG = "livigno-cantoni";
+  const PROPERTY_NAME = "Livigno Cantoni";
+  const WHATSAPP_PHONE = "393333269224";
+  const EMAIL_TO = "immobiliaita@gmail.com";
+  const MONTHS_IT = ["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"];
+  const DOW_IT = ["Lu","Ma","Me","Gi","Ve","Sa","Do"];
+
+  let blockedSet = new Set();
+  let priceMap = {};
+  let viewYear, viewMonth;
+  let checkin = null, checkout = null;
+
+  const today = new Date();
+  viewYear = today.getFullYear();
+  viewMonth = today.getMonth();
+
+  function fmt(date) {
+    return date.toISOString().slice(0, 10);
+  }
+
+  async function loadData() {
+    const start = fmt(today);
+    const endDate = new Date(today);
+    endDate.setDate(endDate.getDate() + 200);
+    const end = fmt(endDate);
+
+    try {
+      const [availRes, priceRes] = await Promise.all([
+        fetch(`/api/availability?property=${PROPERTY_SLUG}`).then((r) => r.json()),
+        fetch(`/api/pricing?property=${PROPERTY_SLUG}&start=${start}&end=${end}`).then((r) => r.json()),
+      ]);
+
+      (availRes.blocked || []).forEach((b) => blockedSet.add(b.start));
+      (priceRes.prices || []).forEach((p) => { priceMap[p.date] = p; });
+
+      renderCalendar();
+    } catch (err) {
+      document.getElementById("cal-container").innerHTML =
+        '<div class="cal-loading">Impossibile caricare il calendario in questo momento. Scrivici direttamente su WhatsApp o email per verificare la disponibilità.</div>';
+    }
+  }
+
+  function isBlocked(dateStr) {
+    return blockedSet.has(dateStr);
+  }
+
+  function renderCalendar() {
+    const container = document.getElementById("cal-container");
+    const first = new Date(viewYear, viewMonth, 1);
+    const startWeekday = (first.getDay() + 6) % 7;
+    const daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
+
+    let cellsHtml = "";
+    for (let i = 0; i < startWeekday; i++) {
+      cellsHtml += '<div class="cal-day empty"></div>';
+    }
+    for (let d = 1; d <= daysInMonth; d++) {
+      const dateObj = new Date(viewYear, viewMonth, d);
+      const dateStr = fmt(dateObj);
+      const isPast = dateObj < new Date(today.getFullYear(), today.getMonth(), today.getDate());
+      const blocked = isBlocked(dateStr) || isPast;
+      const priceInfo = priceMap[dateStr];
+      const priceLabel = priceInfo && !blocked ? `€${Math.round(priceInfo.price)}` : "";
+
+      let cls = "cal-day";
+      if (blocked) cls += " disabled";
+      if (checkin === dateStr || checkout === dateStr) cls += " selected";
+      else if (checkin && checkout && dateStr > checkin && dateStr < checkout) cls += " in-range";
+
+      cellsHtml += `<div class="${cls}" ${blocked ? "" : `onclick="calSelect('${dateStr}')"`}>
+        <span class="d-num">${d}</span>
+        <span class="d-price">${priceLabel}</span>
+      </div>`;
+    }
+
+    container.innerHTML = `
+      <div class="cal-nav">
+        <button onclick="calNav(-1)">‹</button>
+        <span>${MONTHS_IT[viewMonth]} ${viewYear}</span>
+        <button onclick="calNav(1)">›</button>
+      </div>
+      <div class="cal-grid">
+        ${DOW_IT.map((d) => `<div class="cal-dow">${d}</div>`).join("")}
+        ${cellsHtml}
+      </div>
+      <div class="cal-summary" id="cal-summary">${summaryText()}</div>
+      <div class="cal-actions">
+        <button class="quote-btn" onclick="calSendWhatsapp()" ${checkin && checkout ? "" : "disabled"} style="${checkin && checkout ? "" : "opacity:.5;cursor:not-allowed;"}">
+          WhatsApp →
+        </button>
+        <button class="quote-btn email-btn" onclick="calSendEmail()" ${checkin && checkout ? "" : "disabled"} style="${checkin && checkout ? "" : "opacity:.5;cursor:not-allowed;"}">
+          Email →
+        </button>
+      </div>
+    `;
+  }
+
+  function summaryText() {
+    if (!checkin && !checkout) return "Seleziona la data di arrivo nel calendario.";
+    if (checkin && !checkout) return `Arrivo: <strong>${checkin.split("-").reverse().join("/")}</strong> — ora seleziona la partenza.`;
+    const nights = nightsBetween(checkin, checkout);
+    const total = totalPrice(checkin, checkout);
+    return `<strong>${checkin.split("-").reverse().join("/")} → ${checkout.split("-").reverse().join("/")}</strong> · ${nights} nott${nights === 1 ? "e" : "i"} · Totale stimato: <strong>€${total}</strong>`;
+  }
+
+  function nightsBetween(a, b) {
+    const d1 = new Date(a), d2 = new Date(b);
+    return Math.round((d2 - d1) / 86400000);
+  }
+
+  function totalPrice(a, b) {
+    let total = 0;
+    let cur = new Date(a);
+    const end = new Date(b);
+    while (cur < end) {
+      const ds = fmt(cur);
+      total += priceMap[ds] ? priceMap[ds].price : 0;
+      cur.setDate(cur.getDate() + 1);
+    }
+    return Math.round(total);
+  }
+
+  window.calNav = function (dir) {
+    viewMonth += dir;
+    if (viewMonth < 0) { viewMonth = 11; viewYear--; }
+    if (viewMonth > 11) { viewMonth = 0; viewYear++; }
+    renderCalendar();
+  };
+
+  window.calSelect = function (dateStr) {
+    if (!checkin || (checkin && checkout)) {
+      checkin = dateStr;
+      checkout = null;
+    } else if (dateStr <= checkin) {
+      checkin = dateStr;
+      checkout = null;
+    } else {
+      let cur = new Date(checkin);
+      const end = new Date(dateStr);
+      let hasBlocked = false;
+      while (cur < end) {
+        if (isBlocked(fmt(cur))) hasBlocked = true;
+        cur.setDate(cur.getDate() + 1);
+      }
+      if (hasBlocked) {
+        checkin = dateStr;
+        checkout = null;
+      } else {
+        checkout = dateStr;
+      }
+    }
+    renderCalendar();
+  };
+
+  window.calSendWhatsapp = function () {
+    if (!checkin || !checkout) return;
+    const nights = nightsBetween(checkin, checkout);
+    const total = totalPrice(checkin, checkout);
+    const msg = `Ciao! Vorrei prenotare ${PROPERTY_NAME} dal ${checkin.split("-").reverse().join("/")} al ${checkout.split("-").reverse().join("/")} (${nights} notti). Prezzo indicato sul sito: €${total}.`;
+    window.open(`https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(msg)}`, "_blank");
+  };
+
+  window.calSendEmail = function () {
+    if (!checkin || !checkout) return;
+    const nights = nightsBetween(checkin, checkout);
+    const total = totalPrice(checkin, checkout);
+    const subject = `Richiesta prenotazione — ${PROPERTY_NAME}`;
+    const body = `Ciao,%0D%0A%0D%0AVorrei prenotare ${PROPERTY_NAME} dal ${checkin.split("-").reverse().join("/")} al ${checkout.split("-").reverse().join("/")} (${nights} notti). Prezzo indicato sul sito: €${total}.%0D%0A%0D%0AGrazie!`;
+    window.location.href = `mailto:${EMAIL_TO}?subject=${encodeURIComponent(subject)}&body=${body}`;
+  };
+
+  loadData();
+})();
+</script>
+
 </body>
 </html>

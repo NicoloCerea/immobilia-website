@@ -1,10 +1,8 @@
 // /api/pricing.js
-// Legge i prezzi per notte di Sertorelli 26 da PriceLabs.
-// Esempio: GET /api/pricing?start=2026-08-25&end=2026-09-05
-// Risposta: { property: "sertorelli-26", prices: [{date, price, min_stay, check_in, check_out}, ...] }
+// Legge i prezzi per notte di una proprietà da PriceLabs.
+// Esempio: GET /api/pricing?property=fumarogo-100d&start=2026-08-25&end=2026-09-05
 
-const LISTING_ID = "145903___14556"; // Sertorelli 26
-const PMS = "ciaobooking";
+import { PROPERTIES } from "./_config.js";
 
 export default async function handler(req, res) {
   const API_KEY = process.env.PRICELABS_API_KEY;
@@ -13,6 +11,14 @@ export default async function handler(req, res) {
     res.status(500).json({
       error: "PRICELABS_API_KEY non configurata. Vai su Vercel -> Project Settings -> Environment Variables.",
     });
+    return;
+  }
+
+  const property = req.query.property || "sertorelli-26";
+  const cfg = PROPERTIES[property];
+
+  if (!cfg) {
+    res.status(400).json({ error: `Proprietà sconosciuta: ${property}` });
     return;
   }
 
@@ -32,8 +38,8 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         listings: [
           {
-            id: LISTING_ID,
-            pms: PMS,
+            id: cfg.listingId,
+            pms: cfg.pms,
             dateFrom,
             dateTo,
             reason: false,
@@ -54,10 +60,8 @@ export default async function handler(req, res) {
     }
 
     const data = JSON.parse(raw);
-    // data è un array con un elemento per listing richiesto; ne prendiamo il primo (Sertorelli)
     const listing = Array.isArray(data) ? data[0] : data;
 
-    // Semplifichiamo la risposta per il sito: solo data, prezzo, soggiorno minimo, check-in/out
     const prices = (listing?.data || []).map((d) => ({
       date: d.date,
       price: d.price,
@@ -67,7 +71,7 @@ export default async function handler(req, res) {
     }));
 
     res.setHeader("Cache-Control", "s-maxage=1800, stale-while-revalidate=3600");
-    res.status(200).json({ property: "sertorelli-26", listing_id: LISTING_ID, prices });
+    res.status(200).json({ property, listing_id: cfg.listingId, prices });
   } catch (err) {
     res.status(500).json({ error: "Errore nel contattare PriceLabs", details: err.message });
   }

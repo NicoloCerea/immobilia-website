@@ -306,8 +306,8 @@
 
     try {
       const [availRes, priceRes] = await Promise.all([
-        fetch(`/api/availability`).then((r) => r.json()),
-        fetch(`/api/pricing?start=${start}&end=${end}`).then((r) => r.json()),
+        fetch(`/api/availability?property=sertorelli-26`).then((r) => r.json()),
+        fetch(`/api/pricing?property=sertorelli-26&start=${start}&end=${end}`).then((r) => r.json()),
       ]);
 
       (availRes.blocked || []).forEach((b) => blockedSet.add(b.start));

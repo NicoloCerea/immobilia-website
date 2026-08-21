@@ -66,19 +66,22 @@
   .sidebar{position:sticky;top:90px;align-self:start;}
   .booking-full{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px;margin:0 0 40px;box-shadow:0 12px 30px rgba(15,33,25,.08);}
   .booking-full .stay-meta{font-size:13px;color:var(--ink-soft);margin-bottom:16px;}
-  .cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
-  .cal-nav button{background:transparent;border:1px solid var(--line);width:36px;height:36px;border-radius:50%;font-size:16px;color:var(--ink);cursor:pointer;transition:border-color .2s;}
+  .booking-full{max-width:640px;}
+  .cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;}
+  .cal-nav button{background:transparent;border:1px solid var(--line);width:32px;height:32px;border-radius:50%;font-size:15px;color:var(--ink);cursor:pointer;transition:border-color .2s;flex-shrink:0;}
   .cal-nav button:hover{border-color:var(--ink);}
-  .cal-nav span{font-family:'Fraunces',serif;font-size:17px;font-weight:600;text-transform:capitalize;letter-spacing:.2px;}
   .cal-guests{display:flex;align-items:center;justify-content:space-between;padding:14px 0;margin-bottom:18px;border-bottom:1px solid var(--line);font-size:14px;font-weight:600;}
   .cal-guests .g-btn{width:28px;height:28px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--ink);font-weight:700;cursor:pointer;transition:border-color .2s;}
   .cal-guests .g-btn:hover{border-color:var(--ink);}
   .cal-guests .g-count{font-weight:700;min-width:22px;text-align:center;}
-  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;}
-  .cal-dow{font-size:11px;color:var(--ink-soft);text-align:center;font-weight:600;padding-bottom:10px;text-transform:uppercase;letter-spacing:.5px;}
-  .cal-day{position:relative;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:13px;cursor:pointer;background:transparent;border:none;transition:all .12s;}
-  .cal-day .d-num{width:38px;height:38px;display:flex;align-items:center;justify-content:center;border-radius:50%;font-weight:500;font-size:13.5px;transition:all .12s;}
-  .cal-day .d-price{font-size:9px;color:var(--ink-soft);margin-top:2px;font-weight:600;}
+  .cal-months{display:flex;gap:28px;justify-content:center;}
+  .cal-month{width:230px;}
+  .cal-month-title{text-align:center;font-family:'Fraunces',serif;font-size:14.5px;font-weight:600;margin-bottom:12px;text-transform:capitalize;}
+  .cal-grid{display:grid;grid-template-columns:repeat(7,30px);gap:2px;justify-content:center;}
+  .cal-dow{font-size:10px;color:var(--ink-soft);text-align:center;font-weight:600;padding-bottom:8px;text-transform:uppercase;letter-spacing:.3px;}
+  .cal-day{position:relative;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-size:11px;cursor:pointer;background:transparent;border:none;}
+  .cal-day .d-num{width:30px;height:30px;display:flex;align-items:center;justify-content:center;border-radius:50%;font-weight:500;font-size:12px;transition:all .12s;}
+  .cal-day .d-price{position:absolute;top:32px;left:50%;transform:translateX(-50%);font-size:8px;color:var(--ink-soft);font-weight:600;white-space:nowrap;}
   .cal-day:hover:not(.disabled):not(.empty) .d-num{border:1px solid var(--ink);}
   .cal-day.disabled{color:#ccc7b8;cursor:not-allowed;}
   .cal-day.disabled .d-num{text-decoration:line-through;color:#ccc7b8;}
@@ -86,16 +89,15 @@
   .cal-day.empty{visibility:hidden;cursor:default;}
   .cal-day.selected .d-num{background:var(--forest);color:#fff;}
   .cal-day.selected .d-price{color:var(--forest);font-weight:700;}
-  .cal-day.in-range{background:var(--cream-soft);}
-  .cal-day.in-range .d-num{border-radius:50%;}
-  .cal-summary-bar{position:sticky;bottom:0;background:#fff;border-top:1px solid var(--line);margin:20px -22px -22px;padding:18px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;border-radius:0 0 var(--radius) var(--radius);}
+  .cal-day.in-range .d-num{background:var(--cream-soft);border-radius:50%;}
+  .cal-summary-bar{background:#fff;border-top:1px solid var(--line);margin:26px -22px -22px;padding:18px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;border-radius:0 0 var(--radius) var(--radius);flex-wrap:wrap;}
   .cal-summary-text{font-size:13px;color:var(--ink-soft);line-height:1.5;}
   .cal-summary-text strong{color:var(--ink);font-family:'Fraunces',serif;font-size:16px;font-weight:600;}
-  .cal-summary-text .cal-total-line{display:none;}
   .cal-pay-btn{background:var(--forest);color:#fff;border:none;padding:15px 28px;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;white-space:nowrap;transition:background .2s;flex-shrink:0;}
   .cal-pay-btn:hover:not(:disabled){background:var(--forest-dark);}
   .cal-pay-btn:disabled{background:#d8d2c0;cursor:not-allowed;}
   .cal-loading{font-size:13px;color:var(--ink-soft);padding:30px 0;text-align:center;}
+  @media(max-width:640px){ .cal-months{flex-direction:column;gap:20px;} .cal-month{width:100%;} .cal-grid{grid-template-columns:repeat(7,1fr);} .cal-day{width:auto;height:auto;aspect-ratio:1;} .cal-day .d-num{width:34px;height:34px;} .cal-day .d-price{position:static;transform:none;margin-top:1px;} }
   .cal-guests{display:flex;align-items:center;justify-content:space-between;background:var(--cream-soft);border-radius:10px;padding:10px 14px;margin-bottom:14px;font-size:13.5px;}
   .cal-guests .g-btn{width:26px;height:26px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--forest);font-weight:700;cursor:pointer;}
   .cal-guests .g-btn:hover{background:var(--gold);color:#fff;}
@@ -314,7 +316,6 @@
   viewYear = today.getFullYear();
   viewMonth = today.getMonth();
 
-  // Se si arriva da una ricerca in home, pre-seleziona date e ospiti
   const urlParams = new URLSearchParams(window.location.search);
   const urlCheckin = urlParams.get('checkin');
   const urlCheckout = urlParams.get('checkout');
@@ -371,20 +372,17 @@
     return null;
   }
 
-  function renderCalendar() {
-    const container = document.getElementById("cal-container");
-    const first = new Date(viewYear, viewMonth, 1);
+  function renderMonthGrid(y, m, edgeCheckoutDay) {
+    const first = new Date(y, m, 1);
     const startWeekday = (first.getDay() + 6) % 7;
-    const daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
-
-    const edgeCheckoutDay = checkin && !checkout ? firstBlockedAfter(checkin) : null;
+    const daysInMonth = new Date(y, m + 1, 0).getDate();
 
     let cellsHtml = "";
     for (let i = 0; i < startWeekday; i++) {
       cellsHtml += '<div class="cal-day empty"></div>';
     }
     for (let d = 1; d <= daysInMonth; d++) {
-      const dateObj = new Date(viewYear, viewMonth, d);
+      const dateObj = new Date(y, m, d);
       const dateStr = fmt(dateObj);
       const isPast = dateObj < new Date(today.getFullYear(), today.getMonth(), today.getDate());
       const nightOccupied = isBlocked(dateStr);
@@ -404,6 +402,24 @@
       </div>`;
     }
 
+    return `
+      <div class="cal-month">
+        <div class="cal-month-title">${MONTHS_IT[m]} ${y}</div>
+        <div class="cal-grid">
+          ${DOW_IT.map((d) => `<div class="cal-dow">${d}</div>`).join("")}
+          ${cellsHtml}
+        </div>
+      </div>
+    `;
+  }
+
+  function renderCalendar() {
+    const container = document.getElementById("cal-container");
+    const edgeCheckoutDay = checkin && !checkout ? firstBlockedAfter(checkin) : null;
+
+    let m2y = viewYear, m2m = viewMonth + 1;
+    if (m2m > 11) { m2m = 0; m2y++; }
+
     container.innerHTML = `
       <div class="cal-guests">
         <span>Ospiti</span>
@@ -415,12 +431,12 @@
       </div>
       <div class="cal-nav">
         <button onclick="calNav(-1)">‹</button>
-        <span>${MONTHS_IT[viewMonth]} ${viewYear}</span>
+        <div style="flex:1;"></div>
         <button onclick="calNav(1)">›</button>
       </div>
-      <div class="cal-grid">
-        ${DOW_IT.map((d) => `<div class="cal-dow">${d}</div>`).join("")}
-        ${cellsHtml}
+      <div class="cal-months">
+        ${renderMonthGrid(viewYear, viewMonth, edgeCheckoutDay)}
+        ${renderMonthGrid(m2y, m2m, edgeCheckoutDay)}
       </div>
       <div class="cal-summary-bar">
         <div class="cal-summary-text">${summaryText()}</div>

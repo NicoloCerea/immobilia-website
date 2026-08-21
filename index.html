@@ -254,12 +254,12 @@
         </label>
         <div class="search-field">
           <span>Check-in</span>
-          <div class="search-date-btn placeholder" id="search-checkin-btn" onclick="toggleCal('checkin')">Aggiungi data</div>
+          <div class="search-date-btn placeholder" id="search-checkin-btn" onclick="event.stopPropagation(); toggleCal('checkin')">Aggiungi data</div>
           <div class="search-cal-popover" id="search-checkin-cal"></div>
         </div>
         <div class="search-field">
           <span>Check-out</span>
-          <div class="search-date-btn placeholder" id="search-checkout-btn" onclick="toggleCal('checkout')">Aggiungi data</div>
+          <div class="search-date-btn placeholder" id="search-checkout-btn" onclick="event.stopPropagation(); toggleCal('checkout')">Aggiungi data</div>
           <div class="search-cal-popover" id="search-checkout-cal"></div>
         </div>
         <label class="search-field">
@@ -627,14 +627,14 @@
       if (isPast) cls += " past";
       if (dateStr === searchCheckin || dateStr === searchCheckout) cls += " sel";
       else if (searchCheckin && searchCheckout && dateStr > searchCheckin && dateStr < searchCheckout) cls += " range";
-      cells += `<div class="${cls}" onclick="pickSearchDate('${which}','${dateStr}')">${d}</div>`;
+      cells += `<div class="${cls}" onclick="event.stopPropagation(); pickSearchDate('${which}','${dateStr}')">${d}</div>`;
     }
 
     pop.innerHTML = `
       <div class="search-cal-nav">
-        <button onclick="navSearchCal('${which}',-1)">‹</button>
+        <button onclick="event.stopPropagation(); navSearchCal('${which}',-1)">‹</button>
         <span>${MONTHS_IT[view.m]} ${view.y}</span>
-        <button onclick="navSearchCal('${which}',1)">›</button>
+        <button onclick="event.stopPropagation(); navSearchCal('${which}',1)">›</button>
       </div>
       <div class="search-cal-grid">
         ${DOW_IT.map((d) => `<div class="search-cal-dow">${d}</div>`).join("")}

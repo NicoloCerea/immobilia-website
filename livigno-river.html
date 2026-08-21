@@ -300,6 +300,7 @@
   let rules = { cleaningFeeBase: 0, cleaningFeePerGuest: 0, baseOccupancy: 2, extraGuestFeePerNight: 0 };
   let viewYear, viewMonth;
   let checkin = null, checkout = null;
+  let minStayWarning = null;
   let guests = 2;
 
   const today = new Date();
@@ -415,6 +416,7 @@
   }
 
   function summaryText() {
+    if (minStayWarning) return `<span style="color:#b23b3b;">${minStayWarning}</span>`;
     if (!checkin && !checkout) return "Seleziona la data di arrivo nel calendario.";
     if (checkin && !checkout) return `Arrivo: <strong>${checkin.split("-").reverse().join("/")}</strong> — ora seleziona la partenza.`;
     const b = priceBreakdown(checkin, checkout);
@@ -446,6 +448,7 @@
   };
 
   window.calSelect = function (dateStr) {
+    minStayWarning = null;
     if (!checkin || (checkin && checkout)) {
       checkin = dateStr;
       checkout = null;
@@ -460,8 +463,13 @@
         if (isBlocked(fmt(cur))) hasBlocked = true;
         cur.setDate(cur.getDate() + 1);
       }
+      const nights = nightsBetween(checkin, dateStr);
+      const minStay = (priceMap[checkin] && priceMap[checkin].min_stay) || 1;
       if (hasBlocked) {
         checkin = dateStr;
+        checkout = null;
+      } else if (nights < minStay) {
+        minStayWarning = `Per questa data serve un soggiorno minimo di ${minStay} nott${minStay === 1 ? "e" : "i"}. Scegli una partenza più lontana.`;
         checkout = null;
       } else {
         checkout = dateStr;

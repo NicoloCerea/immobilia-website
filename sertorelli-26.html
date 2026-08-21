@@ -405,6 +405,9 @@
       </div>
       <div class="cal-summary" id="cal-summary">${summaryText()}</div>
       <div class="cal-actions">
+        <button class="quote-btn" id="cal-pay-btn" onclick="calPayNow()" ${checkin && checkout ? "" : "disabled"} style="background:var(--gold);${checkin && checkout ? "" : "opacity:.5;cursor:not-allowed;"}">
+          Paga ora →
+        </button>
         <button class="quote-btn" onclick="calSendWhatsapp()" ${checkin && checkout ? "" : "disabled"} style="${checkin && checkout ? "" : "opacity:.5;cursor:not-allowed;"}">
           WhatsApp →
         </button>
@@ -493,6 +496,40 @@
       }
     }
     renderCalendar();
+  };
+
+  window.calPayNow = async function () {
+    if (!checkin || !checkout) return;
+    const btn = document.getElementById("cal-pay-btn");
+    const b = priceBreakdown(checkin, checkout);
+    btn.disabled = true;
+    btn.textContent = "Attendere...";
+    try {
+      const response = await fetch("/api/stripe-checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          property: PROPERTY_SLUG,
+          propertyName: PROPERTY_NAME,
+          checkin,
+          checkout,
+          guests,
+          totalAmount: b.total,
+        }),
+      });
+      const data = await response.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        alert("Impossibile avviare il pagamento: " + (data.error || "errore sconosciuto"));
+        btn.disabled = false;
+        btn.textContent = "Paga ora →";
+      }
+    } catch (err) {
+      alert("Errore di connessione, riprova.");
+      btn.disabled = false;
+      btn.textContent = "Paga ora →";
+    }
   };
 
   window.calSendWhatsapp = function () {

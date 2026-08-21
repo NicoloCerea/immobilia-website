@@ -68,25 +68,36 @@
   .sidebar{position:sticky;top:90px;align-self:start;}
   .booking-full{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px;margin:0 0 40px;box-shadow:0 12px 30px rgba(15,33,25,.08);}
   .booking-full .stay-meta{font-size:13px;color:var(--ink-soft);margin-bottom:16px;}
-  .cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
-  .cal-nav button{background:var(--cream-soft);border:1px solid var(--line);width:32px;height:32px;border-radius:50%;font-size:16px;color:var(--forest);cursor:pointer;}
-  .cal-nav button:hover{background:var(--gold);color:#fff;}
-  .cal-nav span{font-family:'Fraunces',serif;font-size:16px;font-weight:600;text-transform:capitalize;}
-  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;}
-  .cal-dow{font-size:11px;color:var(--ink-soft);text-align:center;font-weight:700;padding-bottom:6px;}
-  .cal-day{position:relative;aspect-ratio:1;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:12px;cursor:pointer;background:var(--cream-soft);border:1px solid transparent;transition:all .15s;}
-  .cal-day .d-num{font-weight:600;font-size:13px;}
-  .cal-day .d-price{font-size:9.5px;color:var(--forest);font-weight:600;}
-  .cal-day:hover:not(.disabled):not(.empty){border-color:var(--gold);}
-  .cal-day.disabled{background:transparent;color:#c9c4b3;cursor:not-allowed;text-decoration:line-through;}
+  .cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
+  .cal-nav button{background:transparent;border:1px solid var(--line);width:36px;height:36px;border-radius:50%;font-size:16px;color:var(--ink);cursor:pointer;transition:border-color .2s;}
+  .cal-nav button:hover{border-color:var(--ink);}
+  .cal-nav span{font-family:'Fraunces',serif;font-size:17px;font-weight:600;text-transform:capitalize;letter-spacing:.2px;}
+  .cal-guests{display:flex;align-items:center;justify-content:space-between;padding:14px 0;margin-bottom:18px;border-bottom:1px solid var(--line);font-size:14px;font-weight:600;}
+  .cal-guests .g-btn{width:28px;height:28px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--ink);font-weight:700;cursor:pointer;transition:border-color .2s;}
+  .cal-guests .g-btn:hover{border-color:var(--ink);}
+  .cal-guests .g-count{font-weight:700;min-width:22px;text-align:center;}
+  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;}
+  .cal-dow{font-size:11px;color:var(--ink-soft);text-align:center;font-weight:600;padding-bottom:10px;text-transform:uppercase;letter-spacing:.5px;}
+  .cal-day{position:relative;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:13px;cursor:pointer;background:transparent;border:none;transition:all .12s;}
+  .cal-day .d-num{width:38px;height:38px;display:flex;align-items:center;justify-content:center;border-radius:50%;font-weight:500;font-size:13.5px;transition:all .12s;}
+  .cal-day .d-price{font-size:9px;color:var(--ink-soft);margin-top:2px;font-weight:600;}
+  .cal-day:hover:not(.disabled):not(.empty) .d-num{border:1px solid var(--ink);}
+  .cal-day.disabled{color:#ccc7b8;cursor:not-allowed;}
+  .cal-day.disabled .d-num{text-decoration:line-through;color:#ccc7b8;}
+  .cal-day.disabled .d-price{visibility:hidden;}
   .cal-day.empty{visibility:hidden;cursor:default;}
-  .cal-day.selected{background:var(--forest);color:#fff;}
-  .cal-day.selected .d-price{color:rgba(246,242,233,.8);}
-  .cal-day.in-range{background:rgba(185,151,78,.22);}
-  .cal-summary{margin-top:16px;padding:14px;background:var(--cream-soft);border-radius:10px;font-size:13.5px;color:var(--ink-soft);}
-  .cal-summary strong{color:var(--forest);}
-  .cal-actions{margin-top:14px;display:flex;gap:10px;}
-  .cal-loading{font-size:13px;color:var(--ink-soft);padding:20px;text-align:center;}
+  .cal-day.selected .d-num{background:var(--forest);color:#fff;}
+  .cal-day.selected .d-price{color:var(--forest);font-weight:700;}
+  .cal-day.in-range{background:var(--cream-soft);}
+  .cal-day.in-range .d-num{border-radius:50%;}
+  .cal-summary-bar{position:sticky;bottom:0;background:#fff;border-top:1px solid var(--line);margin:20px -22px -22px;padding:18px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;border-radius:0 0 var(--radius) var(--radius);}
+  .cal-summary-text{font-size:13px;color:var(--ink-soft);line-height:1.5;}
+  .cal-summary-text strong{color:var(--ink);font-family:'Fraunces',serif;font-size:16px;font-weight:600;}
+  .cal-summary-text .cal-total-line{display:none;}
+  .cal-pay-btn{background:var(--forest);color:#fff;border:none;padding:15px 28px;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;white-space:nowrap;transition:background .2s;flex-shrink:0;}
+  .cal-pay-btn:hover:not(:disabled){background:var(--forest-dark);}
+  .cal-pay-btn:disabled{background:#d8d2c0;cursor:not-allowed;}
+  .cal-loading{font-size:13px;color:var(--ink-soft);padding:30px 0;text-align:center;}
   .cal-guests{display:flex;align-items:center;justify-content:space-between;background:var(--cream-soft);border-radius:10px;padding:10px 14px;margin-bottom:14px;font-size:13.5px;}
   .cal-guests .g-btn{width:26px;height:26px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--forest);font-weight:700;cursor:pointer;}
   .cal-guests .g-btn:hover{background:var(--gold);color:#fff;}
@@ -292,8 +303,6 @@
   const PROPERTY_SLUG = "monte-reit-7";
   const PROPERTY_NAME = "Monte Reit 7";
   const MAX_GUESTS = 5;
-  const WHATSAPP_PHONE = "393333269224";
-  const EMAIL_TO = "immobiliaita@gmail.com";
   const MONTHS_IT = ["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"];
   const DOW_IT = ["Lu","Ma","Me","Gi","Ve","Sa","Do"];
 
@@ -302,8 +311,8 @@
   let rules = { cleaningFeeBase: 0, cleaningFeePerGuest: 0, baseOccupancy: 2, extraGuestFeePerNight: 0 };
   let viewYear, viewMonth;
   let checkin = null, checkout = null;
-  let minStayWarning = null;
   let guests = 2;
+  let minStayWarning = null;
 
   const today = new Date();
   viewYear = today.getFullYear();
@@ -333,7 +342,7 @@
       renderCalendar();
     } catch (err) {
       document.getElementById("cal-container").innerHTML =
-        '<div class="cal-loading">Impossibile caricare il calendario in questo momento. Scrivici direttamente su WhatsApp o email per verificare la disponibilità.</div>';
+        '<div class="cal-loading">Impossibile caricare il calendario in questo momento. Scrivici direttamente per verificare la disponibilità.</div>';
     }
   }
 
@@ -342,7 +351,6 @@
   }
 
   function firstBlockedAfter(startDateStr) {
-    // Trova la prima notte occupata dopo checkin (cercando fino a 400 giorni avanti).
     let cur = new Date(startDateStr);
     cur.setDate(cur.getDate() + 1);
     for (let i = 0; i < 400; i++) {
@@ -370,9 +378,6 @@
       const dateStr = fmt(dateObj);
       const isPast = dateObj < new Date(today.getFullYear(), today.getMonth(), today.getDate());
       const nightOccupied = isBlocked(dateStr);
-      // Se stiamo scegliendo la partenza, il giorno resta selezionabile come checkout SOLO
-      // se è il primo giorno occupato subito dopo l'ultimo tratto libero (chi parte quel
-      // giorno non dorme lì). Le date occupate oltre quel punto restano chiuse.
       const isEdgeCheckoutDay = edgeCheckoutDay && dateStr === edgeCheckoutDay;
       const blocked = isPast || (nightOccupied && !isEdgeCheckoutDay);
       const priceInfo = priceMap[dateStr];
@@ -392,7 +397,7 @@
     container.innerHTML = `
       <div class="cal-guests">
         <span>Ospiti</span>
-        <div style="display:flex;align-items:center;gap:12px;">
+        <div style="display:flex;align-items:center;gap:14px;">
           <button class="g-btn" onclick="calGuests(-1)">−</button>
           <span class="g-count">${guests}</span>
           <button class="g-btn" onclick="calGuests(1)">+</button>
@@ -407,13 +412,10 @@
         ${DOW_IT.map((d) => `<div class="cal-dow">${d}</div>`).join("")}
         ${cellsHtml}
       </div>
-      <div class="cal-summary" id="cal-summary">${summaryText()}</div>
-      <div class="cal-actions">
-        <button class="quote-btn" onclick="calSendWhatsapp()" ${checkin && checkout ? "" : "disabled"} style="${checkin && checkout ? "" : "opacity:.5;cursor:not-allowed;"}">
-          WhatsApp →
-        </button>
-        <button class="quote-btn email-btn" onclick="calSendEmail()" ${checkin && checkout ? "" : "disabled"} style="${checkin && checkout ? "" : "opacity:.5;cursor:not-allowed;"}">
-          Email →
+      <div class="cal-summary-bar">
+        <div class="cal-summary-text">${summaryText()}</div>
+        <button class="cal-pay-btn" id="cal-pay-btn" onclick="calPayNow()" ${checkin && checkout ? "" : "disabled"}>
+          Prenota e paga →
         </button>
       </div>
     `;
@@ -438,17 +440,10 @@
 
   function summaryText() {
     if (minStayWarning) return `<span style="color:#b23b3b;">${minStayWarning}</span>`;
-    if (!checkin && !checkout) return "Seleziona la data di arrivo nel calendario.";
-    if (checkin && !checkout) return `Arrivo: <strong>${checkin.split("-").reverse().join("/")}</strong> — ora seleziona la partenza.`;
+    if (!checkin && !checkout) return "Seleziona le date per vedere il prezzo totale.";
+    if (checkin && !checkout) return `Arrivo: <strong>${checkin.split("-").reverse().join("/")}</strong> — scegli la partenza`;
     const b = priceBreakdown(checkin, checkout);
-    let html = `<strong>${checkin.split("-").reverse().join("/")} → ${checkout.split("-").reverse().join("/")}</strong> · ${b.nights} nott${b.nights === 1 ? "e" : "i"} · ${guests} ospiti`;
-    html += `<div class="cal-breakdown">`;
-    html += `<div><span>Soggiorno</span><span>€${b.nightly}</span></div>`;
-    if (b.extraGuestTotal > 0) html += `<div><span>Supplemento ospiti extra</span><span>€${b.extraGuestTotal}</span></div>`;
-    html += `<div><span>Pulizia finale</span><span>€${b.cleaning}</span></div>`;
-    html += `<div class="total-row"><span>Totale stimato</span><span>€${b.total}</span></div>`;
-    html += `</div>`;
-    return html;
+    return `<strong>€${b.total}</strong> totale · ${b.nights} nott${b.nights === 1 ? "e" : "i"}, ${guests} ospiti<br><span style="font-size:11.5px;">(soggiorno €${b.nightly}${b.extraGuestTotal > 0 ? ` + supplemento €${b.extraGuestTotal}` : ""} + pulizia €${b.cleaning})</span>`;
   }
 
   function nightsBetween(a, b) {
@@ -490,7 +485,7 @@
         checkin = dateStr;
         checkout = null;
       } else if (nights < minStay) {
-        minStayWarning = `Per questa data serve un soggiorno minimo di ${minStay} nott${minStay === 1 ? "e" : "i"}. Scegli una partenza più lontana.`;
+        minStayWarning = `Per questa data serve un soggiorno minimo di ${minStay} nott${minStay === 1 ? "e" : "i"}.`;
         checkout = null;
       } else {
         checkout = dateStr;
@@ -499,19 +494,38 @@
     renderCalendar();
   };
 
-  window.calSendWhatsapp = function () {
+  window.calPayNow = async function () {
     if (!checkin || !checkout) return;
+    const btn = document.getElementById("cal-pay-btn");
     const b = priceBreakdown(checkin, checkout);
-    const msg = `Ciao! Vorrei prenotare ${PROPERTY_NAME} dal ${checkin.split("-").reverse().join("/")} al ${checkout.split("-").reverse().join("/")} (${b.nights} notti, ${guests} ospiti). Prezzo indicato sul sito: €${b.total} (soggiorno €${b.nightly} + pulizia €${b.cleaning}${b.extraGuestTotal > 0 ? ` + supplemento ospiti €${b.extraGuestTotal}` : ""}).`;
-    window.open(`https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(msg)}`, "_blank");
-  };
-
-  window.calSendEmail = function () {
-    if (!checkin || !checkout) return;
-    const b = priceBreakdown(checkin, checkout);
-    const subject = `Richiesta prenotazione — ${PROPERTY_NAME}`;
-    const body = `Ciao,%0D%0A%0D%0AVorrei prenotare ${PROPERTY_NAME} dal ${checkin.split("-").reverse().join("/")} al ${checkout.split("-").reverse().join("/")} (${b.nights} notti, ${guests} ospiti).%0D%0APrezzo indicato sul sito: €${b.total} (soggiorno €${b.nightly} + pulizia €${b.cleaning}${b.extraGuestTotal > 0 ? ` + supplemento ospiti €${b.extraGuestTotal}` : ""}).%0D%0A%0D%0AGrazie!`;
-    window.location.href = `mailto:${EMAIL_TO}?subject=${encodeURIComponent(subject)}&body=${body}`;
+    btn.disabled = true;
+    btn.textContent = "Attendere...";
+    try {
+      const response = await fetch("/api/stripe-checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          property: PROPERTY_SLUG,
+          propertyName: PROPERTY_NAME,
+          checkin,
+          checkout,
+          guests,
+          totalAmount: b.total,
+        }),
+      });
+      const data = await response.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        alert("Impossibile avviare il pagamento: " + (data.error || "errore sconosciuto"));
+        btn.disabled = false;
+        btn.textContent = "Prenota e paga →";
+      }
+    } catch (err) {
+      alert("Errore di connessione, riprova.");
+      btn.disabled = false;
+      btn.textContent = "Prenota e paga →";
+    }
   };
 
   loadData();

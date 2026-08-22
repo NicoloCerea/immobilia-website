@@ -221,7 +221,7 @@
       <h2 data-i18n="sec_location">Posizione</h2>
       <p>Il residence è a due minuti d'auto dal centro di Bormio, con collegamento navetta rapido verso gli impianti di risalita. Perfetto punto di partenza sia per le terme e il centro storico d'inverno, sia per i sentieri e i percorsi in mountain bike d'estate.</p>
       <div class="map-embed" id="map-fumarogo"></div>
-      <div class="map-note"><span class="dot-pin">📍</span><span>Zona: Bormio — la posizione esatta viene condivisa dopo la conferma della prenotazione.</span></div>
+      <div class="map-note"><span class="dot-pin">📍</span><span>Zona: Via Fumarogo, Bormio — la posizione esatta viene condivisa dopo la conferma della prenotazione.</span></div>
     </div>
 
     <div class="section">
@@ -250,7 +250,7 @@
   </div>
 </div>
 
-<footer>© 2026 Immobilia — Milano · Bormio · Livigno</footer>
+<footer>© 2026 Immobilia — Milano · Bormio · Livigno <span style="opacity:.5;">·</span> <a href="privacy.html" style="color:inherit;">Privacy</a> · <a href="cookie.html" style="color:inherit;">Cookie</a> · <a href="termini.html" style="color:inherit;">Termini e Condizioni</a></footer>
 
 
 <div class="lightbox" id="lightbox">
@@ -288,12 +288,12 @@
 <script src="js/translations.js"></script>
 
 <script>
-  var map_fumarogo = L.map('map-fumarogo', {scrollWheelZoom:false}).setView([46.4661, 10.3706], 16);
+  var map_fumarogo = L.map('map-fumarogo', {scrollWheelZoom:false}).setView([46.4505475, 10.3570392], 16);
   L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
     attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
     maxZoom: 19
   }).addTo(map_fumarogo);
-  L.circle([46.4661, 10.3706], {
+  L.circle([46.4505475, 10.3570392], {
     radius: 180,
     color: '#173226',
     weight: 1,
@@ -305,7 +305,7 @@
     html: '<div class="leaflet-pin-home"><svg viewBox="0 0 24 24" width="18" height="18" fill="#F6F2E9"><path d="M12 3l9 8h-3v9h-5v-6h-2v6H6v-9H3z"/></svg></div>',
     iconSize: [40,40], iconAnchor: [20,20]
   });
-  L.marker([46.4661, 10.3706], {icon: icon_fumarogo}).addTo(map_fumarogo);
+  L.marker([46.4505475, 10.3570392], {icon: icon_fumarogo}).addTo(map_fumarogo);
 </script>
 <script>
 (function () {

@@ -158,6 +158,44 @@
   .leaflet-control-attribution{font-size:10px !important;background:rgba(246,242,233,.85) !important;}
   .map-note{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ink-soft);margin-top:10px;}
   .map-note .dot-pin{color:var(--gold);font-size:14px;}
+
+  /* === Ottimizzazioni telefono === */
+  @media(max-width:480px){
+    .wrap{padding:0 18px;}
+    nav{padding:14px 18px;gap:10px;flex-wrap:wrap;}
+    .logo-img{height:30px;}
+    .nav-right{gap:10px;}
+    .back-link{font-size:12px;}
+    .lang-select{padding:7px 24px 7px 10px;font-size:12px;}
+    h1{font-size:26px;}
+    .title-block{padding:24px 0 16px;}
+    .stats{font-size:12px;gap:10px;flex-wrap:wrap;}
+    .section h2{font-size:17px;}
+    .amenities{grid-template-columns:1fr;}
+    .booking-full{padding:16px;}
+    .cal-summary-bar{flex-direction:column;align-items:stretch;gap:12px;margin-left:-16px;margin-right:-16px;padding-left:16px;padding-right:16px;}
+    .cal-pay-btn{width:100%;padding:14px;font-size:14px;}
+    .cal-extras{gap:10px;}
+    .cal-paymode{font-size:12.5px;}
+    .cal-cancel-policy{font-size:11px;}
+    .quote-fields{grid-template-columns:1fr 1fr;}
+    .search-form{grid-template-columns:1fr;}
+    .search-btn{grid-column:1;}
+    .hero-copy h1{font-size:28px;}
+    .hero-copy p{font-size:14px;}
+    .service-grid{grid-template-columns:1fr;}
+    .owners-stats{grid-template-columns:1fr;}
+    .owners-process{grid-template-columns:1fr;}
+    .compare-row{grid-template-columns:1fr;}
+    .search-results-grid{grid-template-columns:1fr;}
+    .trust-badges{gap:16px;font-size:11px;}
+    .map-embed iframe,.map-embed{height:220px;}
+    .content{padding:20px 0;}
+    .cal-guests .g-btn{width:36px;height:36px;font-size:16px;}
+    .cal-pet-toggle input,.cal-paymode input{width:20px;height:20px;}
+    .cal-day .d-num{width:36px;height:36px;font-size:13px;}
+    .cal-nav button{width:38px;height:38px;}
+  }
 </style>
 </head>
 <body>

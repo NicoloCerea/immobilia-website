@@ -16,6 +16,7 @@ export const PROPERTIES = {
     cleaningFeePerGuest: 7,
     baseOccupancy: 2,
     extraGuestFeePerNight: 10,
+    petFee: 30, // supplemento fisso se si porta un animale
     stripeAccountId: null,
     commissionPercent: 15,
     platformOwned: true, // proprietà di Immobilia stessa: nessuno smistamento, resta sull'account principale
@@ -29,6 +30,7 @@ export const PROPERTIES = {
     cleaningFeePerGuest: 7,
     baseOccupancy: 2,
     extraGuestFeePerNight: 10,
+    petFee: 30, // supplemento fisso se si porta un animale
     stripeAccountId: null, // si popola dopo l'onboarding del proprietario (vedi /api/stripe-onboard)
     commissionPercent: 15, // % trattenuta da Immobilia come commissione di gestione
     platformOwned: true, // TEMPORANEO: il proprietario non ha ancora completato Stripe, i pagamenti restano sull'account principale per ora
@@ -42,6 +44,7 @@ export const PROPERTIES = {
     cleaningFeePerGuest: 7,
     baseOccupancy: 2,
     extraGuestFeePerNight: 10,
+    petFee: 30, // supplemento fisso se si porta un animale
     stripeAccountId: null, // si popola dopo l'onboarding del proprietario (vedi /api/stripe-onboard)
     commissionPercent: 15, // % trattenuta da Immobilia come commissione di gestione
     platformOwned: true, // TEMPORANEO: il proprietario non ha ancora completato Stripe, i pagamenti restano sull'account principale per ora
@@ -55,6 +58,7 @@ export const PROPERTIES = {
     cleaningFeePerGuest: 0,
     baseOccupancy: 2,
     extraGuestFeePerNight: 10,
+    petFee: 30, // supplemento fisso se si porta un animale
     stripeAccountId: null, // si popola dopo l'onboarding del proprietario (vedi /api/stripe-onboard)
     commissionPercent: 15, // % trattenuta da Immobilia come commissione di gestione
     platformOwned: true, // TEMPORANEO: il proprietario non ha ancora completato Stripe, i pagamenti restano sull'account principale per ora
@@ -68,6 +72,7 @@ export const PROPERTIES = {
     cleaningFeePerGuest: 0,
     baseOccupancy: 2,
     extraGuestFeePerNight: 10,
+    petFee: 30, // supplemento fisso se si porta un animale
     stripeAccountId: null, // si popola dopo l'onboarding del proprietario (vedi /api/stripe-onboard)
     commissionPercent: 15, // % trattenuta da Immobilia come commissione di gestione
     platformOwned: true, // TEMPORANEO: il proprietario non ha ancora completato Stripe, i pagamenti restano sull'account principale per ora
@@ -81,6 +86,7 @@ export const PROPERTIES = {
     cleaningFeePerGuest: 0,
     baseOccupancy: 2,
     extraGuestFeePerNight: 10,
+    petFee: 30, // supplemento fisso se si porta un animale
     stripeAccountId: null, // si popola dopo l'onboarding del proprietario (vedi /api/stripe-onboard)
     commissionPercent: 15, // % trattenuta da Immobilia come commissione di gestione
     platformOwned: true, // TEMPORANEO: il proprietario non ha ancora completato Stripe, i pagamenti restano sull'account principale per ora

@@ -20,5 +20,6 @@ export default async function handler(req, res) {
     cleaningFeePerGuest: cfg.cleaningFeePerGuest || 0,
     baseOccupancy: cfg.baseOccupancy || 2,
     extraGuestFeePerNight: cfg.extraGuestFeePerNight || 0,
+    petFee: cfg.petFee || 0,
   });
 }

@@ -99,6 +99,13 @@
   .cal-pay-btn:hover:not(:disabled){background:var(--forest-dark);}
   .cal-pay-btn:disabled{background:#d8d2c0;cursor:not-allowed;}
   .cal-loading{font-size:13px;color:var(--ink-soft);padding:30px 0;text-align:center;}
+  .cal-extras{margin-top:20px;padding-top:16px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:12px;}
+  .cal-pet-toggle{display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;}
+  .cal-pet-toggle input{width:16px;height:16px;accent-color:var(--forest);cursor:pointer;}
+  .cal-paymode{display:flex;flex-direction:column;gap:6px;font-size:13px;}
+  .cal-paymode label{display:flex;align-items:center;gap:8px;cursor:pointer;}
+  .cal-paymode input{accent-color:var(--forest);cursor:pointer;}
+  .cal-cancel-policy{font-size:11.5px;color:var(--ink-soft);line-height:1.5;background:var(--cream-soft);padding:10px 12px;border-radius:8px;}
   @media(max-width:640px){ .cal-months{flex-direction:column;gap:20px;} .cal-month{width:100%;} .cal-grid{grid-template-columns:repeat(7,1fr);} .cal-day{width:auto;height:auto;aspect-ratio:1;} .cal-day .d-num{width:34px;height:34px;} .cal-day .d-price{position:static;transform:none;margin-top:1px;} }
   .cal-guests{display:flex;align-items:center;justify-content:space-between;background:var(--cream-soft);border-radius:10px;padding:10px 14px;margin-bottom:14px;font-size:13.5px;}
   .cal-guests .g-btn{width:26px;height:26px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--forest);font-weight:700;cursor:pointer;}
@@ -310,11 +317,13 @@
 
   let blockedSet = new Set();
   let priceMap = {};
-  let rules = { cleaningFeeBase: 0, cleaningFeePerGuest: 0, baseOccupancy: 2, extraGuestFeePerNight: 0 };
+  let rules = { cleaningFeeBase: 0, cleaningFeePerGuest: 0, baseOccupancy: 2, extraGuestFeePerNight: 0, petFee: 0 };
   let viewYear, viewMonth;
   let checkin = null, checkout = null;
   let guests = 2;
   let minStayWarning = null;
+  let hasPet = false;
+  let payMode = "full";
 
   const today = new Date();
   viewYear = today.getFullYear();
@@ -442,6 +451,17 @@
         ${renderMonthGrid(viewYear, viewMonth, edgeCheckoutDay)}
         ${renderMonthGrid(m2y, m2m, edgeCheckoutDay)}
       </div>
+      <div class="cal-extras">
+        <label class="cal-pet-toggle">
+          <input type="checkbox" ${hasPet ? "checked" : ""} onchange="calTogglePet(this.checked)">
+          <span>Porto un animale domestico (+€${rules.petFee || 30} pulizia)</span>
+        </label>
+        <div class="cal-paymode">
+          <label><input type="radio" name="paymode" ${payMode === "full" ? "checked" : ""} onchange="calSetPayMode('full')"> Paga tutto ora</label>
+          <label><input type="radio" name="paymode" ${payMode === "deposit" ? "checked" : ""} onchange="calSetPayMode('deposit')"> Paga il 25% ora (acconto)</label>
+        </div>
+        <div class="cal-cancel-policy">📋 Cancellazione gratuita fino a 30 giorni prima dell'arrivo. Rimborso parziale fino a 5 giorni prima. Nessun rimborso oltre tale termine.</div>
+      </div>
       <div class="cal-summary-bar">
         <div class="cal-summary-text">${summaryText()}</div>
         <button class="cal-pay-btn" id="cal-pay-btn" onclick="calPayNow()" ${checkin && checkout ? "" : "disabled"}>
@@ -464,8 +484,10 @@
     const extraGuests = Math.max(0, guests - (rules.baseOccupancy || 2));
     const extraGuestTotal = extraGuests * (rules.extraGuestFeePerNight || 0) * nights;
     const cleaning = (rules.cleaningFeeBase || 0) + (rules.cleaningFeePerGuest || 0) * guests;
-    const total = Math.round(nightly + extraGuestTotal + cleaning);
-    return { nights, nightly: Math.round(nightly), extraGuestTotal: Math.round(extraGuestTotal), cleaning: Math.round(cleaning), total };
+    const petCost = hasPet ? (rules.petFee || 0) : 0;
+    const total = Math.round(nightly + extraGuestTotal + cleaning + petCost);
+    const depositAmount = Math.round(total * 0.25);
+    return { nights, nightly: Math.round(nightly), extraGuestTotal: Math.round(extraGuestTotal), cleaning: Math.round(cleaning), petCost, total, depositAmount, amountToPay: payMode === "deposit" ? depositAmount : total };
   }
 
   function summaryText() {
@@ -473,7 +495,11 @@
     if (!checkin && !checkout) return "Seleziona le date per vedere il prezzo totale.";
     if (checkin && !checkout) return `Arrivo: <strong>${checkin.split("-").reverse().join("/")}</strong> — scegli la partenza`;
     const b = priceBreakdown(checkin, checkout);
-    return `<strong>€${b.total}</strong> totale · ${b.nights} nott${b.nights === 1 ? "e" : "i"}, ${guests} ospiti<br><span style="font-size:11.5px;">(soggiorno €${b.nightly}${b.extraGuestTotal > 0 ? ` + supplemento ospiti aggiuntivi €${b.extraGuestTotal}` : ""} + pulizia €${b.cleaning})</span><br><span style="font-size:11px;color:var(--ink-soft);">Tassa di soggiorno esclusa, da pagare in loco.</span>`;
+    let line = `soggiorno €${b.nightly}${b.extraGuestTotal > 0 ? ` + supplemento ospiti aggiuntivi €${b.extraGuestTotal}` : ""} + pulizia €${b.cleaning}${b.petCost > 0 ? ` (incl. animale +€${rules.petFee})` : ""}`;
+    let payLine = payMode === "deposit"
+      ? `Paghi ora l'acconto: <strong>€${b.depositAmount}</strong> (25%) — saldo di €${b.total - b.depositAmount} da versare prima dell'arrivo.`
+      : `Paghi ora: <strong>€${b.total}</strong> (intero soggiorno).`;
+    return `<strong>€${b.total}</strong> totale · ${b.nights} nott${b.nights === 1 ? "e" : "i"}, ${guests} ospiti<br><span style="font-size:11.5px;">(${line})</span><br><span style="font-size:11px;color:var(--ink-soft);">Tassa di soggiorno esclusa, da pagare in loco.</span><br><span style="font-size:12px;">${payLine}</span>`;
   }
 
   function nightsBetween(a, b) {
@@ -524,6 +550,16 @@
     renderCalendar();
   };
 
+  window.calTogglePet = function (checked) {
+    hasPet = checked;
+    renderCalendar();
+  };
+
+  window.calSetPayMode = function (mode) {
+    payMode = mode;
+    renderCalendar();
+  };
+
   window.calPayNow = async function () {
     if (!checkin || !checkout) return;
     const btn = document.getElementById("cal-pay-btn");
@@ -536,11 +572,11 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           property: PROPERTY_SLUG,
-          propertyName: PROPERTY_NAME,
+          propertyName: PROPERTY_NAME + (payMode === "deposit" ? " (acconto 25%)" : ""),
           checkin,
           checkout,
           guests,
-          totalAmount: b.total,
+          totalAmount: b.amountToPay,
         }),
       });
       const data = await response.json();

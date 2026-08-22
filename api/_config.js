@@ -31,6 +31,7 @@ export const PROPERTIES = {
     extraGuestFeePerNight: 10,
     stripeAccountId: null, // si popola dopo l'onboarding del proprietario (vedi /api/stripe-onboard)
     commissionPercent: 15, // % trattenuta da Immobilia come commissione di gestione
+    platformOwned: true, // TEMPORANEO: il proprietario non ha ancora completato Stripe, i pagamenti restano sull'account principale per ora
   },
   "monte-reit-7": {
     icalUrl:
@@ -43,6 +44,7 @@ export const PROPERTIES = {
     extraGuestFeePerNight: 10,
     stripeAccountId: null, // si popola dopo l'onboarding del proprietario (vedi /api/stripe-onboard)
     commissionPercent: 15, // % trattenuta da Immobilia come commissione di gestione
+    platformOwned: true, // TEMPORANEO: il proprietario non ha ancora completato Stripe, i pagamenti restano sull'account principale per ora
   },
   "livigno-cantoni": {
     icalUrl:
@@ -55,6 +57,7 @@ export const PROPERTIES = {
     extraGuestFeePerNight: 10,
     stripeAccountId: null, // si popola dopo l'onboarding del proprietario (vedi /api/stripe-onboard)
     commissionPercent: 15, // % trattenuta da Immobilia come commissione di gestione
+    platformOwned: true, // TEMPORANEO: il proprietario non ha ancora completato Stripe, i pagamenti restano sull'account principale per ora
   },
   "livigno-river": {
     icalUrl:
@@ -67,6 +70,7 @@ export const PROPERTIES = {
     extraGuestFeePerNight: 10,
     stripeAccountId: null, // si popola dopo l'onboarding del proprietario (vedi /api/stripe-onboard)
     commissionPercent: 15, // % trattenuta da Immobilia come commissione di gestione
+    platformOwned: true, // TEMPORANEO: il proprietario non ha ancora completato Stripe, i pagamenti restano sull'account principale per ora
   },
   "livigno-toila": {
     icalUrl:
@@ -79,5 +83,6 @@ export const PROPERTIES = {
     extraGuestFeePerNight: 10,
     stripeAccountId: null, // si popola dopo l'onboarding del proprietario (vedi /api/stripe-onboard)
     commissionPercent: 15, // % trattenuta da Immobilia come commissione di gestione
+    platformOwned: true, // TEMPORANEO: il proprietario non ha ancora completato Stripe, i pagamenti restano sull'account principale per ora
   },
 };

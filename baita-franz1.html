@@ -89,9 +89,9 @@
 
   .lightbox{position:fixed;inset:0;background:rgba(10,20,16,.94);z-index:300;display:none;align-items:center;justify-content:center;}
   .lightbox.active{display:flex;}
-  .lightbox img{max-width:88vw;max-height:82vh;object-fit:contain;border-radius:6px;}
-  .lightbox-close{position:absolute;top:22px;right:28px;color:#fff;font-size:30px;cursor:pointer;line-height:1;background:rgba(255,255,255,.12);width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
-  .lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);color:#fff;font-size:22px;cursor:pointer;padding:14px 18px;user-select:none;background:rgba(255,255,255,.12);border-radius:50%;}
+  .lightbox img{max-width:88vw;max-height:82vh;object-fit:contain;border-radius:6px;position:relative;z-index:1;}
+  .lightbox-close{position:absolute;top:22px;right:28px;color:#fff;font-size:30px;cursor:pointer;line-height:1;background:rgba(255,255,255,.12);width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:5;}
+  .lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);color:#fff;font-size:22px;cursor:pointer;padding:14px 18px;user-select:none;background:rgba(255,255,255,.12);border-radius:50%;z-index:5;}
   .lightbox-prev{left:20px;}
   .lightbox-next{right:20px;}
   .lightbox-counter{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);color:#fff;font-size:13px;background:rgba(255,255,255,.12);padding:6px 14px;border-radius:999px;}

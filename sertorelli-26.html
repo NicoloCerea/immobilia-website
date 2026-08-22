@@ -571,11 +571,14 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           property: PROPERTY_SLUG,
-          propertyName: PROPERTY_NAME + (payMode === "deposit" ? " (acconto 25%)" : ""),
+          propertyName: PROPERTY_NAME,
           checkin,
           checkout,
           guests,
           totalAmount: b.amountToPay,
+          payMode,
+          fullTotal: b.total,
+          hasPet,
         }),
       });
       const data = await response.json();

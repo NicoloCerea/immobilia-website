@@ -21,7 +21,7 @@ export default async function handler(req, res) {
     return;
   }
 
-  const { property, checkin, checkout, guests, totalAmount, propertyName } = req.body || {};
+  const { property, checkin, checkout, guests, totalAmount, propertyName, payMode, fullTotal, hasPet } = req.body || {};
   const cfg = PROPERTIES[property];
 
   if (!cfg) {
@@ -62,7 +62,18 @@ export default async function handler(req, res) {
           quantity: 1,
         },
       ],
-      success_url: `${origin}/${property}.html?booking=success`,
+      metadata: {
+        property: property || "",
+        propertyName: propertyName || property || "",
+        checkin: checkin || "",
+        checkout: checkout || "",
+        guests: String(guests || ""),
+        payMode: payMode || "full",
+        fullTotal: String(fullTotal || totalAmount),
+        amountPaid: String(totalAmount),
+        hasPet: hasPet ? "true" : "false",
+      },
+      success_url: `${origin}/conferma.html?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/${property}.html?booking=cancelled`,
     };
 

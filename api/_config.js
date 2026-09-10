@@ -17,9 +17,10 @@ export const PROPERTIES = {
     listingId: "145903___14556",
     pms: "ciaobooking",
     cleaningFeeBase: 50,
-    cleaningFeePerGuest: 7,
-    baseOccupancy: 2,
-    extraGuestFeePerNight: 10,
+    cleaningFeePerGuest: 7, // usato solo se manca cleaningFeeByGuests (fallback)
+    cleaningFeeByGuests: { 1: 14, 2: 14, 3: 28, 4: 28, 5: 42 }, // sovrapprezzo pulizia per numero di ospiti (oltre passa il 5)
+    baseOccupancy: 4,
+    extraGuestFeePerNight: 15,
     petFee: 30, // supplemento fisso se si porta un animale
     stripeAccountId: null,
     commissionPercent: 15,
@@ -31,9 +32,10 @@ export const PROPERTIES = {
     listingId: "147076___17281",
     pms: "ciaobooking",
     cleaningFeeBase: 50,
-    cleaningFeePerGuest: 7,
-    baseOccupancy: 2,
-    extraGuestFeePerNight: 10,
+    cleaningFeePerGuest: 7, // usato solo se manca cleaningFeeByGuests (fallback)
+    cleaningFeeByGuests: { 1: 14, 2: 14, 3: 21, 4: 28, 5: 35, 6: 42, 7: 49 }, // sovrapprezzo pulizia per numero di ospiti
+    baseOccupancy: 4,
+    extraGuestFeePerNight: 15,
     petFee: 30, // supplemento fisso se si porta un animale
     stripeAccountId: null, // si popola dopo l'onboarding del proprietario (vedi /api/stripe-onboard)
     commissionPercent: 15, // % trattenuta da Immobilia come commissione di gestione
@@ -45,9 +47,10 @@ export const PROPERTIES = {
     listingId: "146799___16661",
     pms: "ciaobooking",
     cleaningFeeBase: 50,
-    cleaningFeePerGuest: 7,
-    baseOccupancy: 2,
-    extraGuestFeePerNight: 10,
+    cleaningFeePerGuest: 7, // usato solo se manca cleaningFeeByGuests (fallback)
+    cleaningFeeByGuests: { 1: 14, 2: 14, 3: 28, 4: 28, 5: 35 }, // sovrapprezzo pulizia per numero di ospiti
+    baseOccupancy: 4,
+    extraGuestFeePerNight: 15,
     petFee: 30, // supplemento fisso se si porta un animale
     stripeAccountId: null, // si popola dopo l'onboarding del proprietario (vedi /api/stripe-onboard)
     commissionPercent: 15, // % trattenuta da Immobilia come commissione di gestione

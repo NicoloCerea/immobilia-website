@@ -18,6 +18,7 @@ export default async function handler(req, res) {
     property,
     cleaningFeeBase: cfg.cleaningFeeBase || 0,
     cleaningFeePerGuest: cfg.cleaningFeePerGuest || 0,
+    cleaningFeeByGuests: cfg.cleaningFeeByGuests || null,
     baseOccupancy: cfg.baseOccupancy || 2,
     extraGuestFeePerNight: cfg.extraGuestFeePerNight || 0,
     petFee: cfg.petFee || 0,

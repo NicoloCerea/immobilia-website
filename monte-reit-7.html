@@ -546,7 +546,15 @@
     }
     const extraGuests = Math.max(0, guests - (rules.baseOccupancy || 2));
     const extraGuestTotal = extraGuests * (rules.extraGuestFeePerNight || 0) * nights;
-    const cleaning = (rules.cleaningFeeBase || 0) + (rules.cleaningFeePerGuest || 0) * guests;
+    let cleaning;
+    if (rules.cleaningFeeByGuests) {
+      const table = rules.cleaningFeeByGuests;
+      const maxKey = Math.max(...Object.keys(table).map(Number));
+      const g = Math.min(guests, maxKey);
+      cleaning = (rules.cleaningFeeBase || 0) + (table[g] || 0);
+    } else {
+      cleaning = (rules.cleaningFeeBase || 0) + (rules.cleaningFeePerGuest || 0) * guests;
+    }
     const petCost = hasPet ? (rules.petFee || 0) : 0;
     const total = Math.round(nightly + extraGuestTotal + cleaning + petCost);
     const depositAmount = Math.round(total * 0.25);

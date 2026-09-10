@@ -2,7 +2,7 @@
 // Legge i prezzi per notte di una proprietà da PriceLabs.
 // Esempio: GET /api/pricing?property=fumarogo-100d&start=2026-08-25&end=2026-09-05
 
-import { PROPERTIES } from "./_config.js";
+import { PROPERTIES, GLOBAL_DISCOUNT_PERCENT } from "./_config.js";
 
 export default async function handler(req, res) {
   const API_KEY = process.env.PRICELABS_API_KEY;
@@ -62,9 +62,10 @@ export default async function handler(req, res) {
     const data = JSON.parse(raw);
     const listing = Array.isArray(data) ? data[0] : data;
 
+    const discountFactor = 1 - (GLOBAL_DISCOUNT_PERCENT || 0) / 100;
     const prices = (listing?.data || []).map((d) => ({
       date: d.date,
-      price: d.price,
+      price: Math.round(d.price * discountFactor),
       min_stay: d.min_stay,
       check_in: d.check_in,
       check_out: d.check_out,

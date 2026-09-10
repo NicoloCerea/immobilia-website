@@ -6,6 +6,10 @@
 // NOTA: questi valori vivono qui per ora (si modificano cambiando questo file + push).
 // In futuro possiamo spostarli in un pannello web modificabile senza toccare il codice.
 
+// Sconto applicato a TUTTI i prezzi letti da PriceLabs (calendario, ricerca, totale).
+// Per rimuoverlo o cambiarlo, modifica solo questo numero.
+export const GLOBAL_DISCOUNT_PERCENT = 19;
+
 export const PROPERTIES = {
   "sertorelli-26": {
     icalUrl:

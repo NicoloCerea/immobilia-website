@@ -3,7 +3,7 @@
 // e restituisce il prezzo totale di ciascuna.
 // Uso: GET /api/search?checkin=2026-08-25&checkout=2026-08-28&guests=2
 
-import { PROPERTIES } from "./_config.js";
+import { PROPERTIES, GLOBAL_DISCOUNT_PERCENT } from "./_config.js";
 
 function formatDate(d) {
   return `${d.slice(0, 4)}-${d.slice(4, 6)}-${d.slice(6, 8)}`;
@@ -62,6 +62,7 @@ export default async function handler(req, res) {
         ]);
 
         // Verifica libere tutte le notti richieste (dal checkin al giorno prima del checkout)
+        const discountFactor = 1 - (GLOBAL_DISCOUNT_PERCENT || 0) / 100;
         let cur = new Date(checkin);
         const end = new Date(checkout);
         let available = true;
@@ -70,7 +71,7 @@ export default async function handler(req, res) {
         while (cur < end) {
           const ds = cur.toISOString().slice(0, 10);
           if (blocked.has(ds)) available = false;
-          if (prices[ds]) nightlyTotal += prices[ds].price;
+          if (prices[ds]) nightlyTotal += prices[ds].price * discountFactor;
           nights++;
           cur.setDate(cur.getDate() + 1);
         }

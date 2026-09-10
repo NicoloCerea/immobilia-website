@@ -72,7 +72,7 @@
   .sidebar{position:sticky;top:90px;align-self:start;}
   .booking-full{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px;margin:0 0 40px;box-shadow:0 12px 30px rgba(15,33,25,.08);}
   .booking-full .stay-meta{font-size:13px;color:var(--ink-soft);margin-bottom:16px;}
-  .booking-full{max-width:640px;}
+  
   .cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;}
   .cal-nav button{background:transparent;border:1px solid var(--line);width:32px;height:32px;border-radius:50%;font-size:15px;color:var(--ink);cursor:pointer;transition:border-color .2s;flex-shrink:0;}
   .cal-nav button:hover{border-color:var(--ink);}
@@ -258,13 +258,13 @@
 
     <div class="section">
       <h2 data-i18n="sec_house">La casa</h2>
-      <p>A soli due minuti d'auto da Bormio, un appartamento accogliente in un residence tranquillo con vista sulle montagne. Una camera matrimoniale, due camere singole, zona giorno luminosa, cucina completamente attrezzata e due bagni offrono spazio comodo per famiglie o gruppi di amici. Balcone privato panoramico e garage incluso completano la proprietà.</p>
-      <p>Lo stile unisce il calore alpino tradizionale a un design funzionale e moderno, pensato per chi cerca sci d'inverno, escursioni d'estate, o semplicemente relax in un rifugio di montagna tutto l'anno.</p>
+      <p data-i18n="desc_fumarogo_house_1">A soli due minuti d'auto da Bormio, un appartamento accogliente in un residence tranquillo con vista sulle montagne. Una camera matrimoniale, due camere singole, zona giorno luminosa, cucina completamente attrezzata e due bagni offrono spazio comodo per famiglie o gruppi di amici. Balcone privato panoramico e garage incluso completano la proprietà.</p>
+      <p data-i18n="desc_fumarogo_house_2">Lo stile unisce il calore alpino tradizionale a un design funzionale e moderno, pensato per chi cerca sci d'inverno, escursioni d'estate, o semplicemente relax in un rifugio di montagna tutto l'anno.</p>
     </div>
 
     <div class="section">
       <h2 data-i18n="sec_location">Posizione</h2>
-      <p>Il residence è a due minuti d'auto dal centro di Bormio, con collegamento navetta rapido verso gli impianti di risalita. Perfetto punto di partenza sia per le terme e il centro storico d'inverno, sia per i sentieri e i percorsi in mountain bike d'estate.</p>
+      <p data-i18n="desc_fumarogo_location_1">Il residence è a due minuti d'auto dal centro di Bormio, con collegamento navetta rapido verso gli impianti di risalita. Perfetto punto di partenza sia per le terme e il centro storico d'inverno, sia per i sentieri e i percorsi in mountain bike d'estate.</p>
       <div class="map-embed" id="map-fumarogo"></div>
       <div class="map-note"><span class="dot-pin">📍</span><span>Zona: Via Fumarogo, Bormio — la posizione esatta viene condivisa dopo la conferma della prenotazione.</span></div>
     </div>
@@ -359,6 +359,22 @@
   const MAX_GUESTS = 7;
   const MONTHS_IT = ["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"];
   const DOW_IT = ["Lu","Ma","Me","Gi","Ve","Sa","Do"];
+  const CAL_I18N = {
+    it: { guests:"Ospiti", selectDates:"Seleziona le date per vedere il prezzo totale.", arrival:(d)=>`Arrivo: <strong>${d}</strong> — scegli la partenza`, night:"notte", nights:"notti", stay:"soggiorno", extraGuestFee:"supplemento ospiti aggiuntivi", cleaning:"pulizia", petIncluded:(f)=>` (incl. animale +€${f})`, touristTax:"Tassa di soggiorno esclusa, da pagare in loco.", depositLine:(dep,bal)=>`Paghi ora l'acconto: <strong>€${dep}</strong> (25%) — saldo di €${bal} da versare prima dell'arrivo.`, fullLine:(t)=>`Paghi ora: <strong>€${t}</strong> (intero soggiorno).`, total:"totale", guestsWord:"ospiti", petLabel:(f)=>`Porto un animale domestico (+€${f} pulizia)`, payFull:"Paga tutto ora", payDeposit:"Paga il 25% ora (acconto)", cancelPolicy:"📋 Cancellazione gratuita fino a 30 giorni prima dell'arrivo. Rimborso parziale fino a 5 giorni prima. Nessun rimborso oltre tale termine.", bookBtn:"Prenota e paga →", waiting:"Attendere...", minStay:(n)=>`Per questa data serve un soggiorno minimo di ${n} nott${n===1?"e":"i"}.`, months:["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"], dow:["Lu","Ma","Me","Gi","Ve","Sa","Do"] },
+    en: { guests:"Guests", selectDates:"Select dates to see the total price.", arrival:(d)=>`Check-in: <strong>${d}</strong> — choose check-out`, night:"night", nights:"nights", stay:"stay", extraGuestFee:"extra guest fee", cleaning:"cleaning", petIncluded:(f)=>` (incl. pet +€${f})`, touristTax:"City tax excluded, payable on site.", depositLine:(dep,bal)=>`Pay now (deposit): <strong>€${dep}</strong> (25%) — balance of €${bal} due before arrival.`, fullLine:(t)=>`Pay now: <strong>€${t}</strong> (full stay).`, total:"total", guestsWord:"guests", petLabel:(f)=>`Bringing a pet (+€${f} cleaning)`, payFull:"Pay in full now", payDeposit:"Pay 25% now (deposit)", cancelPolicy:"📋 Free cancellation up to 30 days before arrival. Partial refund up to 5 days before. No refund after that.", bookBtn:"Book and pay →", waiting:"Please wait...", minStay:(n)=>`This date requires a minimum stay of ${n} night${n===1?"":"s"}.`, months:["January","February","March","April","May","June","July","August","September","October","November","December"], dow:["Mo","Tu","We","Th","Fr","Sa","Su"] },
+    es: { guests:"Huéspedes", selectDates:"Selecciona las fechas para ver el precio total.", arrival:(d)=>`Entrada: <strong>${d}</strong> — elige la salida`, night:"noche", nights:"noches", stay:"estancia", extraGuestFee:"suplemento huéspedes extra", cleaning:"limpieza", petIncluded:(f)=>` (incl. mascota +€${f})`, touristTax:"Tasa turística excluida, se paga en el lugar.", depositLine:(dep,bal)=>`Pagas ahora (depósito): <strong>€${dep}</strong> (25%) — saldo de €${bal} antes de la llegada.`, fullLine:(t)=>`Pagas ahora: <strong>€${t}</strong> (estancia completa).`, total:"total", guestsWord:"huéspedes", petLabel:(f)=>`Llevo una mascota (+€${f} limpieza)`, payFull:"Pagar todo ahora", payDeposit:"Pagar 25% ahora (depósito)", cancelPolicy:"📋 Cancelación gratuita hasta 30 días antes de la llegada. Reembolso parcial hasta 5 días antes. Sin reembolso después.", bookBtn:"Reservar y pagar →", waiting:"Espera...", minStay:(n)=>`Esta fecha requiere una estancia mínima de ${n} noche${n===1?"":"s"}.`, months:["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"], dow:["Lu","Ma","Mi","Ju","Vi","Sa","Do"] },
+    fr: { guests:"Voyageurs", selectDates:"Sélectionnez les dates pour voir le prix total.", arrival:(d)=>`Arrivée : <strong>${d}</strong> — choisissez le départ`, night:"nuit", nights:"nuits", stay:"séjour", extraGuestFee:"supplément voyageurs supplémentaires", cleaning:"ménage", petIncluded:(f)=>` (dont animal +€${f})`, touristTax:"Taxe de séjour exclue, à régler sur place.", depositLine:(dep,bal)=>`Vous payez maintenant (acompte) : <strong>€${dep}</strong> (25%) — solde de €${bal} avant l'arrivée.`, fullLine:(t)=>`Vous payez maintenant : <strong>€${t}</strong> (séjour complet).`, total:"total", guestsWord:"voyageurs", petLabel:(f)=>`J'amène un animal (+€${f} ménage)`, payFull:"Payer tout maintenant", payDeposit:"Payer 25% maintenant (acompte)", cancelPolicy:"📋 Annulation gratuite jusqu'à 30 jours avant l'arrivée. Remboursement partiel jusqu'à 5 jours avant. Aucun remboursement après.", bookBtn:"Réserver et payer →", waiting:"Veuillez patienter...", minStay:(n)=>`Cette date nécessite un séjour minimum de ${n} nuit${n===1?"":"s"}.`, months:["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"], dow:["Lu","Ma","Me","Je","Ve","Sa","Di"] },
+    de: { guests:"Gäste", selectDates:"Wählen Sie Daten, um den Gesamtpreis zu sehen.", arrival:(d)=>`Anreise: <strong>${d}</strong> — Abreise wählen`, night:"Nacht", nights:"Nächte", stay:"Aufenthalt", extraGuestFee:"Zuschlag zusätzliche Gäste", cleaning:"Endreinigung", petIncluded:(f)=>` (inkl. Haustier +€${f})`, touristTax:"Kurtaxe nicht inbegriffen, vor Ort zu zahlen.", depositLine:(dep,bal)=>`Jetzt zu zahlen (Anzahlung): <strong>€${dep}</strong> (25%) — Restbetrag €${bal} vor Anreise fällig.`, fullLine:(t)=>`Jetzt zu zahlen: <strong>€${t}</strong> (gesamter Aufenthalt).`, total:"gesamt", guestsWord:"Gäste", petLabel:(f)=>`Ich bringe ein Haustier mit (+€${f} Reinigung)`, payFull:"Jetzt vollständig bezahlen", payDeposit:"Jetzt 25% bezahlen (Anzahlung)", cancelPolicy:"📋 Kostenlose Stornierung bis 30 Tage vor Anreise. Teilrückerstattung bis 5 Tage vorher. Danach keine Rückerstattung.", bookBtn:"Buchen und bezahlen →", waiting:"Bitte warten...", minStay:(n)=>`Für dieses Datum ist ein Mindestaufenthalt von ${n} Nächten erforderlich.`, months:["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"], dow:["Mo","Di","Mi","Do","Fr","Sa","So"] },
+    ru: { guests:"Гости", selectDates:"Выберите даты, чтобы увидеть итоговую цену.", arrival:(d)=>`Заезд: <strong>${d}</strong> — выберите дату выезда`, night:"ночь", nights:"ночей", stay:"проживание", extraGuestFee:"доплата за доп. гостей", cleaning:"уборка", petIncluded:(f)=>` (вкл. животное +€${f})`, touristTax:"Туристический налог не включён, оплачивается на месте.", depositLine:(dep,bal)=>`Оплата сейчас (депозит): <strong>€${dep}</strong> (25%) — остаток €${bal} до заезда.`, fullLine:(t)=>`Оплата сейчас: <strong>€${t}</strong> (всё проживание).`, total:"итого", guestsWord:"гостей", petLabel:(f)=>`Беру с собой животное (+€${f} уборка)`, payFull:"Оплатить полностью сейчас", payDeposit:"Оплатить 25% сейчас (депозит)", cancelPolicy:"📋 Бесплатная отмена за 30 дней до заезда. Частичный возврат за 5 дней. После этого возврат не производится.", bookBtn:"Забронировать и оплатить →", waiting:"Подождите...", minStay:(n)=>`Для этой даты требуется минимум ${n} ночей.`, months:["январь","февраль","март","апрель","май","июнь","июль","август","сентябрь","октябрь","ноябрь","декабрь"], dow:["Пн","Вт","Ср","Чт","Пт","Сб","Вс"] },
+    zh: { guests:"入住人数", selectDates:"选择日期以查看总价。", arrival:(d)=>`入住：<strong>${d}</strong> — 请选择退房日期`, night:"晚", nights:"晚", stay:"住宿费", extraGuestFee:"额外客人附加费", cleaning:"清洁费", petIncluded:(f)=>`（含宠物 +€${f}）`, touristTax:"不含旅游税，需在当地支付。", depositLine:(dep,bal)=>`现在支付（订金）：<strong>€${dep}</strong>（25%）— 余款€${bal}需在入住前支付。`, fullLine:(t)=>`现在支付：<strong>€${t}</strong>（全部费用）。`, total:"总计", guestsWord:"位客人", petLabel:(f)=>`携带宠物（+€${f} 清洁费）`, payFull:"立即全额支付", payDeposit:"立即支付25%（订金）", cancelPolicy:"📋 入住前30天可免费取消。入住前5天可部分退款。之后不予退款。", bookBtn:"预订并支付 →", waiting:"请稍候...", minStay:(n)=>`该日期最少入住${n}晚。`, months:["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"], dow:["一","二","三","四","五","六","日"] },
+  };
+  let currentLang = localStorage.getItem("immobilia_lang") || "it";
+  let T = CAL_I18N[currentLang] || CAL_I18N.it;
+  window.addEventListener("immobilia:langchange", function (e) {
+    currentLang = e.detail.lang;
+    T = CAL_I18N[currentLang] || CAL_I18N.it;
+    renderCalendar();
+  });
 
   let blockedSet = new Set();
   let priceMap = {};
@@ -465,9 +481,9 @@
 
     return `
       <div class="cal-month">
-        <div class="cal-month-title">${MONTHS_IT[m]} ${y}</div>
+        <div class="cal-month-title">${T.months[m]} ${y}</div>
         <div class="cal-grid">
-          ${DOW_IT.map((d) => `<div class="cal-dow">${d}</div>`).join("")}
+          ${T.dow.map((d) => `<div class="cal-dow">${d}</div>`).join("")}
           ${cellsHtml}
         </div>
       </div>
@@ -483,7 +499,7 @@
 
     container.innerHTML = `
       <div class="cal-guests">
-        <span>Ospiti</span>
+        <span>${T.guests}</span>
         <div style="display:flex;align-items:center;gap:14px;">
           <button class="g-btn" onclick="calGuests(-1)">−</button>
           <span class="g-count">${guests}</span>
@@ -502,18 +518,18 @@
       <div class="cal-extras">
         <label class="cal-pet-toggle">
           <input type="checkbox" ${hasPet ? "checked" : ""} onchange="calTogglePet(this.checked)">
-          <span>Porto un animale domestico (+€${rules.petFee || 30} pulizia)</span>
+          <span>${T.petLabel(rules.petFee || 30)}</span>
         </label>
         <div class="cal-paymode">
-          <label><input type="radio" name="paymode" ${payMode === "full" ? "checked" : ""} onchange="calSetPayMode('full')"> Paga tutto ora</label>
-          <label><input type="radio" name="paymode" ${payMode === "deposit" ? "checked" : ""} onchange="calSetPayMode('deposit')"> Paga il 25% ora (acconto)</label>
+          <label><input type="radio" name="paymode" ${payMode === "full" ? "checked" : ""} onchange="calSetPayMode('full')"> ${T.payFull}</label>
+          <label><input type="radio" name="paymode" ${payMode === "deposit" ? "checked" : ""} onchange="calSetPayMode('deposit')"> ${T.payDeposit}</label>
         </div>
-        <div class="cal-cancel-policy">📋 Cancellazione gratuita fino a 30 giorni prima dell'arrivo. Rimborso parziale fino a 5 giorni prima. Nessun rimborso oltre tale termine.</div>
+        <div class="cal-cancel-policy">${T.cancelPolicy}</div>
       </div>
       <div class="cal-summary-bar">
         <div class="cal-summary-text">${summaryText()}</div>
         <button class="cal-pay-btn" id="cal-pay-btn" onclick="calPayNow()" ${checkin && checkout ? "" : "disabled"}>
-          Prenota e paga →
+          ${T.bookBtn}
         </button>
       </div>
     `;
@@ -540,14 +556,15 @@
 
   function summaryText() {
     if (minStayWarning) return `<span style="color:#b23b3b;">${minStayWarning}</span>`;
-    if (!checkin && !checkout) return "Seleziona le date per vedere il prezzo totale.";
-    if (checkin && !checkout) return `Arrivo: <strong>${checkin.split("-").reverse().join("/")}</strong> — scegli la partenza`;
+    if (!checkin && !checkout) return T.selectDates;
+    if (checkin && !checkout) return T.arrival(checkin.split("-").reverse().join("/"));
     const b = priceBreakdown(checkin, checkout);
-    let line = `soggiorno €${b.nightly}${b.extraGuestTotal > 0 ? ` + supplemento ospiti aggiuntivi €${b.extraGuestTotal}` : ""} + pulizia €${b.cleaning}${b.petCost > 0 ? ` (incl. animale +€${rules.petFee})` : ""}`;
+    let line = `${T.stay} €${b.nightly}${b.extraGuestTotal > 0 ? ` + ${T.extraGuestFee} €${b.extraGuestTotal}` : ""} + ${T.cleaning} €${b.cleaning}${b.petCost > 0 ? T.petIncluded(rules.petFee) : ""}`;
     let payLine = payMode === "deposit"
-      ? `Paghi ora l'acconto: <strong>€${b.depositAmount}</strong> (25%) — saldo di €${b.total - b.depositAmount} da versare prima dell'arrivo.`
-      : `Paghi ora: <strong>€${b.total}</strong> (intero soggiorno).`;
-    return `<strong>€${b.total}</strong> totale · ${b.nights} nott${b.nights === 1 ? "e" : "i"}, ${guests} ospiti<br><span style="font-size:11.5px;">(${line})</span><br><span style="font-size:11px;color:var(--ink-soft);">Tassa di soggiorno esclusa, da pagare in loco.</span><br><span style="font-size:12px;">${payLine}</span>`;
+      ? T.depositLine(b.depositAmount, b.total - b.depositAmount)
+      : T.fullLine(b.total);
+    const nightsLabel = b.nights === 1 ? T.night : T.nights;
+    return `<strong>€${b.total}</strong> ${T.total} · ${b.nights} ${nightsLabel}, ${guests} ${T.guestsWord}<br><span style="font-size:11.5px;">(${line})</span><br><span style="font-size:11px;color:var(--ink-soft);">${T.touristTax}</span><br><span style="font-size:12px;">${payLine}</span>`;
   }
 
   function nightsBetween(a, b) {
@@ -589,7 +606,7 @@
         checkin = dateStr;
         checkout = null;
       } else if (nights < minStay) {
-        minStayWarning = `Per questa data serve un soggiorno minimo di ${minStay} nott${minStay === 1 ? "e" : "i"}.`;
+        minStayWarning = T.minStay(minStay);
         checkout = null;
       } else {
         checkout = dateStr;
@@ -613,7 +630,7 @@
     const btn = document.getElementById("cal-pay-btn");
     const b = priceBreakdown(checkin, checkout);
     btn.disabled = true;
-    btn.textContent = "Attendere...";
+    btn.textContent = T.waiting;
     try {
       const response = await fetch("/api/stripe-checkout", {
         method: "POST",
@@ -636,12 +653,12 @@
       } else {
         alert("Impossibile avviare il pagamento: " + (data.error || "errore sconosciuto"));
         btn.disabled = false;
-        btn.textContent = "Prenota e paga →";
+        btn.textContent = T.bookBtn;
       }
     } catch (err) {
       alert("Errore di connessione, riprova.");
       btn.disabled = false;
-      btn.textContent = "Prenota e paga →";
+      btn.textContent = T.bookBtn;
     }
   };
 

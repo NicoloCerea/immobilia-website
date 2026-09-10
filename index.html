@@ -283,7 +283,7 @@
     <div class="search-inner">
       <div class="search-form">
         <label class="search-field">
-          <span>Zona</span>
+          <span data-i18n="search_zone">Zona</span>
           <select id="search-zone">
             <option value="">Tutte</option>
             <option value="Bormio">Bormio</option>
@@ -291,13 +291,13 @@
           </select>
         </label>
         <div class="search-field">
-          <span>Check-in</span>
-          <div class="search-date-btn placeholder" id="search-checkin-btn" onclick="event.stopPropagation(); toggleCal('checkin')">Aggiungi data</div>
+          <span data-i18n="search_checkin">Check-in</span>
+          <div class="search-date-btn placeholder" id="search-checkin-btn" onclick="event.stopPropagation(); toggleCal('checkin')" data-i18n="search_add_date">Aggiungi data</div>
           <div class="search-cal-popover" id="search-checkin-cal"></div>
         </div>
         <div class="search-field">
-          <span>Check-out</span>
-          <div class="search-date-btn placeholder" id="search-checkout-btn" onclick="event.stopPropagation(); toggleCal('checkout')">Aggiungi data</div>
+          <span data-i18n="search_checkout">Check-out</span>
+          <div class="search-date-btn placeholder" id="search-checkout-btn" onclick="event.stopPropagation(); toggleCal('checkout')" data-i18n="search_add_date">Aggiungi data</div>
           <div class="search-cal-popover" id="search-checkout-cal"></div>
         </div>
         <label class="search-field">
@@ -633,7 +633,7 @@
       document.getElementById('search-checkin-btn').textContent = dateStr.split('-').reverse().join('/');
       document.getElementById('search-checkin-btn').classList.remove('placeholder');
       if (searchCheckout) document.getElementById('search-checkout-btn').textContent = searchCheckout.split('-').reverse().join('/');
-      else { document.getElementById('search-checkout-btn').textContent = 'Aggiungi data'; document.getElementById('search-checkout-btn').classList.add('placeholder'); }
+      else { const lang = localStorage.getItem('immobilia_lang') || 'it'; document.getElementById('search-checkout-btn').textContent = I18N[lang].search_add_date; document.getElementById('search-checkout-btn').classList.add('placeholder'); }
       document.getElementById('search-checkin-cal').classList.remove('active');
       renderSearchCal('checkin');
     } else {
@@ -662,7 +662,9 @@
     }
 
     section.style.display = 'block';
-    title.textContent = 'Cerchiamo le disponibilità...';
+    const lang = localStorage.getItem('immobilia_lang') || 'it';
+    const t = I18N[lang];
+    title.textContent = t.search_loading;
     grid.innerHTML = '';
     section.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
@@ -676,30 +678,32 @@
       }
 
       if (results.length === 0) {
-        title.textContent = 'Nessuna disponibilità per queste date' + (zone ? ` a ${zone}` : '');
-        grid.innerHTML = '<div class="search-empty">Prova a cambiare le date o la zona, oppure scrivici direttamente.</div>';
+        title.textContent = t.search_no_results + (zone ? ` — ${zone}` : '');
+        grid.innerHTML = `<div class="search-empty">${t.search_no_results_hint}</div>`;
         return;
       }
 
-      title.textContent = `${results.length} appartament${results.length === 1 ? 'o disponibile' : 'i disponibili'} · ${checkin.split('-').reverse().join('/')} → ${checkout.split('-').reverse().join('/')}`;
+      const apartWord = results.length === 1 ? t.search_apartment : t.search_apartments;
+      const availWord = results.length === 1 ? t.search_available : t.search_available_plural;
+      title.textContent = `${results.length} ${apartWord} ${availWord} · ${checkin.split('-').reverse().join('/')} → ${checkout.split('-').reverse().join('/')}`;
       grid.innerHTML = results.map((r) => {
         const info = PROPERTY_INFO[r.slug] || { name: r.slug, loc: '', img: '' };
         return `
           <a class="result-card" href="${r.slug}.html?checkin=${checkin}&checkout=${checkout}&guests=${guests}" style="text-decoration:none;color:inherit;display:block;">
             <div class="result-img" style="background-image:url('${info.img}')">
-              <div class="result-price-badge">€${r.total} totale</div>
+              <div class="result-price-badge">€${r.total} ${t.search_total}</div>
             </div>
             <div class="result-body">
               <h3>${info.name}</h3>
               <div class="r-loc">📍 ${info.loc}</div>
-              <div class="r-nights">${r.nights} nott${r.nights === 1 ? 'e' : 'i'}</div>
+              <div class="r-nights">${r.nights} ${r.nights === 1 ? t.search_night : t.search_nights}</div>
             </div>
           </a>
         `;
       }).join('');
     } catch (err) {
-      title.textContent = 'Errore nella ricerca';
-      grid.innerHTML = '<div class="search-empty">Riprova tra qualche istante, oppure scrivici direttamente.</div>';
+      title.textContent = 'Error';
+      grid.innerHTML = `<div class="search-empty">${t.search_no_results_hint}</div>`;
     }
   };
 

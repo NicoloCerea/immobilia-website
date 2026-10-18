@@ -3,9 +3,21 @@
 // Esempio: GET /api/pricing?property=fumarogo-100d&start=2026-08-25&end=2026-09-05
 
 import { PROPERTIES, GLOBAL_DISCOUNT_PERCENT } from "./_config.js";
+import { manualPriceList } from "./_manualPrices.js";
 
 export default async function handler(req, res) {
   const API_KEY = process.env.PRICELABS_API_KEY;
+
+  const _p = PROPERTIES[req.query.property || "sertorelli-26"];
+  if (_p && _p.manualPrices) {
+    res.setHeader("Cache-Control", "s-maxage=3600, stale-while-revalidate=86400");
+    res.status(200).json({
+      property: req.query.property,
+      source: "manual",
+      prices: manualPriceList(_p.manualPrices, req.query.start, req.query.end, _p.manualMinStay || 1),
+    });
+    return;
+  }
 
   if (!API_KEY) {
     res.status(500).json({

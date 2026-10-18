@@ -1,3 +1,4 @@
+import { TOILA_PRICES, CANTONI_PRICES } from "./_manualPrices.js";
 // /api/_config.js
 // Configurazione centrale: per ogni proprietà, il link iCal (SmartPMS), l'ID PriceLabs
 // e le regole di pricing (pulizia + supplemento ospiti extra).
@@ -61,6 +62,8 @@ export const PROPERTIES = {
       "https://pms-api.smartness.com/api/3.0/room-types/generate-ics/667745754c673461424d494177666f65333864476c513d3d.ics",
     listingId: "152559___27775",
     pms: "ciaobooking",
+    manualPrices: CANTONI_PRICES, // prezzi fissi da Airbnb (La Baita tra le Alpi) -15,5%
+    manualMinStay: 1,
     cleaningFeeBase: 50,
     cleaningFeePerGuest: 0,
     baseOccupancy: 2,
@@ -89,6 +92,8 @@ export const PROPERTIES = {
       "https://pms-api.smartness.com/api/3.0/room-types/generate-ics/7a426236575a4f654d3955395a644a4d37304e792b513d3d.ics",
     listingId: "152557___27773",
     pms: "ciaobooking",
+    manualPrices: TOILA_PRICES, // prezzi fissi da Airbnb -15,5%: niente PriceLabs né sconto globale
+    manualMinStay: 1,
     cleaningFeeBase: 50,
     cleaningFeePerGuest: 0,
     baseOccupancy: 2,

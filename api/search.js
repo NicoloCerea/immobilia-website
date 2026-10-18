@@ -58,11 +58,11 @@ export default async function handler(req, res) {
       try {
         const [blocked, prices] = await Promise.all([
           getBlockedDates(cfg.icalUrl),
-          getPrices(API_KEY, cfg.listingId, cfg.pms, checkin, checkout),
+          cfg.manualPrices ? Promise.resolve(null) : getPrices(API_KEY, cfg.listingId, cfg.pms, checkin, checkout),
         ]);
 
         // Verifica libere tutte le notti richieste (dal checkin al giorno prima del checkout)
-        const discountFactor = 1 - (GLOBAL_DISCOUNT_PERCENT || 0) / 100;
+        const discountFactor = cfg.manualPrices ? 1 : 1 - (GLOBAL_DISCOUNT_PERCENT || 0) / 100;
         let cur = new Date(checkin);
         const end = new Date(checkout);
         let available = true;
@@ -71,7 +71,8 @@ export default async function handler(req, res) {
         while (cur < end) {
           const ds = cur.toISOString().slice(0, 10);
           if (blocked.has(ds)) available = false;
-          if (prices[ds]) nightlyTotal += prices[ds].price * discountFactor;
+          if (cfg.manualPrices) { if (cfg.manualPrices[ds]) nightlyTotal += cfg.manualPrices[ds]; }
+          else if (prices[ds]) nightlyTotal += prices[ds].price * discountFactor;
           nights++;
           cur.setDate(cur.getDate() + 1);
         }

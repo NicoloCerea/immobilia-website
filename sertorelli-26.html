@@ -354,8 +354,8 @@
 
 <script>
   var map_sertorelli = L.map('map-sertorelli', {scrollWheelZoom:false}).setView([46.473946, 10.370863], 16);
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors',
     maxZoom: 19
   }).addTo(map_sertorelli);
   L.circle([46.473946, 10.370863], {

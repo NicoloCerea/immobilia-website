@@ -356,8 +356,8 @@
 
 <script>
   var map_montereit = L.map('map-montereit', {scrollWheelZoom:false}).setView([46.472716, 10.369346], 16);
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors',
     maxZoom: 19
   }).addTo(map_montereit);
   L.circle([46.472716, 10.369346], {

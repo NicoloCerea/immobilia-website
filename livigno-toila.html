@@ -347,8 +347,8 @@
 
 <script>
   var map_livtoila = L.map('map-livtoila', {scrollWheelZoom:false}).setView([46.518134, 10.125375], 16);
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors',
     maxZoom: 19
   }).addTo(map_livtoila);
   L.circle([46.518134, 10.125375], {

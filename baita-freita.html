@@ -321,8 +321,8 @@
 
 <script>
   var map_baitafreita = L.map('map-baitafreita', {scrollWheelZoom:false}).setView([46.519202, 10.124503], 16);
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors',
     maxZoom: 19
   }).addTo(map_baitafreita);
   L.circle([46.519202, 10.124503], {

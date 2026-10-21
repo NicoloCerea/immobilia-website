@@ -9,7 +9,6 @@
 <link rel="apple-touch-icon" sizes="180x180" href="images/logo/favicon-180.png">
 <link rel="shortcut icon" href="images/logo/favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.ciaobooking.com/widget/js/app.js" defer></script>
 <style>
   :root{
@@ -244,6 +243,7 @@
     .content{padding:20px 0;}
   }
 </style>
+<link rel="stylesheet" href="css/luxury.css">
 </head>
 <body>
 
@@ -272,7 +272,16 @@
 <div class="view active" id="view-booking">
 
   <section class="hero">
-    <div class="hero-media" data-caption="Sostituisci con foto reale — vista Duomo / Alpi"></div>
+    <div class="hero-media" data-caption="">
+      <div class="hero-slides" aria-hidden="true">
+        <i style="background-image:url('images/hero/livigno-vista.jpg')"></i>
+        <i style="background-image:url('images/baita-crosc/foto09.jpg')"></i>
+        <i style="background-image:url('images/baita-franz-1-mansarda/foto28.jpg')"></i>
+        <i style="background-image:url('images/chalet-zanchetta/foto08.jpg')"></i>
+      </div>
+      <div class="hero-rail"><span class="hero-count"><b id="hc-n">01</b> / 04</span><span class="hero-bar"><u></u></span></div>
+      <a class="hero-scroll" href="#cards-tutte" aria-label="Scorri"><span>Scorri</span><i></i></a>
+    </div>
     <div class="hero-copy">
       <h1><span data-i18n="hero_title_line1">Trova il soggiorno</span><br><em data-i18n="hero_title_em">perfetto</em></h1>
       <p data-i18n="hero_sub">Appartamenti selezionati con cura a Bormio e Livigno. Prenota direttamente, senza intermediari.</p>
@@ -316,13 +325,20 @@
     </div>
   </section>
 
+  <section class="manifesto reveal">
+    <div class="wrap">
+      <p class="manifesto-kicker">Bormio · Livigno</p>
+      <p class="manifesto-text">Dimore di montagna scelte una a una, dove il tempo rallenta e ogni dettaglio è pensato per chi arriva.</p>
+    </div>
+  </section>
+
   <section class="trust">
     <div class="wrap trust-grid">
-      <div class="trust-item"><div class="trust-icon">★</div><div><h4 data-i18n="trust1_h">Miglior prezzo garantito</h4><p data-i18n="trust1_p">Solo prenotando sul nostro sito</p></div></div>
-      <div class="trust-item"><div class="trust-icon">◈</div><div><h4 data-i18n="trust2_h">Offerte esclusive</h4><p data-i18n="trust2_p">Promozioni riservate per te</p></div></div>
-      <div class="trust-item"><div class="trust-icon">◎</div><div><h4 data-i18n="trust3_h">Assistenza dedicata</h4><p data-i18n="trust3_p">Sempre a tua disposizione</p></div></div>
-      <div class="trust-item"><div class="trust-icon">✓</div><div><h4 data-i18n="trust4_h">Prenotazione sicura</h4><p data-i18n="trust4_p">Transazioni protette</p></div></div>
-      <div class="trust-item"><div class="trust-icon">⚡</div><div><h4 data-i18n="trust5_h">Conferma immediata</h4><p data-i18n="trust5_p">Prenota in pochi secondi</p></div></div>
+      <div class="trust-item"><div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.5 6.6 19.5l1.2-6L3.3 9.3l6.1-.7z"/></svg></div><div><h4 data-i18n="trust1_h">Miglior prezzo garantito</h4><p data-i18n="trust1_p">Solo prenotando sul nostro sito</p></div></div>
+      <div class="trust-item"><div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M12 3l9 9-9 9-9-9z"/><path d="M12 8l4 4-4 4-4-4z"/></svg></div><div><h4 data-i18n="trust2_h">Offerte esclusive</h4><p data-i18n="trust2_p">Promozioni riservate per te</p></div></div>
+      <div class="trust-item"><div class="trust-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="4"/><path d="M4 21c1-4.5 4-6.5 8-6.5s7 2 8 6.5"/></svg></div><div><h4 data-i18n="trust3_h">Assistenza dedicata</h4><p data-i18n="trust3_p">Sempre a tua disposizione</p></div></div>
+      <div class="trust-item"><div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></div><div><h4 data-i18n="trust4_h">Prenotazione sicura</h4><p data-i18n="trust4_p">Transazioni protette</p></div></div>
+      <div class="trust-item"><div class="trust-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></div><div><h4 data-i18n="trust5_h">Conferma immediata</h4><p data-i18n="trust5_p">Prenota in pochi secondi</p></div></div>
     </div>
   </section>
 
@@ -473,12 +489,18 @@
 <div class="view" id="view-owners">
 
   <section class="hero">
-    <div class="hero-media" data-owners></div>
+    <div class="hero-media" data-owners>
+      <div class="hero-slides" aria-hidden="true">
+        <i style="background-image:url('images/sertorelli-26/foto01.jpg')"></i>
+        <i style="background-image:url('images/monte-reit-7/foto01.jpg')"></i>
+        <i style="background-image:url('images/baita-franz-1-mansarda/foto28.jpg')"></i>
+      </div>
+    </div>
     <div class="hero-copy">
       <h1><span data-i18n="owners_title">Il tuo immobile lavora per te.</span><br><em data-i18n="owners_title_em">Tu non devi fare nulla.</em></h1>
       <p data-i18n="owners_sub">Gestiamo il tuo appartamento su Airbnb e le principali piattaforme: annunci, ospiti, pulizie, contratti. Tutto incluso, zero pensieri.</p>
       <div class="trust-badges">
-        <span data-i18n="badge1">Oltre 10 proprietari</span>
+        <span data-i18n="badge1">Oltre 20 proprietari</span>
         <span data-i18n="badge2">Superhost certificati</span>
         <span data-i18n="badge3">Partner Airbnb</span>
       </div>
@@ -512,13 +534,19 @@
           <p data-i18n="service4_p">Ci occupiamo di tutte le pratiche di rimborso tramite Airbnb AirCover: apertura delle richieste, documentazione, interlocuzione con la piattaforma fino alla risoluzione.</p>
         </div>
       </div>
+    </div>
+  </section>
 
+  <section class="owners-band"><div class="wrap">
       <div class="owners-stats">
         <div class="stat"><div class="stat-num">20+</div><div class="stat-label" data-i18n="stat1_label">Immobili gestiti</div></div>
         <div class="stat"><div class="stat-num">96%</div><div class="stat-label" data-i18n="stat2_label">Soddisfazione proprietari</div></div>
         <div class="stat"><div class="stat-num">5.0</div><div class="stat-label" data-i18n="stat3_label">Valutazione Superhost Airbnb</div></div>
       </div>
+  </div></section>
 
+  <section class="owners-how"><div class="wrap">
+      <p class="o-kicker">Come lavoriamo</p>
       <div class="owners-process">
         <div class="process-step">
           <span class="process-num">1</span>
@@ -536,7 +564,10 @@
           <p data-i18n="process3_p">Gestiamo noi ogni aspetto operativo. Ricevi un report mensile con prenotazioni, entrate e occupazione.</p>
         </div>
       </div>
+  </div></section>
 
+  <section class="owners-vs"><div class="wrap">
+      <p class="o-kicker">Fai da te o con noi</p>
       <div class="compare-table">
         <div class="compare-row head">
           <div data-i18n="cmp_head1">Variabili</div>
@@ -569,8 +600,7 @@
           <div data-i18n="cmp5_us">Gestite internamente da noi</div>
         </div>
       </div>
-    </div>
-  </section>
+  </div></section>
 
   <section class="owners-cta">
     <div class="wrap owners-cta-inner">
@@ -603,11 +633,11 @@
     "livigno-river": { name: "Livigno River", loc: "Livigno", img: "images/livigno-river/foto01.jpg" },
     "livigno-toila": { name: "Livigno Toilà", loc: "Livigno", img: "images/livigno-toila/foto13.jpg" },
     "livigno-cantoni": { name: "Livigno Cantoni", loc: "Livigno", img: "images/livigno-cantoni/foto02.jpg" },
-    "baita-crosc": { name: "Baita Crosc", loc: "Livigno", img: "images/baita-crosc/foto09.jpg" },
     "baita-franz-1-mansarda": { name: "Baita Franz 1 (mansarda)", loc: "Livigno", img: "images/baita-franz-1-mansarda/foto28.jpg" },
     "baita-franz-2": { name: "Baita Franz 2", loc: "Livigno", img: "images/baita-franz-2/foto19.jpg" },
     "baita-franz-3": { name: "Baita Franz 3", loc: "Livigno", img: "images/baita-franz-3/foto12.jpg" },
     "chalet-zanchetta": { name: "Chalet Zanchetta", loc: "Bormio", img: "images/chalet-zanchetta/foto08.jpg" },
+    "baita-crosc": { name: "Baita Crosc", loc: "Livigno", img: "images/baita-crosc/foto09.jpg" },
   };
 
   // --- Calendario di ricerca personalizzato (niente input nativi) ---
@@ -787,5 +817,29 @@
 </script>
 <script src="js/translations.js"></script>
 
+<script>
+(function(){
+  var b=document.body;b.classList.add('home');
+  var h=document.querySelector('header');
+  function onS(){var y=window.scrollY;h.classList.toggle('scrolled',y>60);
+    var c=document.querySelector('#view-booking .hero-copy'),m=document.querySelector('#view-booking .hero-slides');
+    if(y<900){if(c){c.style.transform='translateY('+(y*.22)+'px)';c.style.opacity=Math.max(0,1-y/520)}
+      if(m)m.style.transform='translateY('+(y*.12)+'px)'}}
+  window.addEventListener('scroll',onS,{passive:true});onS();
+  document.querySelectorAll('.hero-media').forEach(function(hm){
+    var sl=[].slice.call(hm.querySelectorAll('.hero-slides i')),k=0,cnt=hm.querySelector('#hc-n');
+    if(!sl.length)return;sl[0].classList.add('on');
+    if(!matchMedia('(prefers-reduced-motion: reduce)').matches)setInterval(function(){
+      sl[k].classList.remove('on');k=(k+1)%sl.length;sl[k].classList.add('on');if(cnt)cnt.textContent='0'+(k+1);
+      var u=hm.querySelector('.hero-bar u');if(u){u.style.animation='none';void u.offsetWidth;u.style.animation='';}},6500);
+  });
+  function countUp(el){var m=el.textContent.match(/^([\d.]+)(.*)$/);if(!m)return;var end=parseFloat(m[1]),suf=m[2],dec=(m[1].split('.')[1]||'').length,t0=null;
+    function f(t){if(!t0)t0=t;var q=Math.min(1,(t-t0)/1600),e=1-Math.pow(1-q,3);el.textContent=(end*e).toFixed(dec)+suf;if(q<1)requestAnimationFrame(f)}requestAnimationFrame(f)}
+  var io2=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){countUp(x.target);io2.unobserve(x.target)}})},{threshold:.6});
+  document.querySelectorAll('.stat-num').forEach(function(el){io2.observe(el)});
+  var io=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.15});
+  document.querySelectorAll('.reveal,.trust-item,.card,.manifesto-text,.service-card,.process-step,.compare-table,.o-kicker,.owners-intro h2,.owners-intro > .wrap > p').forEach(function(el){el.classList.add('rv');io.observe(el)});
+})();
+</script>
 </body>
 </html>

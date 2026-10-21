@@ -492,3 +492,9 @@ body.home header:not(.scrolled){border-bottom-color:transparent!important}
 .g-btn,.cal-guests .g-btn,.cal-guests-popover .g-btn{width:48px!important;height:46px!important;border:0!important}
 .g-count{height:46px!important;min-width:72px!important;border:0!important;border-left:1px solid var(--line)!important;border-right:1px solid var(--line)!important;align-self:stretch!important;font-size:28px;padding-bottom:2px}
 .cal-guests-popover .g-btn:hover{background:var(--cream-soft)!important}
+/* home guests stepper */
+#view-booking .guest-stepper{display:flex;align-items:center;height:26px;gap:0}
+#view-booking .guest-stepper input{width:44px!important;flex:0 0 44px;text-align:center;font-family:var(--display)!important;font-size:24px!important;font-weight:400!important;font-variant-numeric:lining-nums;cursor:default;height:26px;line-height:26px;padding:0!important;pointer-events:none}
+#view-booking .g-step{-webkit-appearance:none;appearance:none;width:30px;height:30px;padding:0;border:1px solid var(--line);border-radius:0;background:transparent;color:var(--forest);font-family:var(--text);font-size:18px;font-weight:300;line-height:1;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .25s,color .25s}
+#view-booking .g-step:hover{border-color:var(--gold);color:var(--gold)}
+#view-booking .search-field:has(.guest-stepper){cursor:default}

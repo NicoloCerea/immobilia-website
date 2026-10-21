@@ -307,10 +307,14 @@
           <div class="search-date-btn placeholder" id="search-checkout-btn" onclick="event.stopPropagation(); toggleCal('checkout')" data-i18n="search_add_date">Aggiungi data</div>
           <div class="search-cal-popover" id="search-checkout-cal"></div>
         </div>
-        <label class="search-field">
+        <div class="search-field">
           <span>Ospiti</span>
-          <input type="number" id="search-guests" min="1" max="10" value="2">
-        </label>
+          <div class="guest-stepper">
+            <button type="button" class="g-step" data-d="-1" aria-label="Meno ospiti">−</button>
+            <input type="number" id="search-guests" min="1" max="10" value="2" readonly>
+            <button type="button" class="g-step" data-d="1" aria-label="Più ospiti">+</button>
+          </div>
+        </div>
         <button class="search-btn" onclick="runSearch()">Cerca disponibilità</button>
       </div>
     </div>
@@ -838,6 +842,9 @@
   var io=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.15});
   document.querySelectorAll('.reveal,.trust-item,.card,.manifesto-text,.service-card,.process-step,.compare-table,.o-kicker,.owners-intro h2,.owners-intro > .wrap > p').forEach(function(el){el.classList.add('rv');io.observe(el)});
 })();
+</script>
+<script>
+document.querySelectorAll('.g-step').forEach(function(b){b.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();var i=document.getElementById('search-guests'),v=(parseInt(i.value)||2)+parseInt(b.dataset.d);i.value=Math.max(+i.min,Math.min(+i.max,v))})});
 </script>
 </body>
 </html>

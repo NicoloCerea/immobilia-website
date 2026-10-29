@@ -3,4 +3,4 @@ Allow: /
 Disallow: /api/
 Disallow: /conferma.html
 
-Sitemap: https://immobiliaitabooking.it/sitemap.xml
+Sitemap: https://immobiliaita.it/sitemap.xml

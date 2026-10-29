@@ -1,0 +1,11 @@
+{
+  "redirects": [
+    { "source": "/baita-franz1.html", "destination": "/baita-franz-1-mansarda.html", "permanent": true },
+    { "source": "/baita-franz2.html", "destination": "/baita-franz-2.html", "permanent": true },
+    { "source": "/baita-franz3.html", "destination": "/baita-franz-3.html", "permanent": true },
+    { "source": "/baita-borch.html", "destination": "/baita-crosc.html", "permanent": true },
+    { "source": "/baita-toila.html", "destination": "/livigno-toila.html", "permanent": true },
+    { "source": "/baita-freita.html", "destination": "/", "permanent": true },
+    { "source": "/baita-pigna.html", "destination": "/", "permanent": true }
+  ]
+}

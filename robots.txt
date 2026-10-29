@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /conferma.html
+
+Sitemap: https://immobiliaitabooking.it/sitemap.xml

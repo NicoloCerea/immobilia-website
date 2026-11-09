@@ -4,17 +4,22 @@
 
 import { PROPERTIES, GLOBAL_DISCOUNT_PERCENT } from "./_config.js";
 import { manualPriceList } from "./_manualPrices.js";
+import { getDynamic, adjustPriceList, effectiveDiscount } from "./_dyn.js";
 
 export default async function handler(req, res) {
   const API_KEY = process.env.PRICELABS_API_KEY;
 
   const _p = PROPERTIES[req.query.property || "sertorelli-26"];
   if (_p && _p.manualPrices) {
-    res.setHeader("Cache-Control", "s-maxage=3600, stale-while-revalidate=86400");
+    const dynM = await getDynamic(req.query.property);
+    res.setHeader("Cache-Control", "s-maxage=60, stale-while-revalidate=300");
     res.status(200).json({
       property: req.query.property,
       source: "manual",
-      prices: manualPriceList(_p.manualPrices, req.query.start, req.query.end, _p.manualMinStay || 1),
+      prices: adjustPriceList(
+        manualPriceList(_p.manualPrices, req.query.start, req.query.end, _p.manualMinStay || 1),
+        dynM, req.query.start, req.query.end, _p.manualMinStay || 1
+      ),
     });
     return;
   }
@@ -74,16 +79,18 @@ export default async function handler(req, res) {
     const data = JSON.parse(raw);
     const listing = Array.isArray(data) ? data[0] : data;
 
-    const discountFactor = 1 - (GLOBAL_DISCOUNT_PERCENT || 0) / 100;
-    const prices = (listing?.data || []).map((d) => ({
+    const dyn = await getDynamic(property);
+    const discountFactor = 1 - effectiveDiscount(GLOBAL_DISCOUNT_PERCENT, dyn) / 100;
+    const basePrices = (listing?.data || []).map((d) => ({
       date: d.date,
       price: Math.round(d.price * discountFactor),
       min_stay: d.min_stay,
       check_in: d.check_in,
       check_out: d.check_out,
     }));
+    const prices = adjustPriceList(basePrices, dyn, start, end);
 
-    res.setHeader("Cache-Control", "s-maxage=1800, stale-while-revalidate=3600");
+    res.setHeader("Cache-Control", "s-maxage=300, stale-while-revalidate=900");
     res.status(200).json({ property, listing_id: cfg.listingId, prices });
   } catch (err) {
     res.status(500).json({ error: "Errore nel contattare PriceLabs", details: err.message });

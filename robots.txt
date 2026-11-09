@@ -1,6 +1,7 @@
 User-agent: *
 Allow: /
 Disallow: /api/
+Disallow: /admin/
 Disallow: /conferma.html
 
 Sitemap: https://immobiliaita.it/sitemap.xml

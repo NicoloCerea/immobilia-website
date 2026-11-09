@@ -21,3 +21,22 @@
   var io=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.12});
   document.querySelectorAll('.gallery .g-tile,.booking-full,section,.wrap > h2,.amenity').forEach(function(el){if(!el.closest('.lux-hero')){el.classList.add('rv');io.observe(el)}});
 })();
+
+/* Foto gestite dal pannello /admin: se il team ha un elenco foto per questa proprietà lo usa,
+   altrimenti non cambia nulla (restano le foto scritte nella pagina). */
+(function(){
+  try{
+    var slug=location.pathname.split('/').pop().replace('.html','');
+    if(!slug||slug==='index')return;
+    fetch('/api/photos?property='+encodeURIComponent(slug)).then(function(r){return r.ok?r.json():null}).then(function(d){
+      if(!d||!d.photos||!d.photos.length)return;
+      var urls=d.photos.map(function(p){return p.url});
+      if(typeof photos!=='undefined'&&Array.isArray(photos)){photos.length=0;urls.forEach(function(u){photos.push(u)})}
+      var imgs=document.querySelectorAll('.gallery .g-tile img');
+      imgs.forEach(function(im,i){if(urls[i])im.src=urls[i]});
+      var bgEl=document.querySelector('.lux-hero-bg');if(bgEl)bgEl.style.backgroundImage="url('"+urls[0]+"')";
+      var ov=document.querySelector('.gallery .more-overlay');
+      if(ov){var n=urls.length-imgs.length;if(n>0)ov.textContent=ov.textContent.replace(/\d+/,n)}
+    }).catch(function(){});
+  }catch(e){}
+})();

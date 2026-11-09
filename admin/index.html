@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Immobilia · Pannello team</title>
+<style>
+:root{--bg:#f4f2ec;--card:#fff;--ink:#1b2a22;--mut:#66736b;--line:#dcd8cc;--acc:#1f5a43;--acc2:#e9f1ec;--warn:#9a5b00;--warnbg:#fff4de;--bad:#a22b2b;--badbg:#fdeaea;--ok:#1d6b3f;--okbg:#e6f4ea}
+@media (prefers-color-scheme:dark){:root{--bg:#121714;--card:#1b231e;--ink:#e8ede9;--mut:#9aa8a0;--line:#2d3a32;--acc:#6fcf9f;--acc2:#1f2d25;--warn:#f0b45a;--warnbg:#33290f;--bad:#f08a8a;--badbg:#391b1b;--ok:#7fd9a2;--okbg:#14301f}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+button,input,select,textarea{font:inherit;color:inherit}
+input,select,textarea{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 10px;width:100%;min-width:0}
+input:focus,select:focus,textarea:focus,button:focus-visible{outline:2px solid var(--acc);outline-offset:1px}
+button{cursor:pointer;border:1px solid var(--line);background:var(--card);border-radius:8px;padding:8px 14px}
+button.primary{background:var(--acc);border-color:var(--acc);color:#fff}
+@media (prefers-color-scheme:dark){button.primary{color:#0d1a13}}
+button.danger{color:var(--bad)}
+button:disabled{opacity:.5;cursor:not-allowed}
+label{display:block;font-size:13px;color:var(--mut);margin-bottom:4px}
+.hidden{display:none!important}
+.wrap{max-width:1180px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-right)) 40px max(16px,env(safe-area-inset-left))}
+header.top{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:14px 0;flex-wrap:wrap}
+header.top h1{font-size:18px;margin:0}
+.who{color:var(--mut);font-size:13px;display:flex;gap:10px;align-items:center}
+.login{max-width:380px;margin:12vh auto 0;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:26px}
+.login h1{margin:0 0 4px;font-size:20px}
+.login p{margin:0 0 18px;color:var(--mut)}
+.row{display:grid;gap:12px;margin-bottom:12px}
+.row.c2{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.row.c3{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+.layout{display:grid;grid-template-columns:240px minmax(0,1fr);gap:18px;align-items:start}
+@media (max-width:820px){.layout{grid-template-columns:1fr}}
+.props{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px;display:flex;flex-direction:column;gap:2px}
+.props button{text-align:left;border:0;background:transparent;padding:9px 10px;display:flex;justify-content:space-between;gap:8px;align-items:center}
+.props button.on{background:var(--acc2);color:var(--acc);font-weight:600}
+.props small{color:var(--mut);font-weight:400}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px}
+.tabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:16px;border-bottom:1px solid var(--line)}
+.tabs button{border:0;border-bottom:2px solid transparent;border-radius:0;background:transparent;padding:9px 12px;color:var(--mut)}
+.tabs button.on{color:var(--acc);border-bottom-color:var(--acc);font-weight:600}
+h2{font-size:17px;margin:0 0 4px}
+.sub{color:var(--mut);margin:0 0 16px;font-size:13px}
+.note{padding:10px 12px;border-radius:8px;background:var(--warnbg);color:var(--warn);margin-bottom:14px;font-size:13px}
+.msg{padding:10px 12px;border-radius:8px;margin:10px 0;font-size:13px}
+.msg.ok{background:var(--okbg);color:var(--ok)}
+.msg.err{background:var(--badbg);color:var(--bad)}
+.bar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:14px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:middle}
+th{color:var(--mut);font-weight:500;font-size:12px}
+td input{padding:6px 8px}
+.cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;gap:8px}
+.cal-head strong{text-transform:capitalize}
+.cal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.cal .dow{font-size:12px;color:var(--mut);text-align:center;padding:4px 0}
+.day{border:1px solid var(--line);border-radius:8px;min-height:62px;padding:5px 6px;cursor:pointer;background:var(--card);text-align:left;display:flex;flex-direction:column;justify-content:space-between}
+.day .n{font-size:12px;color:var(--mut)}
+.day .p{font-weight:600;font-size:14px}
+.day.fixed{background:var(--acc2);border-color:var(--acc)}
+.day.fixed .p::after{content:" ●";font-size:9px;color:var(--acc)}
+.day.sel{outline:2px solid var(--acc);outline-offset:-2px}
+.day.empty{visibility:hidden}
+.day.past{opacity:.45}
+.legend{font-size:12px;color:var(--mut);margin-top:8px}
+.rule{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;padding:12px;border:1px solid var(--line);border-radius:10px;margin-bottom:8px;align-items:center}
+.rule.off{opacity:.55}
+.rule small{color:var(--mut)}
+.photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px}
+.ph{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--card);display:flex;flex-direction:column}
+.ph img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:var(--acc2)}
+.ph .b{padding:8px;display:flex;flex-direction:column;gap:6px}
+.ph .acts{display:flex;gap:4px;flex-wrap:wrap}
+.ph .acts button{padding:4px 8px;font-size:13px}
+.badge{display:inline-block;font-size:11px;padding:2px 7px;border-radius:99px;background:var(--acc2);color:var(--acc);font-weight:600}
+.small{font-size:12px;color:var(--mut)}
+.audit td{font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <!-- LOGIN -->
+  <section id="loginView" class="login hidden">
+    <h1>Pannello Immobilia</h1>
+    <p>Accesso riservato al team.</p>
+    <form id="loginForm" autocomplete="on">
+      <div class="row"><div><label for="em">Email</label><input id="em" type="email" autocomplete="username" required></div></div>
+      <div class="row"><div><label for="pw">Password</label><input id="pw" type="password" autocomplete="current-password" required></div></div>
+      <button class="primary" style="width:100%" id="loginBtn">Entra</button>
+      <div id="loginMsg"></div>
+    </form>
+  </section>
+
+  <!-- APP -->
+  <section id="appView" class="hidden">
+    <header class="top">
+      <h1>Immobilia · Pannello team</h1>
+      <div class="who"><span id="whoEmail"></span><button id="logoutBtn">Esci</button></div>
+    </header>
+    <div class="layout">
+      <nav class="props" id="propList" aria-label="Proprietà"></nav>
+      <main class="panel">
+        <div id="propHead"></div>
+        <div class="tabs" id="tabs" role="tablist">
+          <button data-tab="fees" class="on">Tariffe e pulizie</button>
+          <button data-tab="cal">Calendario prezzi</button>
+          <button data-tab="rules">Regole di prezzo</button>
+          <button data-tab="photos">Foto</button>
+          <button data-tab="log">Registro</button>
+        </div>
+        <div id="tabBody"></div>
+      </main>
+    </div>
+  </section>
+  <noscript>Serve JavaScript per usare il pannello.</noscript>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="config.js"></script>
+<script>
+(function () {
+  "use strict";
+  var C = window.ADMIN_CONFIG;
+  var sb = supabase.createClient(C.SUPABASE_URL, C.SUPABASE_ANON_KEY, { auth: { persistSession: true, autoRefreshToken: true } });
+  var $ = function (id) { return document.getElementById(id); };
+  var state = { user: null, props: [], slug: null, tab: "fees", bookable: {}, calMonth: null, calSel: null };
+
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  function ok(el, t) { el.innerHTML = '<div class="msg ok">' + esc(t) + "</div>"; }
+  function bad(el, t) { el.innerHTML = '<div class="msg err">' + esc(t) + "</div>"; }
+  function ymd(d) { return d.toISOString().slice(0, 10); }
+  function addDays(s, n) { var d = new Date(s + "T00:00:00Z"); d.setUTCDate(d.getUTCDate() + n); return ymd(d); }
+  function fmtIt(s) { var p = s.split("-"); return p[2] + "/" + p[1] + "/" + p[0]; }
+  function num(v) { var n = parseFloat(String(v).replace(",", ".")); return isNaN(n) ? null : n; }
+
+  /* ---------- accesso ---------- */
+  async function boot() {
+    var s = await sb.auth.getSession();
+    if (s.data.session) return enter(s.data.session.user);
+    show("login");
+  }
+  function show(w) { $("loginView").classList.toggle("hidden", w !== "login"); $("appView").classList.toggle("hidden", w !== "app"); }
+
+  $("loginForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
+    $("loginBtn").disabled = true; $("loginMsg").innerHTML = "";
+    var r = await sb.auth.signInWithPassword({ email: $("em").value.trim(), password: $("pw").value });
+    $("loginBtn").disabled = false;
+    if (r.error) return bad($("loginMsg"), "Email o password non corrette.");
+    enter(r.data.user);
+  });
+  $("logoutBtn").addEventListener("click", async function () { await sb.auth.signOut(); location.reload(); });
+
+  async function enter(user) {
+    // Solo chi è nell'elenco del team può proseguire (le regole del database lo impongono comunque).
+    var me = await sb.from("site_admins").select("email,role").eq("email", String(user.email).toLowerCase()).maybeSingle();
+    if (me.error || !me.data) {
+      await sb.auth.signOut();
+      show("login");
+      return bad($("loginMsg"), "Accesso negato: questo account non fa parte del team abilitato.");
+    }
+    state.user = user; state.role = me.data.role;
+    $("whoEmail").textContent = user.email;
+    show("app");
+    await loadProps();
+  }
+
+  /* ---------- proprietà ---------- */
+  async function loadProps() {
+    var r = await sb.from("site_properties").select("*").order("name");
+    if (r.error) { $("tabBody").innerHTML = ""; return bad($("propHead"), "Errore nel leggere le proprietà: " + r.error.message); }
+    state.props = r.data;
+    if (!state.props.length) { $("propHead").innerHTML = '<div class="note">Nessuna proprietà nel database: esegui prima i file SQL (schema e seed) indicati nelle istruzioni.</div>'; $("tabBody").innerHTML = ""; $("propList").innerHTML = ""; return; }
+    if (!state.slug || !state.props.some(function (p) { return p.slug === state.slug; })) state.slug = state.props[0].slug;
+    drawList();
+    await probeBookable(state.slug);
+    render();
+  }
+  function drawList() {
+    $("propList").innerHTML = state.props.map(function (p) {
+      return '<button data-slug="' + esc(p.slug) + '" class="' + (p.slug === state.slug ? "on" : "") + '">' + esc(p.name) + "</button>";
+    }).join("");
+  }
+  $("propList").addEventListener("click", async function (e) {
+    var b = e.target.closest("button[data-slug]"); if (!b) return;
+    state.slug = b.getAttribute("data-slug"); state.calSel = null;
+    drawList(); await probeBookable(state.slug); render();
+  });
+  // una proprietà è "prenotabile online" solo se l'API pubblica la conosce
+  async function probeBookable(slug) {
+    if (slug in state.bookable) return;
+    try { var r = await fetch("/api/rules?property=" + encodeURIComponent(slug)); state.bookable[slug] = r.ok; }
+    catch (e) { state.bookable[slug] = null; }
+  }
+  function cur() { return state.props.find(function (p) { return p.slug === state.slug; }); }
+  $("tabs").addEventListener("click", function (e) {
+    var b = e.target.closest("button[data-tab]"); if (!b) return;
+    state.tab = b.getAttribute("data-tab"); render();
+  });
+
+  function render() {
+    var p = cur(); if (!p) return;
+    [].forEach.call($("tabs").children, function (b) { b.classList.toggle("on", b.getAttribute("data-tab") === state.tab); });
+    var bk = state.bookable[p.slug];
+    $("propHead").innerHTML = '<h2>' + esc(p.name) + "</h2>" +
+      (bk === false ? '<div class="note">Questa proprietà non è ancora prenotabile online: tariffe, calendario e regole qui sotto non hanno effetto sul sito finché non viene collegata. Le foto invece funzionano.</div>' : "") +
+      (bk === null ? '<div class="note">Non riesco a verificare se questa proprietà è collegata alle prenotazioni online.</div>' : "");
+    var fn = { fees: tabFees, cal: tabCal, rules: tabRules, photos: tabPhotos, log: tabLog }[state.tab];
+    $("tabBody").innerHTML = ""; fn();
+  }
+
+  /* ---------- Tariffe e pulizie ---------- */
+  function tabFees() {
+    var p = cur(), body = $("tabBody");
+    var byG = p.cleaning_fee_by_guests || {};
+    var rowsG = Object.keys(byG).map(Number).sort(function (a, b) { return a - b; });
+    body.innerHTML =
+      '<p class="sub">Questi valori sostituiscono quelli scritti nel codice. Si applicano entro un minuto.</p>' +
+      '<div class="row c3">' +
+      '<div><label>Pulizia base (€)</label><input id="f_cb" inputmode="decimal" value="' + esc(p.cleaning_fee_base) + '"></div>' +
+      '<div><label>Pulizia per ospite (€) <span class="small">se non usi la tabella</span></label><input id="f_cg" inputmode="decimal" value="' + esc(p.cleaning_fee_per_guest) + '"></div>' +
+      '<div><label>Supplemento animale (€)</label><input id="f_pet" inputmode="decimal" value="' + esc(p.pet_fee) + '"></div>' +
+      '</div><div class="row c3">' +
+      '<div><label>Ospiti inclusi nel prezzo</label><input id="f_occ" inputmode="numeric" value="' + esc(p.base_occupancy) + '"></div>' +
+      '<div><label>Ospite extra, a notte (€)</label><input id="f_ext" inputmode="decimal" value="' + esc(p.extra_guest_fee_per_night) + '"></div>' +
+      '<div><label>Soggiorno minimo (notti) <span class="small">vuoto = come ora</span></label><input id="f_min" inputmode="numeric" value="' + esc(p.min_stay == null ? "" : p.min_stay) + '"></div>' +
+      '</div><div class="row c3">' +
+      '<div><label>Sconto sul prezzo (%) <span class="small">vuoto = sconto generale del sito</span></label><input id="f_disc" inputmode="decimal" value="' + esc(p.discount_percent == null ? "" : p.discount_percent) + '"></div>' +
+      '<div><label>Commissione Immobilia (%) <span class="small">solo uso interno</span></label><input id="f_com" inputmode="decimal" value="' + esc(p.commission_percent) + '"></div>' +
+      '</div>' +
+      '<h2 style="margin-top:18px">Pulizia per numero di ospiti</h2>' +
+      '<p class="sub">Importo aggiunto alla pulizia base in base agli ospiti. Se la tabella è vuota si usa "pulizia per ospite".</p>' +
+      '<table id="gt"><thead><tr><th>Ospiti</th><th>Aggiunta (€)</th><th></th></tr></thead><tbody></tbody></table>' +
+      '<div class="bar"><button id="addG">+ Aggiungi riga</button></div>' +
+      '<div class="bar"><button class="primary" id="saveFees">Salva</button><span id="feesMsg"></span></div>';
+    var tb = body.querySelector("#gt tbody");
+    function addRow(g, v) {
+      var tr = document.createElement("tr");
+      tr.innerHTML = '<td><input class="g" inputmode="numeric" value="' + esc(g) + '"></td><td><input class="v" inputmode="decimal" value="' + esc(v) + '"></td><td><button class="danger">Togli</button></td>';
+      tr.querySelector("button").onclick = function () { tr.remove(); };
+      tb.appendChild(tr);
+    }
+    rowsG.forEach(function (g) { addRow(g, byG[g]); });
+    $("addG").onclick = function () { addRow("", ""); };
+    $("saveFees").onclick = async function () {
+      var msg = $("feesMsg"); msg.innerHTML = "";
+      var table = {}, bad_ = false;
+      tb.querySelectorAll("tr").forEach(function (tr) {
+        var g = num(tr.querySelector(".g").value), v = num(tr.querySelector(".v").value);
+        if (g == null && v == null) return;
+        if (g == null || v == null || g < 1 || v < 0) bad_ = true; else table[String(Math.round(g))] = v;
+      });
+      var f = { cleaning_fee_base: num($("f_cb").value), cleaning_fee_per_guest: num($("f_cg").value), pet_fee: num($("f_pet").value),
+        base_occupancy: num($("f_occ").value), extra_guest_fee_per_night: num($("f_ext").value), commission_percent: num($("f_com").value) };
+      var min = $("f_min").value.trim() === "" ? null : num($("f_min").value);
+      var disc = $("f_disc").value.trim() === "" ? null : num($("f_disc").value);
+      if (bad_ || Object.keys(f).some(function (k) { return f[k] == null || f[k] < 0; }) || (min !== null && (min < 1 || min > 60)) || (disc !== null && (disc < 0 || disc > 90)) || f.base_occupancy < 1)
+        return bad(msg, "Controlla i numeri: ci sono valori vuoti, negativi o fuori misura.");
+      f.cleaning_fee_by_guests = Object.keys(table).length ? table : null;
+      f.min_stay = min; f.discount_percent = disc; f.base_occupancy = Math.round(f.base_occupancy);
+      this.disabled = true;
+      var r = await sb.from("site_properties").update(f).eq("slug", p.slug);
+      this.disabled = false;
+      if (r.error) return bad(msg, "Non salvato: " + r.error.message);
+      Object.assign(p, f); ok(msg, "Salvato. Sul sito i nuovi valori compaiono entro un minuto.");
+    };
+  }
+
+  /* ---------- Calendario prezzi ---------- */
+  var MONTHS = ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio", "agosto", "settembre", "ottobre", "novembre", "dicembre"];
+  async function tabCal() {
+    var p = cur(), body = $("tabBody");
+    if (!state.calMonth) { var n = new Date(); state.calMonth = n.getFullYear() + "-" + String(n.getMonth() + 1).padStart(2, "0"); }
+    var ym = state.calMonth, y = +ym.slice(0, 4), m = +ym.slice(5, 7);
+    var first = ym + "-01", last = ymd(new Date(Date.UTC(y, m, 0)));
+    body.innerHTML = '<p class="sub">Clicca un giorno di inizio e uno di fine per scegliere un periodo, poi imposta un prezzo fisso a notte. I giorni con ● hanno un prezzo fisso deciso da voi, gli altri mostrano il prezzo attuale del sito.</p><div id="calArea">Carico…</div>';
+    var ov = await sb.from("site_price_overrides").select("*").eq("property_slug", p.slug).order("date_from");
+    if (ov.error) return bad($("calArea"), "Errore: " + ov.error.message);
+    var live = {};
+    if (state.bookable[p.slug]) {
+      try { var r = await fetch("/api/pricing?property=" + encodeURIComponent(p.slug) + "&start=" + first + "&end=" + last); var j = await r.json(); (j.prices || []).forEach(function (x) { live[x.date] = x.price; }); } catch (e) { /* ignora */ }
+    }
+    var fixed = {};
+    ov.data.forEach(function (o) { for (var d = o.date_from; d <= o.date_to; d = addDays(d, 1)) fixed[d] = o.price; });
+    var today = ymd(new Date());
+    var lead = (new Date(Date.UTC(y, m - 1, 1)).getUTCDay() + 6) % 7, days = new Date(Date.UTC(y, m, 0)).getUTCDate();
+    var html = '<div class="cal-head"><button id="pm">←</button><strong>' + MONTHS[m - 1] + " " + y + '</strong><button id="nm">→</button></div><div class="cal">';
+    ["Lu", "Ma", "Me", "Gi", "Ve", "Sa", "Do"].forEach(function (d) { html += '<div class="dow">' + d + "</div>"; });
+    for (var i = 0; i < lead; i++) html += '<div class="day empty"></div>';
+    for (var d = 1; d <= days; d++) {
+      var ds = ym + "-" + String(d).padStart(2, "0"), isF = ds in fixed, price = isF ? fixed[ds] : live[ds];
+      var sel = state.calSel && ds >= state.calSel[0] && ds <= (state.calSel[1] || state.calSel[0]);
+      html += '<button class="day' + (isF ? " fixed" : "") + (sel ? " sel" : "") + (ds < today ? " past" : "") + '" data-d="' + ds + '"><span class="n">' + d + '</span><span class="p">' + (price != null ? "€" + Math.round(price) : "–") + "</span></button>";
+    }
+    html += "</div>";
+    html += '<div class="legend">' + (state.bookable[p.slug] ? "Prezzi grigi/neri = prezzo attuale del sito." : "Proprietà non collegata alle prenotazioni: si vedono solo i prezzi fissi.") + "</div>";
+    html += '<div id="calForm"></div>';
+    $("calArea").innerHTML = html;
+    $("pm").onclick = function () { state.calMonth = ymd(new Date(Date.UTC(y, m - 2, 1))).slice(0, 7); state.calSel = null; tabCal(); };
+    $("nm").onclick = function () { state.calMonth = ymd(new Date(Date.UTC(y, m, 1))).slice(0, 7); state.calSel = null; tabCal(); };
+    $("calArea").querySelectorAll(".day[data-d]").forEach(function (b) {
+      b.onclick = function () {
+        var ds = b.getAttribute("data-d");
+        if (!state.calSel || state.calSel[1]) state.calSel = [ds, null];
+        else state.calSel = ds >= state.calSel[0] ? [state.calSel[0], ds] : [ds, state.calSel[0]];
+        $("calArea").querySelectorAll(".day[data-d]").forEach(function (x) { var dd = x.getAttribute("data-d"); x.classList.toggle("sel", dd >= state.calSel[0] && dd <= (state.calSel[1] || state.calSel[0])); });
+        drawCalForm(ov.data);
+      };
+    });
+    if (state.calSel) drawCalForm(ov.data);
+  }
+  function drawCalForm(rows) {
+    var s = state.calSel, from = s[0], to = s[1] || s[0], p = cur();
+    $("calForm").innerHTML = '<div class="panel" style="margin-top:14px;background:var(--bg)">' +
+      '<strong>Dal ' + fmtIt(from) + " al " + fmtIt(to) + "</strong>" +
+      '<div class="row c3" style="margin-top:10px"><div><label>Prezzo a notte (€)</label><input id="c_price" inputmode="decimal" placeholder="es. 180"></div>' +
+      '<div style="grid-column:span 2"><label>Nota (facoltativa)</label><input id="c_note" maxlength="120" placeholder="es. Capodanno"></div></div>' +
+      '<div class="bar"><button class="primary" id="c_save">Imposta prezzo fisso</button><button class="danger" id="c_clear">Togli i prezzi fissi in questo periodo</button><span id="c_msg"></span></div>' +
+      '<p class="small">Il prezzo fisso è quello finale mostrato al cliente (sconti e regole non si sommano).</p></div>';
+    $("c_save").onclick = async function () {
+      var price = num($("c_price").value), msg = $("c_msg");
+      if (price == null || price <= 0 || price >= 10000) return bad(msg, "Inserisci un prezzo valido, tra 1 e 9999.");
+      this.disabled = true;
+      var e = await cutRange(rows, p.slug, from, to);
+      if (!e) {
+        var r = await sb.from("site_price_overrides").insert({ property_slug: p.slug, date_from: from, date_to: to, price: price, note: $("c_note").value.trim() || null, created_by: state.user.email });
+        e = r.error;
+      }
+      this.disabled = false;
+      if (e) return bad(msg, "Non salvato: " + e.message);
+      state.calSel = null; tabCal();
+    };
+    $("c_clear").onclick = async function () {
+      this.disabled = true; var e = await cutRange(rows, p.slug, from, to); this.disabled = false;
+      if (e) return bad($("c_msg"), "Non rimosso: " + e.message);
+      state.calSel = null; tabCal();
+    };
+  }
+  // Libera un periodo dai prezzi fissi esistenti (li accorcia, li divide o li elimina) per evitare sovrapposizioni.
+  async function cutRange(rows, slug, from, to) {
+    for (var i = 0; i < rows.length; i++) {
+      var o = rows[i];
+      if (o.date_to < from || o.date_from > to) continue;
+      var left = o.date_from < from, right = o.date_to > to, r;
+      if (left && right) {
+        r = await sb.from("site_price_overrides").update({ date_to: addDays(from, -1) }).eq("id", o.id); if (r.error) return r.error;
+        r = await sb.from("site_price_overrides").insert({ property_slug: slug, date_from: addDays(to, 1), date_to: o.date_to, price: o.price, note: o.note, created_by: state.user.email }); if (r.error) return r.error;
+      } else if (left) { r = await sb.from("site_price_overrides").update({ date_to: addDays(from, -1) }).eq("id", o.id); if (r.error) return r.error; }
+      else if (right) { r = await sb.from("site_price_overrides").update({ date_from: addDays(to, 1) }).eq("id", o.id); if (r.error) return r.error; }
+      else { r = await sb.from("site_price_overrides").delete().eq("id", o.id); if (r.error) return r.error; }
+    }
+    return null;
+  }
+
+  /* ---------- Regole di prezzo ---------- */
+  var KIND = { percent_adjust: "Aumento/sconto in un periodo", weekend_markup: "Maggiorazione weekend (notti di venerdì e sabato)" };
+  async function tabRules() {
+    var p = cur(), body = $("tabBody");
+    body.innerHTML = '<p class="sub">Le regole cambiano il prezzo base (quello di PriceLabs già scontato) e valgono in ordine di priorità: numero più basso prima. Un prezzo fisso del calendario le ignora.</p><div id="rl">Carico…</div>' +
+      '<h2 style="margin-top:20px">Nuova regola</h2>' +
+      '<div class="row c3"><div><label>Tipo</label><select id="r_kind"><option value="percent_adjust">' + KIND.percent_adjust + '</option><option value="weekend_markup">' + KIND.weekend_markup + '</option></select></div>' +
+      '<div><label>Percentuale (+ aumenta, − sconta)</label><input id="r_pct" inputmode="decimal" placeholder="es. 10 oppure -5"></div>' +
+      '<div><label>Si applica a</label><select id="r_scope"><option value="one">Solo ' + esc(p.name) + '</option><option value="all">Tutte le proprietà</option></select></div></div>' +
+      '<div class="row c3"><div><label>Dal (facoltativo)</label><input id="r_from" type="date"></div><div><label>Al (facoltativo)</label><input id="r_to" type="date"></div><div><label>Priorità</label><input id="r_pri" inputmode="numeric" value="100"></div></div>' +
+      '<div class="row"><div><label>Nota</label><input id="r_note" maxlength="120" placeholder="es. Alta stagione"></div></div>' +
+      '<div class="bar"><button class="primary" id="r_add">Aggiungi regola</button><span id="r_msg"></span></div>';
+    async function list() {
+      var r = await sb.from("site_price_rules").select("*").or("property_slug.eq." + p.slug + ",property_slug.is.null").order("priority");
+      if (r.error) return bad($("rl"), "Errore: " + r.error.message);
+      if (!r.data.length) { $("rl").innerHTML = '<p class="small">Nessuna regola.</p>'; return; }
+      $("rl").innerHTML = r.data.map(function (x) {
+        var per = x.date_from || x.date_to ? " · " + (x.date_from ? "dal " + fmtIt(x.date_from) : "") + (x.date_to ? " al " + fmtIt(x.date_to) : "") : " · tutto l'anno";
+        var pct = Number(x.params && x.params.percent);
+        return '<div class="rule' + (x.enabled ? "" : " off") + '"><div><strong>' + esc(KIND[x.kind] || x.kind) + " " + (pct > 0 ? "+" : "") + esc(pct) + "%</strong> " +
+          (x.property_slug ? "" : '<span class="badge">Tutte</span>') + "<br><small>" + esc(per.replace(/^ · /, "")) + " · priorità " + esc(x.priority) + (x.note ? " · " + esc(x.note) : "") + "</small></div>" +
+          '<div class="acts"><button data-t="' + x.id + '">' + (x.enabled ? "Disattiva" : "Attiva") + '</button> <button class="danger" data-x="' + x.id + '">Elimina</button></div></div>';
+      }).join("");
+      $("rl").querySelectorAll("button[data-t]").forEach(function (b) {
+        b.onclick = async function () { var row = r.data.find(function (z) { return z.id === b.getAttribute("data-t"); }); var u = await sb.from("site_price_rules").update({ enabled: !row.enabled }).eq("id", row.id); if (u.error) alert(u.error.message); list(); };
+      });
+      $("rl").querySelectorAll("button[data-x]").forEach(function (b) {
+        b.onclick = async function () { if (!confirm("Eliminare questa regola?")) return; var u = await sb.from("site_price_rules").delete().eq("id", b.getAttribute("data-x")); if (u.error) alert(u.error.message); list(); };
+      });
+    }
+    list();
+    $("r_add").onclick = async function () {
+      var pct = num($("r_pct").value), pri = num($("r_pri").value), from = $("r_from").value || null, to = $("r_to").value || null, msg = $("r_msg");
+      if (pct == null || pct === 0 || pct < -90 || pct > 300) return bad(msg, "Inserisci una percentuale valida (diversa da 0, tra -90 e 300).");
+      if (pri == null) return bad(msg, "La priorità deve essere un numero.");
+      if (from && to && to < from) return bad(msg, "La data finale è prima di quella iniziale.");
+      this.disabled = true;
+      var r = await sb.from("site_price_rules").insert({ property_slug: $("r_scope").value === "all" ? null : p.slug, kind: $("r_kind").value, date_from: from, date_to: to, params: { percent: pct }, priority: Math.round(pri), note: $("r_note").value.trim() || null, created_by: state.user.email });
+      this.disabled = false;
+      if (r.error) return bad(msg, "Non salvata: " + r.error.message);
+      ok(msg, "Regola aggiunta."); $("r_pct").value = ""; $("r_note").value = ""; list();
+    };
+  }
+
+  /* ---------- Foto ---------- */
+  function photoUrl(path) { return path.indexOf("images/") === 0 ? "/" + path : sb.storage.from("site-photos").getPublicUrl(path).data.publicUrl; }
+  async function tabPhotos() {
+    var p = cur(), body = $("tabBody");
+    body.innerHTML = '<p class="sub">La prima foto è quella grande in cima all\'annuncio e nella pagina iniziale. L\'ordine che vedi è quello del sito. Le modifiche valgono entro un minuto.</p>' +
+      '<div class="bar" style="margin:0 0 14px"><label class="primary" style="margin:0;padding:8px 14px;border-radius:8px;background:var(--acc);color:#fff;cursor:pointer">+ Carica foto<input id="up" type="file" accept="image/jpeg,image/png,image/webp" multiple hidden></label><span id="phMsg"></span></div><div class="photos" id="ph">Carico…</div>';
+    var rows = [];
+    async function load() {
+      var r = await sb.from("site_photos").select("*").eq("property_slug", p.slug).order("position");
+      if (r.error) return bad($("ph"), "Errore: " + r.error.message);
+      rows = r.data; draw();
+    }
+    function draw() {
+      if (!rows.length) { $("ph").innerHTML = '<p class="small">Nessuna foto registrata: il sito usa quelle già presenti nella pagina. Caricandone una, il sito userà solo l\'elenco che gestisci qui.</p>'; return; }
+      $("ph").innerHTML = rows.map(function (x, i) {
+        return '<div class="ph"><img loading="lazy" src="' + esc(photoUrl(x.storage_path)) + '" alt=""><div class="b"><div><span class="badge">' + (i + 1) + (i === 0 ? " · copertina" : "") + '</span></div>' +
+          '<input data-cap="' + x.id + '" placeholder="Didascalia" value="' + esc(x.caption || "") + '" maxlength="120">' +
+          '<div class="acts"><button data-up="' + i + '" title="Sposta prima"' + (i === 0 ? " disabled" : "") + '>←</button><button data-dn="' + i + '" title="Sposta dopo"' + (i === rows.length - 1 ? " disabled" : "") + '>→</button>' +
+          (i === 0 ? "" : '<button data-first="' + i + '">Copertina</button>') + '<button class="danger" data-del="' + i + '">Togli</button></div></div></div>';
+      }).join("");
+      $("ph").querySelectorAll("[data-up]").forEach(function (b) { b.onclick = function () { move(+b.getAttribute("data-up"), -1); }; });
+      $("ph").querySelectorAll("[data-dn]").forEach(function (b) { b.onclick = function () { move(+b.getAttribute("data-dn"), 1); }; });
+      $("ph").querySelectorAll("[data-first]").forEach(function (b) { b.onclick = function () { var i = +b.getAttribute("data-first"); var x = rows.splice(i, 1)[0]; rows.unshift(x); persist(); }; });
+      $("ph").querySelectorAll("[data-del]").forEach(function (b) { b.onclick = async function () {
+        var x = rows[+b.getAttribute("data-del")]; if (!confirm("Togliere questa foto dal sito? (il file originale non viene cancellato dal sito)")) return;
+        var d = await sb.from("site_photos").delete().eq("id", x.id); if (d.error) return bad($("phMsg"), d.error.message);
+        if (x.storage_path.indexOf("images/") !== 0) await sb.storage.from("site-photos").remove([x.storage_path]);
+        rows = rows.filter(function (z) { return z.id !== x.id; }); await persist(true);
+      }; });
+      $("ph").querySelectorAll("[data-cap]").forEach(function (inp) { inp.onchange = async function () { var u = await sb.from("site_photos").update({ caption: inp.value.trim() || null }).eq("id", inp.getAttribute("data-cap")); if (u.error) bad($("phMsg"), u.error.message); }; });
+    }
+    function move(i, d) { var j = i + d; if (j < 0 || j >= rows.length) return; var t = rows[i]; rows[i] = rows[j]; rows[j] = t; persist(); }
+    async function persist(skipIfEmpty) {
+      draw();
+      for (var i = 0; i < rows.length; i++) { if (rows[i].position !== i) { var u = await sb.from("site_photos").update({ position: i }).eq("id", rows[i].id); if (u.error) return bad($("phMsg"), u.error.message); rows[i].position = i; } }
+      ok($("phMsg"), "Ordine salvato.");
+    }
+    $("up").onchange = async function () {
+      var files = [].slice.call(this.files), msg = $("phMsg"); if (!files.length) return;
+      var pos = rows.length;
+      for (var k = 0; k < files.length; k++) {
+        msg.innerHTML = '<div class="msg ok">Carico ' + (k + 1) + " di " + files.length + "…</div>";
+        try {
+          var blob = await shrink(files[k]);
+          var path = p.slug + "/" + Date.now() + "-" + k + ".jpg";
+          var up = await sb.storage.from("site-photos").upload(path, blob, { contentType: "image/jpeg", cacheControl: "31536000" });
+          if (up.error) throw up.error;
+          var ins = await sb.from("site_photos").insert({ property_slug: p.slug, storage_path: path, position: pos++, created_by: state.user.email });
+          if (ins.error) throw ins.error;
+        } catch (e) { return bad(msg, "Caricamento interrotto: " + (e.message || e)); }
+      }
+      ok(msg, "Foto caricate."); this.value = ""; load();
+    };
+    load();
+  }
+  // Riduce le foto a max 2200 px e le comprime in JPEG, così il sito resta veloce.
+  function shrink(file) {
+    return new Promise(function (resolve, reject) {
+      var img = new Image(), url = URL.createObjectURL(file);
+      img.onload = function () {
+        var s = Math.min(1, 2200 / Math.max(img.width, img.height)), c = document.createElement("canvas");
+        c.width = Math.round(img.width * s); c.height = Math.round(img.height * s);
+        c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+        c.toBlob(function (b) { URL.revokeObjectURL(url); b ? resolve(b) : reject(new Error("Immagine non leggibile")); }, "image/jpeg", 0.85);
+      };
+      img.onerror = function () { URL.revokeObjectURL(url); reject(new Error("Immagine non leggibile")); };
+      img.src = url;
+    });
+  }
+
+  /* ---------- Registro ---------- */
+  async function tabLog() {
+    var body = $("tabBody");
+    body.innerHTML = '<p class="sub">Ultime 60 modifiche fatte dal team (tutte le proprietà).</p><div id="lg">Carico…</div>';
+    var r = await sb.from("site_audit").select("at,who,table_name,action,row_data").order("at", { ascending: false }).limit(60);
+    if (r.error) return bad($("lg"), "Errore: " + r.error.message);
+    var T = { site_properties: "Tariffe", site_price_overrides: "Prezzo fisso", site_price_rules: "Regola", site_photos: "Foto", site_admins: "Team" };
+    var A = { INSERT: "aggiunto", UPDATE: "modificato", DELETE: "eliminato" };
+    $("lg").innerHTML = '<table class="audit"><thead><tr><th>Quando</th><th>Chi</th><th>Cosa</th><th>Dettaglio</th></tr></thead><tbody>' + r.data.map(function (x) {
+      var d = x.row_data || {}, det = d.property_slug || d.slug || d.email || "";
+      return "<tr><td>" + esc(new Date(x.at).toLocaleString("it-IT")) + "</td><td>" + esc(x.who || "") + "</td><td>" + esc((T[x.table_name] || x.table_name) + " " + (A[x.action] || x.action)) + "</td><td>" + esc(det) + "</td></tr>";
+    }).join("") + "</tbody></table>";
+  }
+
+  boot();
+})();
+</script>
+</body>
+</html>

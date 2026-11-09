@@ -4,6 +4,7 @@
 // Uso: GET /api/search?checkin=2026-08-25&checkout=2026-08-28&guests=2
 
 import { PROPERTIES, GLOBAL_DISCOUNT_PERCENT } from "./_config.js";
+import { getDynamic, effectiveFees, effectiveDiscount, adjustNight } from "./_dyn.js";
 
 function formatDate(d) {
   return `${d.slice(0, 4)}-${d.slice(4, 6)}-${d.slice(6, 8)}`;
@@ -56,13 +57,15 @@ export default async function handler(req, res) {
   const results = await Promise.all(
     entries.map(async ([slug, cfg]) => {
       try {
+        const dyn = await getDynamic(slug);
+        const fees = effectiveFees(cfg, dyn);
         const [blocked, prices] = await Promise.all([
           getBlockedDates(cfg.icalUrl),
           cfg.manualPrices ? Promise.resolve(null) : getPrices(API_KEY, cfg.listingId, cfg.pms, checkin, checkout),
         ]);
 
         // Verifica libere tutte le notti richieste (dal checkin al giorno prima del checkout)
-        const discountFactor = cfg.manualPrices ? 1 : 1 - (GLOBAL_DISCOUNT_PERCENT || 0) / 100;
+        const discountFactor = cfg.manualPrices ? 1 : 1 - effectiveDiscount(GLOBAL_DISCOUNT_PERCENT, dyn) / 100;
         let cur = new Date(checkin);
         const end = new Date(checkout);
         let available = true;
@@ -71,17 +74,17 @@ export default async function handler(req, res) {
         while (cur < end) {
           const ds = cur.toISOString().slice(0, 10);
           if (blocked.has(ds)) available = false;
-          if (cfg.manualPrices) { if (cfg.manualPrices[ds]) nightlyTotal += cfg.manualPrices[ds]; }
-          else if (prices[ds]) nightlyTotal += prices[ds].price * discountFactor;
+          if (cfg.manualPrices) { if (cfg.manualPrices[ds]) nightlyTotal += dyn ? adjustNight(ds, cfg.manualPrices[ds], dyn) : cfg.manualPrices[ds]; }
+          else if (prices[ds]) nightlyTotal += dyn ? adjustNight(ds, Math.round(prices[ds].price * discountFactor), dyn) : prices[ds].price * discountFactor;
           nights++;
           cur.setDate(cur.getDate() + 1);
         }
 
         if (!available) return { slug, available: false };
 
-        const extraGuests = Math.max(0, guestCount - (cfg.baseOccupancy || 2));
-        const extraGuestTotal = extraGuests * (cfg.extraGuestFeePerNight || 0) * nights;
-        const cleaning = (cfg.cleaningFeeBase || 0) + (cfg.cleaningFeePerGuest || 0) * guestCount;
+        const extraGuests = Math.max(0, guestCount - (fees.baseOccupancy || 2));
+        const extraGuestTotal = extraGuests * (fees.extraGuestFeePerNight || 0) * nights;
+        const cleaning = (fees.cleaningFeeBase || 0) + (fees.cleaningFeePerGuest || 0) * guestCount;
         const total = Math.round(nightlyTotal + extraGuestTotal + cleaning);
 
         return { slug, available: true, total, nights };

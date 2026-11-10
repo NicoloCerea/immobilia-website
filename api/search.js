@@ -4,7 +4,7 @@
 // Uso: GET /api/search?checkin=2026-08-25&checkout=2026-08-28&guests=2
 
 import { PROPERTIES, GLOBAL_DISCOUNT_PERCENT } from "./_config.js";
-import { getDynamic, effectiveFees, effectiveDiscount, adjustNight } from "./_dyn.js";
+import { getDynamic, effectiveFees, effectiveDiscount, adjustNight, hasOverride } from "./_dyn.js";
 import { validateStay } from "./_stay.js";
 
 function formatDate(d) {
@@ -77,8 +77,10 @@ export default async function handler(req, res) {
         while (cur < end) {
           const ds = cur.toISOString().slice(0, 10);
           if (blocked.has(ds)) available = false;
-          if (cfg.manualPrices) { if (cfg.manualPrices[ds]) nightlyTotal += dyn ? adjustNight(ds, cfg.manualPrices[ds], dyn) : cfg.manualPrices[ds]; }
-          else if (prices[ds]) nightlyTotal += dyn ? adjustNight(ds, Math.round(prices[ds].price * discountFactor), dyn) : prices[ds].price * discountFactor;
+          const base = cfg.manualPrices ? cfg.manualPrices[ds] : (prices[ds] ? (dyn ? Math.round(prices[ds].price * discountFactor) : prices[ds].price * discountFactor) : undefined);
+          if (base) nightlyTotal += dyn ? adjustNight(ds, base, dyn) : base;
+          else if (dyn && hasOverride(ds, dyn)) nightlyTotal += adjustNight(ds, 0, dyn);
+          else available = false; // notte senza prezzo: non proponibile
           nights++;
           cur.setDate(cur.getDate() + 1);
         }

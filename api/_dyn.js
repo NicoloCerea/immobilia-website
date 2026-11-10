@@ -92,21 +92,26 @@ function inRange(d, from, to) {
 
 // Applica prezzi fissi e regole a un singolo prezzo notturno già scontato.
 // Ritorna il prezzo finale in euro interi.
+export function hasOverride(date, dyn) { return !!(dyn && dyn.overrides.some((o) => inRange(date, o.date_from, o.date_to))); }
+
 export function adjustNight(date, price, dyn) {
   if (!dyn) return price;
   const fixed = dyn.overrides.find((o) => inRange(date, o.date_from, o.date_to));
   if (fixed) return Math.round(Number(fixed.price));
   let p = price;
+  let changed = false;
   for (const r of dyn.rules) {
     if (!inRange(date, r.date_from, r.date_to)) continue;
     const pct = Number(r.params && r.params.percent);
     if (!pct || Number.isNaN(pct)) continue;
-    if (r.kind === "percent_adjust") p *= 1 + pct / 100;
+    if (r.kind === "percent_adjust") { p *= 1 + pct / 100; changed = true; }
     else if (r.kind === "weekend_markup") {
       const dow = dayOfWeek(date); // notte di venerdì o sabato
-      if (dow === 5 || dow === 6) p *= 1 + pct / 100;
+      if (dow === 5 || dow === 6) { p *= 1 + pct / 100; changed = true; }
     }
   }
+  // senza regole applicate il prezzo resta com'è (i prezzi manuali dei Franz sono frazionari: arrotondare farebbe derivare il totale settimanale)
+  if (!changed) return p;
   return Math.max(1, Math.round(p));
 }
 

@@ -5,6 +5,7 @@
 
 import { PROPERTIES, GLOBAL_DISCOUNT_PERCENT } from "./_config.js";
 import { getDynamic, effectiveFees, effectiveDiscount, adjustNight } from "./_dyn.js";
+import { validateStay } from "./_stay.js";
 
 function formatDate(d) {
   return `${d.slice(0, 4)}-${d.slice(4, 6)}-${d.slice(6, 8)}`;
@@ -52,11 +53,13 @@ export default async function handler(req, res) {
   }
 
   const guestCount = parseInt(guests, 10) || 2;
-  const entries = Object.entries(PROPERTIES).filter(([, cfg]) => cfg.icalUrl && cfg.listingId);
+  const entries = Object.entries(PROPERTIES).filter(([, cfg]) => cfg.icalUrl && (cfg.listingId || cfg.manualPrices));
 
   const results = await Promise.all(
     entries.map(async ([slug, cfg]) => {
       try {
+        // regola di soggiorno (es. sabato-sabato, minimo 7 notti): se non rispettata la proprietà non è proponibile
+        if (!validateStay(cfg, checkin, checkout).ok) return { slug, available: false, reason: "stay_rule" };
         const dyn = await getDynamic(slug);
         const fees = effectiveFees(cfg, dyn);
         const [blocked, prices] = await Promise.all([

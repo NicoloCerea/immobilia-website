@@ -5,6 +5,7 @@
 import { PROPERTIES, GLOBAL_DISCOUNT_PERCENT } from "./_config.js";
 import { manualPriceList } from "./_manualPrices.js";
 import { getDynamic, adjustPriceList, effectiveDiscount } from "./_dyn.js";
+import { applyStayRule } from "./_stay.js";
 
 export default async function handler(req, res) {
   const API_KEY = process.env.PRICELABS_API_KEY;
@@ -16,10 +17,10 @@ export default async function handler(req, res) {
     res.status(200).json({
       property: req.query.property,
       source: "manual",
-      prices: adjustPriceList(
+      prices: applyStayRule(adjustPriceList(
         manualPriceList(_p.manualPrices, req.query.start, req.query.end, _p.manualMinStay || 1),
         dynM, req.query.start, req.query.end, _p.manualMinStay || 1
-      ),
+      ), _p),
     });
     return;
   }
@@ -88,7 +89,7 @@ export default async function handler(req, res) {
       check_in: d.check_in,
       check_out: d.check_out,
     }));
-    const prices = adjustPriceList(basePrices, dyn, start, end);
+    const prices = applyStayRule(adjustPriceList(basePrices, dyn, start, end), cfg);
 
     res.setHeader("Cache-Control", "s-maxage=300, stale-while-revalidate=900");
     res.status(200).json({ property, listing_id: cfg.listingId, prices });

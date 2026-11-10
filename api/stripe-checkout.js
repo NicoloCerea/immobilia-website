@@ -7,6 +7,7 @@
 // Risposta: { url: "https://checkout.stripe.com/..." } -> il sito reindirizza l'ospite lì
 
 import { PROPERTIES } from "./_config.js";
+import { validateStay } from "./_stay.js";
 import Stripe from "stripe";
 
 export default async function handler(req, res) {
@@ -33,6 +34,19 @@ export default async function handler(req, res) {
       error: `Il proprietario di questa proprietà non ha ancora completato la verifica Stripe. Usa /api/stripe-onboard?property=${property} per generare il link.`,
     });
     return;
+  }
+  const stay = validateStay(cfg, checkin, checkout);
+  if (!stay.ok) {
+    res.status(400).json({ error: stay.error });
+    return;
+  }
+  // proprietà con solo acconto: online si paga solo il 25%, il saldo si salda in struttura
+  if (cfg.depositOnly) {
+    const full = Number(fullTotal);
+    if (payMode !== "deposit" || !(full > 0) || Math.abs(Number(totalAmount) - Math.round(full * 0.25)) > 1) {
+      res.status(400).json({ error: "Per questa proprietà si può pagare online solo l'acconto del 25%." });
+      return;
+    }
   }
   if (!totalAmount || totalAmount <= 0) {
     res.status(400).json({ error: "Importo totale mancante o non valido." });

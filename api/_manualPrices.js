@@ -33,3 +33,48 @@ export function manualPriceList(map, start, end, minStay = 1) {
     .filter((d) => (!start || d >= start) && (!end || d <= end))
     .map((d) => ({ date: d, price: map[d], min_stay: minStay, check_in: 1, check_out: 1 }));
 }
+
+// ---- Baita Franz 1, 2, 3: prezzi fissi settimanali (sabato -> sabato) dalla tabella del proprietario ----
+// Ogni riga: inizio settimana (sabato), poi prezzo settimanale di App.1 (Franz 1), App.2 (Franz 2), App.3 (Franz 3).
+// null = settimana non disponibile (nessun prezzo, non prenotabile). Le date occupate arrivano comunque dall'iCal.
+// Prezzo finale sul sito = prezzo tabella + 15%, arrotondato all'euro, diviso per 7 notti.
+export const FRANZ_MARKUP_PERCENT = 15;
+const FRANZ_WEEKS = [
+  ["2026-11-28", 2650, 1550, 1550],
+  ["2026-12-05", null, null, 1700],
+  ["2026-12-19", 3200, 1800, null],
+  ["2027-01-09", 2000, 1200, null],
+  ["2027-01-23", 2400, 1450, 1450],
+  ["2027-01-30", null, 2000, 2000],
+  ["2027-02-06", 3500, 2000, 2000],
+  ["2027-02-13", null, 1900, 1900],
+  ["2027-02-27", 2400, null, null],
+  ["2027-03-06", 2250, 1350, 1350],
+  ["2027-03-13", 2250, 1350, 1350],
+  ["2027-03-20", 2250, 1350, 1350],
+  ["2027-03-27", 2800, 1700, 1700],
+  ["2027-04-03", 2000, 1200, 1200],
+  ["2027-04-10", 3200, null, null],
+  ["2027-04-17", 2900, 1700, 1700],
+  ["2027-04-24", 2800, 1600, 1600],
+];
+
+function franzNightly(colIndex) {
+  const out = {};
+  for (const row of FRANZ_WEEKS) {
+    const weekly = row[colIndex];
+    if (weekly == null) continue;
+    const weeklyFinal = Math.round((weekly * (100 + FRANZ_MARKUP_PERCENT)) / 100); // aritmetica intera: niente errori da virgola mobile
+    const nightly = weeklyFinal / 7;
+    const d = new Date(row[0] + "T00:00:00Z");
+    for (let i = 0; i < 7; i++) {
+      out[d.toISOString().slice(0, 10)] = nightly;
+      d.setUTCDate(d.getUTCDate() + 1);
+    }
+  }
+  return out;
+}
+
+export const FRANZ1_PRICES = franzNightly(1);
+export const FRANZ2_PRICES = franzNightly(2);
+export const FRANZ3_PRICES = franzNightly(3);

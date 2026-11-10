@@ -249,6 +249,93 @@
   .quote-btn.email-btn:hover{background:var(--cream-soft);}
   .quote-actions{display:flex;gap:10px;}
   @media(max-width:720px){ .quote-fields{grid-template-columns:1fr 1fr;} .quote-actions{grid-column:1/3;} }
+
+  /* ---- calendario prenotazione (stesso del sito) ---- */
+  .cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;}
+  .cal-nav button{background:transparent;border:1px solid var(--line);width:32px;height:32px;border-radius:50%;font-size:15px;color:var(--ink);cursor:pointer;transition:border-color .2s;flex-shrink:0;}
+  .cal-nav button:hover{border-color:var(--ink);}
+  .cal-guests{display:flex;align-items:center;justify-content:space-between;padding:14px 0;margin-bottom:18px;border-bottom:1px solid var(--line);font-size:14px;font-weight:600;}
+  .cal-guests .g-btn{width:28px;height:28px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--ink);font-weight:700;cursor:pointer;transition:border-color .2s;}
+  .cal-guests .g-btn:hover{border-color:var(--ink);}
+  .cal-guests .g-count{font-weight:700;min-width:22px;text-align:center;}
+  .cal-months{display:flex;gap:28px;justify-content:center;}
+  .cal-month{width:230px;}
+  .cal-month-title{text-align:center;font-family:'Fraunces',serif;font-size:14.5px;font-weight:600;margin-bottom:12px;text-transform:capitalize;}
+  .cal-grid{display:grid;grid-template-columns:repeat(7,30px);gap:2px;justify-content:center;}
+  .cal-dow{font-size:10px;color:var(--ink-soft);text-align:center;font-weight:600;padding-bottom:8px;text-transform:uppercase;letter-spacing:.3px;}
+  .cal-day{position:relative;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-size:11px;cursor:pointer;background:transparent;border:none;}
+  .cal-day .d-num{width:30px;height:30px;display:flex;align-items:center;justify-content:center;border-radius:50%;font-weight:500;font-size:12px;transition:all .12s;}
+  .cal-day .d-price{position:absolute;top:32px;left:50%;transform:translateX(-50%);font-size:8px;color:var(--ink-soft);font-weight:600;white-space:nowrap;}
+  .cal-day:hover:not(.disabled):not(.empty) .d-num{border:1px solid var(--ink);}
+  .cal-day.disabled{color:#ccc7b8;cursor:not-allowed;}
+  .cal-day.disabled .d-num{text-decoration:line-through;color:#ccc7b8;}
+  .cal-day.disabled .d-price{visibility:hidden;}
+  .cal-day.empty{visibility:hidden;cursor:default;}
+  .cal-day.selected .d-num{background:var(--forest);color:#fff;}
+  .cal-day.selected .d-price{color:var(--forest);font-weight:700;}
+  .cal-day.in-range .d-num{background:var(--cream-soft);border-radius:50%;}
+  .cal-summary-bar{background:#fff;border-top:1px solid var(--line);margin:26px -22px -22px;padding:18px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;border-radius:0 0 var(--radius) var(--radius);flex-wrap:wrap;}
+  .cal-summary-text{font-size:13px;color:var(--ink-soft);line-height:1.5;}
+  .cal-summary-text strong{color:var(--ink);font-family:'Fraunces',serif;font-size:16px;font-weight:600;}
+  .cal-pay-btn{background:var(--forest);color:#fff;border:none;padding:15px 28px;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;white-space:nowrap;transition:background .2s;flex-shrink:0;}
+  .cal-pay-btn:hover:not(:disabled){background:var(--forest-dark);}
+  .cal-pay-btn:disabled{background:#d8d2c0;cursor:not-allowed;}
+  .cal-loading{font-size:13px;color:var(--ink-soft);padding:30px 0;text-align:center;}
+  .cal-fields{display:flex;border:1.5px solid var(--ink);border-radius:14px;overflow:hidden;margin-bottom:14px;}
+  .cal-field{flex:1;padding:12px 16px;cursor:pointer;border-right:1px solid var(--line);transition:background .15s;}
+  .cal-field:last-child{border-right:none;}
+  .cal-field:hover{background:var(--cream-soft);}
+  .cal-field.active{background:#fff;box-shadow:inset 0 0 0 2px var(--forest);}
+  .cal-field span{display:block;font-size:10px;font-weight:700;letter-spacing:.5px;color:var(--ink-soft);margin-bottom:3px;text-transform:uppercase;}
+  .cal-field-value{font-size:14px;color:var(--ink);}
+  .cal-field-value.placeholder{color:var(--ink-soft);}
+  .cal-popover-holder{position:relative;}
+  .cal-popover{position:absolute;top:0;left:0;right:0;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 20px 50px rgba(15,33,25,.2);padding:20px;z-index:60;display:none;}
+  .cal-popover.active{display:block;}
+  .cal-guests-field{border:1.5px solid var(--ink);border-radius:14px;padding:12px 16px;margin-bottom:16px;cursor:pointer;transition:background .15s;}
+  .cal-guests-field:hover{background:var(--cream-soft);}
+  .cal-guests-field .label{display:block;font-size:10px;font-weight:700;letter-spacing:.5px;color:var(--ink-soft);margin-bottom:3px;text-transform:uppercase;}
+  .cal-guests-field .value-row{display:flex;align-items:center;justify-content:space-between;font-size:14px;}
+  .cal-guests-popover{position:relative;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 16px 40px rgba(15,33,25,.15);padding:16px;margin:-8px 0 16px;display:none;}
+  .cal-guests-popover.active{display:block;}
+  .cal-main-btn{width:100%;background:var(--forest);color:#fff;border:none;padding:16px;border-radius:999px;font-size:15px;font-weight:700;cursor:pointer;transition:background .2s;}
+  .cal-main-btn:hover{background:var(--forest-dark);}
+  .cal-main-btn:disabled{background:#d8d2c0;cursor:not-allowed;}
+  .cal-extras-panel{margin-top:16px;padding-top:16px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:12px;}
+  .cal-extras{margin-top:20px;padding-top:16px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:12px;}
+  .cal-pet-toggle{display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;}
+  .cal-pet-toggle input{width:16px;height:16px;accent-color:var(--forest);cursor:pointer;}
+  .cal-paymode{display:flex;flex-direction:column;gap:6px;font-size:13px;}
+  .cal-paymode label{display:flex;align-items:center;gap:8px;cursor:pointer;}
+  .cal-paymode input{accent-color:var(--forest);cursor:pointer;}
+  .cal-cancel-policy{font-size:11.5px;color:var(--ink-soft);line-height:1.5;background:var(--cream-soft);padding:10px 12px;border-radius:8px;}
+  .cal-rule-note{font-size:12px;color:var(--ink-soft);margin:-4px 0 12px;line-height:1.4;}
+  .cal-guests{display:flex;align-items:center;justify-content:space-between;background:var(--cream-soft);border-radius:10px;padding:10px 14px;margin-bottom:14px;font-size:13.5px;}
+  .cal-guests .g-btn{width:26px;height:26px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--forest);font-weight:700;cursor:pointer;}
+  .cal-guests .g-btn:hover{background:var(--gold);color:#fff;}
+  .cal-guests .g-count{font-weight:700;color:var(--forest);min-width:20px;text-align:center;}
+  .cal-breakdown{margin-top:10px;font-size:12.5px;color:var(--ink-soft);}
+  .cal-breakdown div{display:flex;justify-content:space-between;padding:2px 0;}
+  .cal-breakdown .total-row{border-top:1px solid var(--line);margin-top:6px;padding-top:6px;font-weight:700;color:var(--forest);}
+  @media(max-width:640px){ .cal-months{flex-direction:column;gap:20px;} .cal-month{width:100%;} .cal-grid{grid-template-columns:repeat(7,1fr);} .cal-day{width:auto;height:auto;aspect-ratio:1;} .cal-day .d-num{width:34px;height:34px;} .cal-day .d-price{position:static;transform:none;margin-top:1px;} }
+  .cal-contact{font-size:12.5px;color:var(--ink-soft);margin-top:14px;text-align:center;}
+  .cal-contact a{color:var(--forest);font-weight:700;}
+  @media(max-width:880px){
+
+  }
+  @media(max-width:480px){
+    .cal-summary-bar{flex-direction:column;align-items:stretch;gap:12px;margin-left:-16px;margin-right:-16px;padding-left:16px;padding-right:16px;}
+    .cal-pay-btn{width:100%;padding:14px;font-size:14px;}
+    .cal-extras{gap:10px;}
+    .cal-paymode{font-size:12.5px;}
+    .cal-cancel-policy{font-size:11px;}
+    .cal-guests .g-btn{width:36px;height:36px;font-size:16px;}
+    .cal-pet-toggle input,.cal-paymode input{width:20px;height:20px;}
+    .cal-grid{gap:0;}
+    .cal-day{aspect-ratio:1;}
+    .cal-day .d-num{width:85%;height:85%;max-width:36px;max-height:36px;font-size:12px;}
+    .cal-nav button{width:38px;height:38px;}
+  }
 </style>
 <link rel="stylesheet" href="css/luxury.css">
 </head>
@@ -296,19 +383,10 @@
 <div class="wrap">
   <div class="booking-full">
       <p class="stay-meta">4 ospiti · 2 camere · 1 matrimoniale + 2 singoli · 1 bagno</p>
-      <div class="quote-box" style="margin-bottom:0">
-        <h3 data-i18n="quote_title">Richiedi un preventivo</h3>
-        <p class="quote-sub">Disponibilità e prezzi su richiesta: inserisci le date del soggiorno e ti rispondiamo il prima possibile.</p>
-        <div class="quote-fields">
-          <label><span data-i18n="quote_checkin">Check-in</span><input type="date" id="checkin-baita_franz_2"></label>
-          <label><span data-i18n="quote_checkout">Check-out</span><input type="date" id="checkout-baita_franz_2"></label>
-          <label><span data-i18n="quote_guests">Ospiti</span><input type="number" id="guests-baita_franz_2" min="1" max="4" value="2"></label>
-          <div class="quote-actions">
-            <button class="quote-btn" onclick="sendQuote_baita_franz_2()"><span data-i18n="quote_btn_wa">WhatsApp →</span></button>
-            <button class="quote-btn email-btn" onclick="sendQuoteEmail_baita_franz_2()"><span data-i18n="quote_btn_email">Email →</span></button>
-          </div>
-        </div>
+      <div id="cal-container">
+        <div class="cal-loading">Caricamento disponibilità e prezzi...</div>
       </div>
+      <p class="cal-contact">Altre date o domande? <a href="https://wa.me/393333269224" target="_blank" rel="noopener">Scrivici su WhatsApp</a></p>
     </div>
 </div>
 <div class="wrap content">
@@ -399,18 +477,420 @@
   L.marker([46.512256, 10.120646], {icon: icon_baita_franz_2}).addTo(map_baita_franz_2);
 </script>
 <script>
-function sendQuote_baita_franz_2() {
-  const ci=document.getElementById('checkin-baita_franz_2').value, co=document.getElementById('checkout-baita_franz_2').value, g=document.getElementById('guests-baita_franz_2').value||'2';
-  const fmt=d=>d?d.split('-').reverse().join('/'):'(da definire)';
-  const msg=`Ciao! Vorrei un preventivo per Baita Franz 2 (Livigno) dal ${fmt(ci)} al ${fmt(co)} per ${g} ospiti.`;
-  window.open(`https://wa.me/393333269224?text=${encodeURIComponent(msg)}`,'_blank');
-}
-function sendQuoteEmail_baita_franz_2() {
-  const ci=document.getElementById('checkin-baita_franz_2').value, co=document.getElementById('checkout-baita_franz_2').value, g=document.getElementById('guests-baita_franz_2').value||'2';
-  const fmt=d=>d?d.split('-').reverse().join('/'):'(da definire)';
-  const body=`Ciao,%0D%0A%0D%0AVorrei un preventivo per Baita Franz 2 (Livigno) dal ${fmt(ci)} al ${fmt(co)} per ${g} ospiti.%0D%0A%0D%0AGrazie!`;
-  window.location.href=`mailto:immobiliaita@gmail.com?subject=${encodeURIComponent('Richiesta preventivo — Baita Franz 2')}&body=${body}`;
-}
+(function () {
+  const PROPERTY_SLUG = "baita-franz-2";
+  const PROPERTY_NAME = "Baita Franz 2";
+  const MAX_GUESTS = 4;
+  const MONTHS_IT = ["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"];
+  const DOW_IT = ["Lu","Ma","Me","Gi","Ve","Sa","Do"];
+  const CAL_I18N = {
+    it: { depositSite:(dep,bal)=>`Paghi ora l'acconto: <strong>€${dep}</strong> (25%) — saldo di €${bal} da pagare in struttura.`, satRule:(n)=>`Arrivo e partenza solo di sabato, minimo ${n} notti.`, guests:"Ospiti", selectDates:"Seleziona le date per vedere il prezzo totale.", arrival:(d)=>`Arrivo: <strong>${d}</strong> — scegli la partenza`, night:"notte", nights:"notti", stay:"soggiorno", extraGuestFee:"supplemento ospiti aggiuntivi", cleaning:"pulizia", petIncluded:(f)=>` (incl. animale +€${f})`, touristTax:"Tassa di soggiorno esclusa, da pagare in loco.", depositLine:(dep,bal)=>`Paghi ora l'acconto: <strong>€${dep}</strong> (25%) — saldo di €${bal} da versare prima dell'arrivo.`, fullLine:(t)=>`Paghi ora: <strong>€${t}</strong> (intero soggiorno).`, total:"totale", guestsWord:"ospiti", petLabel:(f)=>`Porto un animale domestico (+€${f} pulizia)`, payFull:"Paga tutto ora", payDeposit:"Paga il 25% ora (acconto)", cancelPolicy:"📋 Cancellazione gratuita fino a 30 giorni prima dell'arrivo. Rimborso parziale fino a 5 giorni prima. Nessun rimborso oltre tale termine.", bookBtn:"Prenota e paga →", waiting:"Attendere...", minStay:(n)=>`Per questa data serve un soggiorno minimo di ${n} nott${n===1?"e":"i"}.`, months:["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"], dow:["Lu","Ma","Me","Gi","Ve","Sa","Do"], addDate:"Aggiungi una data", checkAvailability:"Controlla la disponibilità" },
+    en: { depositSite:(dep,bal)=>`Pay now (deposit): <strong>€${dep}</strong> (25%) — balance of €${bal} payable at the property.`, satRule:(n)=>`Check-in and check-out on Saturdays only, minimum ${n} nights.`, guests:"Guests", selectDates:"Select dates to see the total price.", arrival:(d)=>`Check-in: <strong>${d}</strong> — choose check-out`, night:"night", nights:"nights", stay:"stay", extraGuestFee:"extra guest fee", cleaning:"cleaning", petIncluded:(f)=>` (incl. pet +€${f})`, touristTax:"City tax excluded, payable on site.", depositLine:(dep,bal)=>`Pay now (deposit): <strong>€${dep}</strong> (25%) — balance of €${bal} due before arrival.`, fullLine:(t)=>`Pay now: <strong>€${t}</strong> (full stay).`, total:"total", guestsWord:"guests", petLabel:(f)=>`Bringing a pet (+€${f} cleaning)`, payFull:"Pay in full now", payDeposit:"Pay 25% now (deposit)", cancelPolicy:"📋 Free cancellation up to 30 days before arrival. Partial refund up to 5 days before. No refund after that.", bookBtn:"Book and pay →", waiting:"Please wait...", minStay:(n)=>`This date requires a minimum stay of ${n} night${n===1?"":"s"}.`, months:["January","February","March","April","May","June","July","August","September","October","November","December"], dow:["Mo","Tu","We","Th","Fr","Sa","Su"], addDate:"Add a date", checkAvailability:"Check availability" },
+    es: { depositSite:(dep,bal)=>`Pagas ahora (depósito): <strong>€${dep}</strong> (25%) — saldo de €${bal} a pagar en el alojamiento.`, satRule:(n)=>`Entrada y salida solo los sábados, mínimo ${n} noches.`, guests:"Huéspedes", selectDates:"Selecciona las fechas para ver el precio total.", arrival:(d)=>`Entrada: <strong>${d}</strong> — elige la salida`, night:"noche", nights:"noches", stay:"estancia", extraGuestFee:"suplemento huéspedes extra", cleaning:"limpieza", petIncluded:(f)=>` (incl. mascota +€${f})`, touristTax:"Tasa turística excluida, se paga en el lugar.", depositLine:(dep,bal)=>`Pagas ahora (depósito): <strong>€${dep}</strong> (25%) — saldo de €${bal} antes de la llegada.`, fullLine:(t)=>`Pagas ahora: <strong>€${t}</strong> (estancia completa).`, total:"total", guestsWord:"huéspedes", petLabel:(f)=>`Llevo una mascota (+€${f} limpieza)`, payFull:"Pagar todo ahora", payDeposit:"Pagar 25% ahora (depósito)", cancelPolicy:"📋 Cancelación gratuita hasta 30 días antes de la llegada. Reembolso parcial hasta 5 días antes. Sin reembolso después.", bookBtn:"Reservar y pagar →", waiting:"Espera...", minStay:(n)=>`Esta fecha requiere una estancia mínima de ${n} noche${n===1?"":"s"}.`, months:["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"], dow:["Lu","Ma","Mi","Ju","Vi","Sa","Do"], addDate:"Añadir una fecha", checkAvailability:"Consultar disponibilidad" },
+    fr: { depositSite:(dep,bal)=>`Vous payez maintenant (acompte) : <strong>€${dep}</strong> (25%) — solde de €${bal} à régler sur place.`, satRule:(n)=>`Arrivée et départ uniquement le samedi, minimum ${n} nuits.`, guests:"Voyageurs", selectDates:"Sélectionnez les dates pour voir le prix total.", arrival:(d)=>`Arrivée : <strong>${d}</strong> — choisissez le départ`, night:"nuit", nights:"nuits", stay:"séjour", extraGuestFee:"supplément voyageurs supplémentaires", cleaning:"ménage", petIncluded:(f)=>` (dont animal +€${f})`, touristTax:"Taxe de séjour exclue, à régler sur place.", depositLine:(dep,bal)=>`Vous payez maintenant (acompte) : <strong>€${dep}</strong> (25%) — solde de €${bal} avant l'arrivée.`, fullLine:(t)=>`Vous payez maintenant : <strong>€${t}</strong> (séjour complet).`, total:"total", guestsWord:"voyageurs", petLabel:(f)=>`J'amène un animal (+€${f} ménage)`, payFull:"Payer tout maintenant", payDeposit:"Payer 25% maintenant (acompte)", cancelPolicy:"📋 Annulation gratuite jusqu'à 30 jours avant l'arrivée. Remboursement partiel jusqu'à 5 jours avant. Aucun remboursement après.", bookBtn:"Réserver et payer →", waiting:"Veuillez patienter...", minStay:(n)=>`Cette date nécessite un séjour minimum de ${n} nuit${n===1?"":"s"}.`, months:["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"], dow:["Lu","Ma","Me","Je","Ve","Sa","Di"], addDate:"Ajouter une date", checkAvailability:"Vérifier la disponibilité" },
+    de: { depositSite:(dep,bal)=>`Jetzt zu zahlen (Anzahlung): <strong>€${dep}</strong> (25%) — Restbetrag €${bal} vor Ort zu zahlen.`, satRule:(n)=>`An- und Abreise nur samstags, mindestens ${n} Nächte.`, guests:"Gäste", selectDates:"Wählen Sie Daten, um den Gesamtpreis zu sehen.", arrival:(d)=>`Anreise: <strong>${d}</strong> — Abreise wählen`, night:"Nacht", nights:"Nächte", stay:"Aufenthalt", extraGuestFee:"Zuschlag zusätzliche Gäste", cleaning:"Endreinigung", petIncluded:(f)=>` (inkl. Haustier +€${f})`, touristTax:"Kurtaxe nicht inbegriffen, vor Ort zu zahlen.", depositLine:(dep,bal)=>`Jetzt zu zahlen (Anzahlung): <strong>€${dep}</strong> (25%) — Restbetrag €${bal} vor Anreise fällig.`, fullLine:(t)=>`Jetzt zu zahlen: <strong>€${t}</strong> (gesamter Aufenthalt).`, total:"gesamt", guestsWord:"Gäste", petLabel:(f)=>`Ich bringe ein Haustier mit (+€${f} Reinigung)`, payFull:"Jetzt vollständig bezahlen", payDeposit:"Jetzt 25% bezahlen (Anzahlung)", cancelPolicy:"📋 Kostenlose Stornierung bis 30 Tage vor Anreise. Teilrückerstattung bis 5 Tage vorher. Danach keine Rückerstattung.", bookBtn:"Buchen und bezahlen →", waiting:"Bitte warten...", minStay:(n)=>`Für dieses Datum ist ein Mindestaufenthalt von ${n} Nächten erforderlich.`, months:["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"], dow:["Mo","Di","Mi","Do","Fr","Sa","So"], addDate:"Datum hinzufügen", checkAvailability:"Verfügbarkeit prüfen" },
+    ru: { depositSite:(dep,bal)=>`Оплата сейчас (депозит): <strong>€${dep}</strong> (25%) — остаток €${bal} оплачивается на месте.`, satRule:(n)=>`Заезд и выезд только по субботам, минимум ${n} ночей.`, guests:"Гости", selectDates:"Выберите даты, чтобы увидеть итоговую цену.", arrival:(d)=>`Заезд: <strong>${d}</strong> — выберите дату выезда`, night:"ночь", nights:"ночей", stay:"проживание", extraGuestFee:"доплата за доп. гостей", cleaning:"уборка", petIncluded:(f)=>` (вкл. животное +€${f})`, touristTax:"Туристический налог не включён, оплачивается на месте.", depositLine:(dep,bal)=>`Оплата сейчас (депозит): <strong>€${dep}</strong> (25%) — остаток €${bal} до заезда.`, fullLine:(t)=>`Оплата сейчас: <strong>€${t}</strong> (всё проживание).`, total:"итого", guestsWord:"гостей", petLabel:(f)=>`Беру с собой животное (+€${f} уборка)`, payFull:"Оплатить полностью сейчас", payDeposit:"Оплатить 25% сейчас (депозит)", cancelPolicy:"📋 Бесплатная отмена за 30 дней до заезда. Частичный возврат за 5 дней. После этого возврат не производится.", bookBtn:"Забронировать и оплатить →", waiting:"Подождите...", minStay:(n)=>`Для этой даты требуется минимум ${n} ночей.`, months:["январь","февраль","март","апрель","май","июнь","июль","август","сентябрь","октябрь","ноябрь","декабрь"], dow:["Пн","Вт","Ср","Чт","Пт","Сб","Вс"], addDate:"Добавить дату", checkAvailability:"Проверить наличие" },
+    zh: { depositSite:(dep,bal)=>`现在支付（订金）：<strong>€${dep}</strong>（25%）— 余款€${bal}在住宿处支付。`, satRule:(n)=>`仅限周六入住和退房，至少入住${n}晚。`, guests:"入住人数", selectDates:"选择日期以查看总价。", arrival:(d)=>`入住：<strong>${d}</strong> — 请选择退房日期`, night:"晚", nights:"晚", stay:"住宿费", extraGuestFee:"额外客人附加费", cleaning:"清洁费", petIncluded:(f)=>`（含宠物 +€${f}）`, touristTax:"不含旅游税，需在当地支付。", depositLine:(dep,bal)=>`现在支付（订金）：<strong>€${dep}</strong>（25%）— 余款€${bal}需在入住前支付。`, fullLine:(t)=>`现在支付：<strong>€${t}</strong>（全部费用）。`, total:"总计", guestsWord:"位客人", petLabel:(f)=>`携带宠物（+€${f} 清洁费）`, payFull:"立即全额支付", payDeposit:"立即支付25%（订金）", cancelPolicy:"📋 入住前30天可免费取消。入住前5天可部分退款。之后不予退款。", bookBtn:"预订并支付 →", waiting:"请稍候...", minStay:(n)=>`该日期最少入住${n}晚。`, months:["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"], dow:["一","二","三","四","五","六","日"], addDate:"添加日期", checkAvailability:"查询可预订情况" },
+  };
+  let currentLang = localStorage.getItem("immobilia_lang") || "it";
+  let T = CAL_I18N[currentLang] || CAL_I18N.it;
+  window.addEventListener("immobilia:langchange", function (e) {
+    currentLang = e.detail.lang;
+    T = CAL_I18N[currentLang] || CAL_I18N.it;
+    renderCalendar();
+  });
+
+  let blockedSet = new Set();
+  let priceMap = {};
+  let rules = { cleaningFeeBase: 0, cleaningFeePerGuest: 0, baseOccupancy: 2, extraGuestFeePerNight: 0, petFee: 0 };
+  let viewYear, viewMonth;
+  let checkin = null, checkout = null;
+  let guests = 2;
+  let minStayWarning = null;
+  let calOpen = false;
+  let guestsOpen = false;
+  let hasPet = false;
+  let payMode = "full";
+
+  const today = new Date();
+  viewYear = today.getFullYear();
+  viewMonth = today.getMonth();
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const urlCheckin = urlParams.get('checkin');
+  const urlCheckout = urlParams.get('checkout');
+  const urlGuests = parseInt(urlParams.get('guests'), 10);
+  if (urlCheckin) {
+    checkin = urlCheckin;
+    const d = new Date(urlCheckin);
+    viewYear = d.getFullYear();
+    viewMonth = d.getMonth();
+  }
+  if (urlCheckout) checkout = urlCheckout;
+  if (urlGuests) guests = Math.max(1, Math.min(MAX_GUESTS, urlGuests));
+
+  function fmt(date) {
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, "0");
+    const d = String(date.getDate()).padStart(2, "0");
+    return `${y}-${m}-${d}`;
+  }
+
+  async function loadData() {
+    const start = fmt(today);
+    const endDate = new Date(today);
+    endDate.setDate(endDate.getDate() + 200);
+    const end = fmt(endDate);
+
+    try {
+      const [availRes, priceRes, rulesRes] = await Promise.all([
+        fetch(`/api/availability?property=${PROPERTY_SLUG}`).then((r) => r.json()),
+        fetch(`/api/pricing?property=${PROPERTY_SLUG}&start=${start}&end=${end}`).then((r) => r.json()),
+        fetch(`/api/rules?property=${PROPERTY_SLUG}`).then((r) => r.json()),
+      ]);
+
+      (availRes.blocked || []).forEach((b) => blockedSet.add(b.start));
+      (priceRes.prices || []).forEach((p) => { priceMap[p.date] = p; });
+      if (!rulesRes.error) rules = rulesRes;
+      if (rules.depositOnly) payMode = "deposit";
+      if (stayRule() && checkin && (!canCheckin(checkin) || (checkout && !canCheckout(checkout, checkin)))) { checkin = null; checkout = null; }
+
+      renderCalendar();
+    } catch (err) {
+      document.getElementById("cal-container").innerHTML =
+        '<div class="cal-loading">Impossibile caricare il calendario in questo momento. Scrivici direttamente per verificare la disponibilità.</div>';
+    }
+  }
+
+  function isBlocked(dateStr) {
+    return blockedSet.has(dateStr);
+  }
+
+  function firstBlockedAfter(startDateStr) {
+    let cur = new Date(startDateStr);
+    cur.setDate(cur.getDate() + 1);
+    for (let i = 0; i < 400; i++) {
+      const ds = fmt(cur);
+      if (isBlocked(ds)) return ds;
+      cur.setDate(cur.getDate() + 1);
+    }
+    return null;
+  }
+
+  // ---- regola di soggiorno (es. sabato-sabato, minimo 7 notti), attiva se /api/rules restituisce "stayRule" ----
+  function stayRule() { return rules && rules.stayRule ? rules.stayRule : null; }
+  function dowOf(ds) { const p = ds.split("-"); return new Date(+p[0], +p[1] - 1, +p[2]).getDay(); }
+  function canCheckin(ds) {
+    const r = stayRule();
+    if (!r) return true;
+    return dowOf(ds) === r.checkinDow && !!priceMap[ds] && !isBlocked(ds);
+  }
+  function canCheckout(ds, ci) {
+    const r = stayRule();
+    if (!r || !ci || ds <= ci) return !r;
+    if (dowOf(ds) !== r.checkoutDow) return false;
+    if (nightsBetween(ci, ds) < r.minNights) return false;
+    let cur = new Date(ci);
+    const end = new Date(ds);
+    while (cur < end) {
+      const k = fmt(cur);
+      if (isBlocked(k) || !priceMap[k]) return false;
+      cur.setDate(cur.getDate() + 1);
+    }
+    return true;
+  }
+
+  function renderMonthGrid(y, m, edgeCheckoutDay) {
+    const first = new Date(y, m, 1);
+    const startWeekday = (first.getDay() + 6) % 7;
+    const daysInMonth = new Date(y, m + 1, 0).getDate();
+
+    let cellsHtml = "";
+    for (let i = 0; i < startWeekday; i++) {
+      cellsHtml += '<div class="cal-day empty"></div>';
+    }
+    for (let d = 1; d <= daysInMonth; d++) {
+      const dateObj = new Date(y, m, d);
+      const dateStr = fmt(dateObj);
+      const isPast = dateObj < new Date(today.getFullYear(), today.getMonth(), today.getDate());
+      const nightOccupied = isBlocked(dateStr);
+      const isEdgeCheckoutDay = edgeCheckoutDay && dateStr === edgeCheckoutDay;
+      let blocked = isPast || (nightOccupied && !isEdgeCheckoutDay);
+      if (stayRule()) {
+        if (isPast) blocked = true;
+        else if (checkin && !checkout && dateStr > checkin) blocked = !canCheckout(dateStr, checkin);
+        else blocked = !canCheckin(dateStr);
+      }
+      const priceInfo = priceMap[dateStr];
+      const priceLabel = priceInfo && !isPast ? `€${Math.round(priceInfo.price)}` : "";
+
+      let cls = "cal-day";
+      if (blocked) cls += " disabled";
+      if (checkin === dateStr || checkout === dateStr) cls += " selected";
+      else if (checkin && checkout && dateStr > checkin && dateStr < checkout) cls += " in-range";
+
+      cellsHtml += `<div class="${cls}" ${blocked ? "" : `onclick="calSelect('${dateStr}')"`}>
+        <span class="d-num">${d}</span>
+        <span class="d-price">${priceLabel}</span>
+      </div>`;
+    }
+
+    return `
+      <div class="cal-month">
+        <div class="cal-month-title">${T.months[m]} ${y}</div>
+        <div class="cal-grid">
+          ${T.dow.map((d) => `<div class="cal-dow">${d}</div>`).join("")}
+          ${cellsHtml}
+        </div>
+      </div>
+    `;
+  }
+
+  function renderCalendar() {
+    const container = document.getElementById("cal-container");
+    const edgeCheckoutDay = checkin && !checkout ? firstBlockedAfter(checkin) : null;
+
+    let m2y = viewYear, m2m = viewMonth + 1;
+    if (m2m > 11) { m2m = 0; m2y++; }
+
+    const checkinDisplay = checkin ? checkin.split("-").reverse().join("/") : T.addDate;
+    const checkoutDisplay = checkout ? checkout.split("-").reverse().join("/") : T.addDate;
+    const hasDates = checkin && checkout;
+
+    container.innerHTML = `
+      <div class="cal-popover-holder">
+        <div class="cal-fields">
+          <div class="cal-field ${calOpen ? "active" : ""}" onclick="event.stopPropagation(); calToggleOpen()">
+            <span>Check-in</span>
+            <div class="cal-field-value ${checkin ? "" : "placeholder"}">${checkinDisplay}</div>
+          </div>
+          <div class="cal-field ${calOpen ? "active" : ""}" onclick="event.stopPropagation(); calToggleOpen()">
+            <span>Check-out</span>
+            <div class="cal-field-value ${checkout ? "" : "placeholder"}">${checkoutDisplay}</div>
+          </div>
+        </div>
+        <div class="cal-popover ${calOpen ? "active" : ""}" onclick="event.stopPropagation();">
+          <div class="cal-nav">
+            <button onclick="calNav(-1)">‹</button>
+            <div style="flex:1;"></div>
+            <button onclick="calNav(1)">›</button>
+          </div>
+          <div class="cal-months">
+            ${renderMonthGrid(viewYear, viewMonth, edgeCheckoutDay)}
+            ${renderMonthGrid(m2y, m2m, edgeCheckoutDay)}
+          </div>
+        </div>
+      </div>
+
+      ${stayRule() ? `<div class="cal-rule-note">${T.satRule(stayRule().minNights)}</div>` : ""}
+      <div class="cal-guests-field" onclick="event.stopPropagation(); calToggleGuests()">
+        <span class="label">${T.guests}</span>
+        <div class="value-row"><span>${guests} ${T.guestsWord}</span><span>⌄</span></div>
+      </div>
+      <div class="cal-guests-popover ${guestsOpen ? "active" : ""}" onclick="event.stopPropagation();">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+          <span>${T.guests}</span>
+          <div style="display:flex;align-items:center;gap:14px;">
+            <button class="g-btn" onclick="calGuests(-1)">−</button>
+            <span class="g-count">${guests}</span>
+            <button class="g-btn" onclick="calGuests(1)">+</button>
+          </div>
+        </div>
+        ${(rules.petFee || 0) > 0 ? `        <label class="cal-pet-toggle">
+          <input type="checkbox" ${hasPet ? "checked" : ""} onchange="calTogglePet(this.checked)">
+          <span>${T.petLabel(rules.petFee || 30)}</span>
+        </label>` : ""}
+      </div>
+
+      ${hasDates ? `
+      <div class="cal-extras-panel">
+        ${rules.depositOnly ? "" : `        <div class="cal-paymode">
+          <label><input type="radio" name="paymode" ${payMode === "full" ? "checked" : ""} onchange="calSetPayMode('full')"> ${T.payFull}</label>
+          <label><input type="radio" name="paymode" ${payMode === "deposit" ? "checked" : ""} onchange="calSetPayMode('deposit')"> ${T.payDeposit}</label>
+        </div>`}
+        <div class="cal-cancel-policy">${T.cancelPolicy}</div>
+        <div class="cal-summary-text">${summaryText()}</div>
+      </div>
+      ` : ""}
+
+      <button class="cal-main-btn" id="cal-pay-btn" onclick="event.stopPropagation(); ${hasDates ? "calPayNow()" : "calToggleOpen()"}" style="margin-top:14px;">
+        ${hasDates ? T.bookBtn : T.checkAvailability}
+      </button>
+    `;
+  }
+
+  window.calToggleOpen = function () {
+    calOpen = !calOpen;
+    guestsOpen = false;
+    renderCalendar();
+  };
+
+  window.calToggleGuests = function () {
+    guestsOpen = !guestsOpen;
+    calOpen = false;
+    renderCalendar();
+  };
+
+  document.addEventListener("click", function (e) {
+    if (!e.target.closest("#cal-container")) {
+      if (calOpen || guestsOpen) {
+        calOpen = false;
+        guestsOpen = false;
+        renderCalendar();
+      }
+    }
+  });
+
+  function priceBreakdown(a, b) {
+    const nights = nightsBetween(a, b);
+    let nightly = 0;
+    let cur = new Date(a);
+    const end = new Date(b);
+    while (cur < end) {
+      const ds = fmt(cur);
+      nightly += priceMap[ds] ? priceMap[ds].price : 0;
+      cur.setDate(cur.getDate() + 1);
+    }
+    const extraGuests = Math.max(0, guests - (rules.baseOccupancy || 2));
+    const extraGuestTotal = extraGuests * (rules.extraGuestFeePerNight || 0) * nights;
+    let cleaning;
+    if (rules.cleaningFeeByGuests) {
+      const table = rules.cleaningFeeByGuests;
+      const maxKey = Math.max(...Object.keys(table).map(Number));
+      const g = Math.min(guests, maxKey);
+      cleaning = (rules.cleaningFeeBase || 0) + (table[g] || 0);
+    } else {
+      cleaning = (rules.cleaningFeeBase || 0) + (rules.cleaningFeePerGuest || 0) * guests;
+    }
+    const petCost = hasPet ? (rules.petFee || 0) : 0;
+    const total = Math.round(nightly + extraGuestTotal + cleaning + petCost);
+    const depositAmount = Math.round(total * 0.25);
+    return { nights, nightly: Math.round(nightly), extraGuestTotal: Math.round(extraGuestTotal), cleaning: Math.round(cleaning), petCost, total, depositAmount, amountToPay: payMode === "deposit" ? depositAmount : total };
+  }
+
+  function summaryText() {
+    if (minStayWarning) return `<span style="color:#b23b3b;">${minStayWarning}</span>`;
+    if (!checkin && !checkout) return T.selectDates;
+    if (checkin && !checkout) return T.arrival(checkin.split("-").reverse().join("/"));
+    const b = priceBreakdown(checkin, checkout);
+    let line = `${T.stay} €${b.nightly}${b.extraGuestTotal > 0 ? ` + ${T.extraGuestFee} €${b.extraGuestTotal}` : ""} + ${T.cleaning} €${b.cleaning}${b.petCost > 0 ? T.petIncluded(rules.petFee) : ""}`;
+    let payLine = payMode === "deposit"
+      ? (rules.depositOnly ? T.depositSite : T.depositLine)(b.depositAmount, b.total - b.depositAmount)
+      : T.fullLine(b.total);
+    const nightsLabel = b.nights === 1 ? T.night : T.nights;
+    return `<strong>€${b.total}</strong> ${T.total} · ${b.nights} ${nightsLabel}, ${guests} ${T.guestsWord}<br><span style="font-size:11.5px;">(${line})</span><br><span style="font-size:11px;color:var(--ink-soft);">${T.touristTax}</span><br><span style="font-size:12px;">${payLine}</span>`;
+  }
+
+  function nightsBetween(a, b) {
+    const d1 = new Date(a), d2 = new Date(b);
+    return Math.round((d2 - d1) / 86400000);
+  }
+
+  window.calGuests = function (dir) {
+    guests = Math.max(1, Math.min(MAX_GUESTS, guests + dir));
+    renderCalendar();
+  };
+
+  window.calNav = function (dir) {
+    viewMonth += dir;
+    if (viewMonth < 0) { viewMonth = 11; viewYear--; }
+    if (viewMonth > 11) { viewMonth = 0; viewYear++; }
+    renderCalendar();
+  };
+
+  window.calSelect = function (dateStr) {
+    minStayWarning = null;
+    if (stayRule()) {
+      if (!checkin || (checkin && checkout) || dateStr <= checkin) {
+        if (canCheckin(dateStr)) { checkin = dateStr; checkout = null; }
+      } else if (canCheckout(dateStr, checkin)) {
+        checkout = dateStr;
+        calOpen = false;
+      } else {
+        minStayWarning = T.minStay(stayRule().minNights);
+      }
+      renderCalendar();
+      return;
+    }
+    if (!checkin || (checkin && checkout)) {
+      checkin = dateStr;
+      checkout = null;
+    } else if (dateStr <= checkin) {
+      checkin = dateStr;
+      checkout = null;
+    } else {
+      let cur = new Date(checkin);
+      const end = new Date(dateStr);
+      let hasBlocked = false;
+      while (cur < end) {
+        if (isBlocked(fmt(cur))) hasBlocked = true;
+        cur.setDate(cur.getDate() + 1);
+      }
+      const nights = nightsBetween(checkin, dateStr);
+      const minStay = (priceMap[checkin] && priceMap[checkin].min_stay) || 1;
+      if (hasBlocked) {
+        checkin = dateStr;
+        checkout = null;
+      } else if (nights < minStay) {
+        minStayWarning = T.minStay(minStay);
+        checkout = null;
+      } else {
+        checkout = dateStr;
+        calOpen = false;
+      }
+    }
+    renderCalendar();
+  };
+
+  window.calTogglePet = function (checked) {
+    hasPet = checked;
+    renderCalendar();
+  };
+
+  window.calSetPayMode = function (mode) {
+    payMode = mode;
+    renderCalendar();
+  };
+
+  window.calPayNow = async function () {
+    if (!checkin || !checkout) return;
+    const btn = document.getElementById("cal-pay-btn");
+    const b = priceBreakdown(checkin, checkout);
+    btn.disabled = true;
+    btn.textContent = T.waiting;
+    try {
+      const response = await fetch("/api/stripe-checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          property: PROPERTY_SLUG,
+          propertyName: PROPERTY_NAME,
+          checkin,
+          checkout,
+          guests,
+          totalAmount: b.amountToPay,
+          payMode,
+          fullTotal: b.total,
+          hasPet,
+        }),
+      });
+      const data = await response.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        alert("Impossibile avviare il pagamento: " + (data.error || "errore sconosciuto"));
+        btn.disabled = false;
+        btn.textContent = T.bookBtn;
+      }
+    } catch (err) {
+      alert("Errore di connessione, riprova.");
+      btn.disabled = false;
+      btn.textContent = T.bookBtn;
+    }
+  };
+
+  loadData();
+})();
 </script>
 
 <script src="js/lux-listing.js"></script>

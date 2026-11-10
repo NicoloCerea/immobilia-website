@@ -127,7 +127,7 @@
             <span>${data.payMode === "deposit" ? "Acconto pagato ora" : "Totale pagato"}</span>
             <span>€${data.amountPaid}</span>
           </div>
-          ${balance > 0 ? `<div class="balance-note">Saldo rimanente di <strong>€${balance}</strong> (su un totale di €${data.fullTotal}) ${["baita-franz-1-mansarda","baita-franz-2","baita-franz-3"].includes(data.property) ? "da pagare in struttura." : "da versare prima dell'arrivo, come da policy di cancellazione."}</div>` : ""}
+          ${balance > 0 ? `<div class="balance-note">Saldo rimanente di <strong>€${balance}</strong> (su un totale di €${data.fullTotal}) da pagare in struttura.</div>` : ""}
         </div>
 
         <a class="cta" href="${data.property ? data.property + '.html' : 'index.html'}">Torna all'annuncio</a>

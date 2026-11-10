@@ -17,6 +17,7 @@ export const SATURDAY_WEEK_RULE = { minNights: 7, checkinDow: 6, checkoutDow: 6 
 
 export const PROPERTIES = {
   "sertorelli-26": {
+    depositOnly: true, // si paga solo l'acconto del 25% online, il saldo in struttura
     icalUrl:
       "https://pms-api.smartness.com/api/3.0/room-types/generate-ics/6d6f6476306a587a696a2f795a36446d462b45624e773d3d.ics",
     listingId: "145903___14556",
@@ -32,6 +33,7 @@ export const PROPERTIES = {
     platformOwned: true, // proprietà di Immobilia stessa: nessuno smistamento, resta sull'account principale
   },
   "fumarogo-100d": {
+    depositOnly: true, // si paga solo l'acconto del 25% online, il saldo in struttura
     icalUrl:
       "https://pms-api.smartness.com/api/3.0/room-types/generate-ics/646964454d48744d794d6756724843514f2f425a74773d3d.ics",
     listingId: "147076___17281",
@@ -47,6 +49,7 @@ export const PROPERTIES = {
     platformOwned: true, // TEMPORANEO: il proprietario non ha ancora completato Stripe, i pagamenti restano sull'account principale per ora
   },
   "monte-reit-7": {
+    depositOnly: true, // si paga solo l'acconto del 25% online, il saldo in struttura
     icalUrl:
       "https://pms-api.smartness.com/api/3.0/room-types/generate-ics/76614d6c464a76505a6c536c374f6668457571386f513d3d.ics",
     listingId: "146799___16661",
@@ -62,6 +65,7 @@ export const PROPERTIES = {
     platformOwned: true, // TEMPORANEO: il proprietario non ha ancora completato Stripe, i pagamenti restano sull'account principale per ora
   },
   "livigno-cantoni": {
+    depositOnly: true, // si paga solo l'acconto del 25% online, il saldo in struttura
     stayRule: SATURDAY_WEEK_RULE, // sabato-sabato, minimo 7 notti
     icalUrl:
       "https://pms-api.smartness.com/api/3.0/room-types/generate-ics/667745754c673461424d494177666f65333864476c513d3d.ics",
@@ -79,6 +83,7 @@ export const PROPERTIES = {
     platformOwned: true, // TEMPORANEO: il proprietario non ha ancora completato Stripe, i pagamenti restano sull'account principale per ora
   },
   "livigno-river": {
+    depositOnly: true, // si paga solo l'acconto del 25% online, il saldo in struttura
     stayRule: SATURDAY_WEEK_RULE, // sabato-sabato, minimo 7 notti
     icalUrl:
       "https://pms-api.smartness.com/api/3.0/room-types/generate-ics/43454d636c7265476459325a384e69487348452f44773d3d.ics",
@@ -94,6 +99,7 @@ export const PROPERTIES = {
     platformOwned: true, // TEMPORANEO: il proprietario non ha ancora completato Stripe, i pagamenti restano sull'account principale per ora
   },
   "livigno-toila": {
+    depositOnly: true, // si paga solo l'acconto del 25% online, il saldo in struttura
     stayRule: SATURDAY_WEEK_RULE, // sabato-sabato, minimo 7 notti
     icalUrl:
       "https://pms-api.smartness.com/api/3.0/room-types/generate-ics/7a426236575a4f654d3955395a644a4d37304e792b513d3d.ics",

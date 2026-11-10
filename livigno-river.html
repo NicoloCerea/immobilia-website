@@ -685,12 +685,26 @@
     if (!checkin && !checkout) return T.selectDates;
     if (checkin && !checkout) return T.arrival(checkin.split("-").reverse().join("/"));
     const b = priceBreakdown(checkin, checkout);
-    let line = `${T.stay} €${b.nightly}${b.extraGuestTotal > 0 ? ` + ${T.extraGuestFee} €${b.extraGuestTotal}` : ""} + ${T.cleaning} €${b.cleaning}${b.petCost > 0 ? T.petIncluded(rules.petFee) : ""}`;
-    let payLine = payMode === "deposit"
+    const groups = new Map();
+    for (let cur = new Date(checkin), end = new Date(checkout); cur < end; cur.setDate(cur.getDate() + 1)) {
+      const p = priceMap[fmt(cur)] ? priceMap[fmt(cur)].price : 0;
+      const k = Math.round(p * 100) / 100;
+      groups.set(k, (groups.get(k) || 0) + 1);
+    }
+    const row = (l, v, st) => `<div style="display:flex;justify-content:space-between;gap:12px;${st || ""}"><span>${l}</span><span>${v}</span></div>`;
+    const eur = (n) => "€" + (Math.round(n * 100) / 100).toLocaleString("it-IT", { maximumFractionDigits: 2 });
+    let rows = "";
+    groups.forEach((n, p) => { rows += row(`${eur(p)} × ${n} ${n === 1 ? T.night : T.nights}`, eur(p * n)); });
+    const extra = Math.max(0, guests - (rules.baseOccupancy || 2));
+    if (b.extraGuestTotal > 0) rows += row(`${T.extraGuestFee} (${eur(rules.extraGuestFeePerNight)} × ${extra} × ${b.nights})`, eur(b.extraGuestTotal));
+    if (b.cleaning > 0) rows += row(T.cleaning, eur(b.cleaning));
+    if (b.petCost > 0) rows += row("🐾", eur(b.petCost));
+    rows += row(`<strong>${T.total}</strong>`, `<strong>${eur(b.total)}</strong>`, "border-top:1px solid currentColor;margin-top:4px;padding-top:4px;");
+    const payLine = payMode === "deposit"
       ? (rules.depositOnly ? T.depositSite : T.depositLine)(b.depositAmount, b.total - b.depositAmount)
       : T.fullLine(b.total);
-    const nightsLabel = b.nights === 1 ? T.night : T.nights;
-    return `<strong>€${b.total}</strong> ${T.total} · ${b.nights} ${nightsLabel}, ${guests} ${T.guestsWord}<br><span style="font-size:11.5px;">(${line})</span><br><span style="font-size:11px;color:var(--ink-soft);">${T.touristTax}</span><br><span style="font-size:12px;">${payLine}</span>`;
+    const DL = { it: "Dettaglio costi", en: "Cost breakdown", es: "Desglose de costes", fr: "Détail des coûts", de: "Kostenaufstellung", ru: "Детализация стоимости", zh: "费用明细" }[currentLang] || "Cost breakdown";
+    return `<strong>${eur(b.total)}</strong> ${T.total} · ${b.nights} ${b.nights === 1 ? T.night : T.nights}, ${guests} ${T.guestsWord}<details style="margin:4px 0;"><summary style="cursor:pointer;font-size:12px;text-decoration:underline;">${DL}</summary><div style="font-size:12.5px;line-height:1.5;margin-top:4px;">${rows}</div></details><span style="font-size:11px;color:var(--ink-soft);">${T.touristTax}</span><br><span style="font-size:12px;">${payLine}</span>`;
   }
 
   function nightsBetween(a, b) {
